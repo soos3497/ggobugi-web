@@ -215,8 +215,43 @@
   var tstT = null;
   function toast(msg) { tst.textContent = msg; tst.classList.add('on'); clearTimeout(tstT); tstT = setTimeout(function () { tst.classList.remove('on'); }, 3200); }
 
-  function brand() {
-    return '<div class="ws-brand"><span class="ws-logo">🐢</span><div><b>꼬북이</b><small>물리치료 평가 기록지</small></div></div>';
+  /* 학과 테마 키트(univ-kit) 모양: 상단 띠 · 캠퍼스 배너 · 하단 정보 (키트 CSS 의 .uk-* 를 이 화면 안에서만 씀) */
+  var UNIV = { univ: '청암대학교', dept: '물리치료과', app: '꼬북이 · 물리치료 평가 기록지', site: 'https://www.ca.ac.kr', portal: 'https://pt-portal-eta.vercel.app/' };
+  function ukUtil() {
+    return '<div class="uk-util"><div class="uk-in"><span><b>' + esc(UNIV.univ) + '</b> · ' + esc(UNIV.dept) + ' · ' + esc(UNIV.app) + '</span><span class="uk-links"><a href="' + UNIV.portal + '" target="_blank" rel="noopener">학습 포털</a><a href="' + UNIV.site + '" target="_blank" rel="noopener">대학 홈페이지 ↗</a></span></div></div>';
+  }
+  function ukFoot() {
+    return '<footer class="uk-foot"><div class="uk-in"><div class="uk-fb"><span class="uk-logo"><img src="web/univ-kit/logo.png" alt="' + esc(UNIV.univ) + ' 로고"></span><div><b>' + esc(UNIV.univ + ' ' + UNIV.dept) + '</b><small>' + esc(UNIV.app) + ' · 수업용 학습 웹앱</small></div></div>' +
+      '<nav><a href="' + UNIV.portal + '" target="_blank" rel="noopener">물리치료과 학습 포털</a><a href="' + UNIV.site + '" target="_blank" rel="noopener">대학 홈페이지</a></nav><small class="uk-copy">© ' + new Date().getFullYear() + ' ' + esc(UNIV.univ + ' ' + UNIV.dept) + ' · 모든 가상 환자는 교육·실습용입니다.</small></div></footer>';
+  }
+  function ukHero(title, text) {
+    return '<section class="uk-hero"><div class="uk-hin"><span class="uk-kick">' + esc(UNIV.univ + ' ' + UNIV.dept) + '</span><h1>' + esc(title) + '</h1><p>' + esc(text) + '</p></div></section>';
+  }
+
+  /* 학과 표준 설문도구 앱(교수님 제공) — 목차에서 바로 열기. 기록지 내용과는 따로 열리는 외부 앱 */
+  var QUEST = 'https://pt-questionaires.vercel.app/';
+  var QUEST_AREAS = [
+    { k: 'spine', icon: '🧍', t: '목·등·허리·엉치엉덩관절', tools: 'NDI · FRI · ODI · RMDQ · PGQ · FABQ', re: /목|경추|등뼈|흉추|허리|요추|엉치|천장|골반|척추/ },
+    { k: 'upper', icon: '💪', t: '어깨·팔꿈치·손목·손', tools: 'QuickDASH · SPADI · PRTEE · PRWE · BCTQ', re: /어깨|팔꿈치|손목|손가락|손|회전근|테니스/ },
+    { k: 'lower', icon: '🦵', t: '엉덩관절·무릎·발목·발', tools: 'LEFS · OHS · OKS · Lysholm · FAAM · FFI', re: /엉덩관절|고관절|무릎|발목|발바닥|아킬레스|족저/ },
+    { k: 'perinatal', icon: '🤰', t: '산전·산후', tools: 'PGQ · ODI · ICIQ-UI SF · EPDS · SF-12 · SF-36 · DRAM · PFIQ-7', re: /임신|산전|산후|출산/ }
+  ];
+  function questPick() {
+    /* 의뢰 진단명에서 가장 앞에 나오는 부위로 추천 (예: '손목'은 '목'보다 손목 쪽) */
+    var txt = fieldVal('ref_medical_dx');
+    var best = null, bi = 1e9;
+    QUEST_AREAS.forEach(function (a) { var m = a.re.exec(txt); if (m && m.index < bi) { bi = m.index; best = a.k; } });
+    return best;
+  }
+  function renderQuest() {
+    var pick = questPick();
+    var cards = QUEST_AREAS.map(function (a) {
+      return '<a class="ws-qcard' + (a.k === pick ? ' pick' : '') + '" href="' + QUEST + a.k + '/" target="_blank" rel="noopener">' +
+        '<span class="ws-qicon">' + a.icon + '</span><span class="ws-qtxt"><b>' + esc(a.t) + (a.k === pick ? ' <em>이 환자 추천</em>' : '') + '</b><small>' + esc(a.tools) + '</small></span><span class="ws-qgo">열기 ↗</span></a>';
+    }).join('');
+    return '<section class="ws-quest">' +
+      '<div class="ws-qhead"><span class="ws-qtag">연계 도구</span><div><b>학과 표준 설문도구</b><small>부위별 설문 채점 · 결과 해석 · 운동 처방 · 임상의사결정 연습 (새 창으로 열림 · 이 기록지에 자동으로 들어오지는 않음)</small></div></div>' +
+      '<div class="ws-qgrid">' + cards + '</div></section>';
   }
   function fmtDate(iso) { if (!iso) return ''; var d = new Date(iso); if (isNaN(d)) return ''; var p = function (n) { return String(n).padStart(2, '0'); }; return d.getFullYear() + '.' + p(d.getMonth() + 1) + '.' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes()); }
 
@@ -242,10 +277,10 @@
       var d = k === 'blank' ? '이름·나이·성별·직업만 채우고 나머지는 직접 작성' : (s ? s.desc : '');
       return '<label class="ws-base"><input type="radio" name="wsBase" value="' + k + '"' + (i === 0 ? ' checked' : '') + '><span><b>' + esc(t) + '</b><small>' + esc(d) + '</small></span></label>';
     }).join('');
-    shell.innerHTML =
+    shell.innerHTML = ukUtil() +
       '<div class="ws-page ws-patients">' +
-      '<header class="ws-top">' + brand() + '<span class="ws-step">1 / 2 · 환자 선택</span></header>' +
-      '<section class="ws-hero"><h1>어떤 환자의 기록지를 열까요?</h1><p>환자를 고르면 그 환자의 검진부터 결과까지 모든 기록이 준비되고 목차가 열립니다.</p></section>' +
+      ukHero('물리치료 평가 기록지', '환자를 고르면 그 환자의 검진부터 결과까지 모든 기록이 준비되고 목차가 열립니다.') +
+      '<div class="ws-sechead"><b>어떤 환자의 기록지를 열까요?</b><span class="ws-step">1 / 2 · 환자 선택</span></div>' +
       '<div class="ws-pgrid">' + cards +
       '<details class="ws-add"><summary><span class="ws-plus">+</span><span><b>가상 환자 추가</b><small>새 가상 환자를 만들어 따로 기록합니다</small></span></summary>' +
       '<form class="ws-addform" autocomplete="off" onsubmit="return false">' +
@@ -257,7 +292,7 @@
       '</form></details>' +
       '</div>' +
       '<p class="ws-foot">환자마다 기록은 이 브라우저에 따로 보관됩니다. 다른 컴퓨터로 옮길 때는 기록지 위쪽의 💾 JSON 백업을 쓰세요. · 모든 가상 환자는 교육·실습용입니다.</p>' +
-      '</div>';
+      '</div>' + ukFoot();
   }
 
   function renderToc() {
@@ -281,14 +316,15 @@
         (items.length ? '<ul class="ws-subs">' + sub + '</ul>' : '') +
         '</div>';
     }).join('');
-    shell.innerHTML =
+    shell.innerHTML = ukUtil() +
       '<div class="ws-page ws-toc">' +
-      '<header class="ws-top"><a class="ws-back" href="#/">← 환자 선택</a>' + brand() + '<span class="ws-step">2 / 2 · 목차</span></header>' +
+      '<header class="ws-top"><a class="ws-back" href="#/">← 환자 선택</a><div class="ws-toptitle"><b>목차</b><small>물리치료 평가 기록지</small></div><span class="ws-step">2 / 2 · 목차</span></header>' +
       '<section class="ws-pbar"><span class="ws-avatar">' + esc((p.name || '?').slice(0, 1)) + '</span><div><b>' + esc(p.name) + '</b><span>' + esc(as) + (p.job ? ' · ' + esc(p.job) : '') + '</span></div>' +
       '<div class="ws-tocbtns"><button type="button" class="ws-btn ghost" data-all="open">모두 펼치기</button><button type="button" class="ws-btn ghost" data-all="close">모두 접기</button></div></section>' +
       '<div class="ws-stages">' + html + '</div>' +
+      renderQuest() +
       '<p class="ws-foot">단계 이름을 누르면 그 단계 기록지가 열리고, <b>세부</b>를 누르면 항목이 펼쳐져 원하는 곳으로 바로 갈 수 있습니다. 기록지 안에서는 맨 위 <b>← 목차</b> 단추로 돌아옵니다.</p>' +
-      '</div>';
+      '</div>' + ukFoot();
   }
 
   shell.addEventListener('click', function (e) {

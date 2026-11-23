@@ -1,0 +1,80 @@
+/* ─────────────────────────────────────────────
+   청암대학교 물리치료과 · 대학 테마 키트
+   색은 청암대학교 홈페이지(ca.ac.kr)에서 뽑았습니다. 아래 6개 값만 바꾸면 모든 앱이 함께 바뀝니다.
+   ───────────────────────────────────────────── */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+body.univ-kit{
+  --u-navy:#27417f; --u-blue:#5380f0; --u-sky:#5d8cf5; --u-gold:#f4de57; --u-green:#5e9a2e; --u-bg:#f4f7fd;
+  --u-line:#dde4ee; --u-ink:#363b4f; --u-sh:0 1px 2px rgba(10,42,92,.06),0 6px 18px rgba(10,42,92,.06);
+  font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+/* 상단 띠 */
+.uk-util{background:var(--u-sky);color:#eef3ff;font-size:.8rem;line-height:1.4;position:relative;z-index:60}
+.uk-util .uk-in{max-width:1180px;margin:0 auto;padding:6px 18px;display:flex;justify-content:space-between;gap:10px}
+.uk-util b{color:#fff} .uk-util a{color:#fff;text-decoration:none;margin-left:14px} .uk-util a:hover{color:#fff}
+@media (max-width:640px){.uk-util .uk-links a:last-child{display:none}.uk-util{font-size:.72rem}}
+/* 하단 정보 */
+.uk-foot{background:#1f2f5c;color:#9fb0c8;margin-top:40px}
+.uk-foot .uk-in{max-width:1180px;margin:0 auto;padding:24px 18px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;justify-content:space-between}
+.uk-fb{display:flex;gap:12px;align-items:center} .uk-fb b{display:block;color:#fff} .uk-fb small{color:#9fb0c8}
+.uk-logo{width:38px;height:38px;border-radius:50%;display:inline-grid;place-items:center;background:#fff;color:var(--u-navy);font-weight:900;font-size:.78rem;box-shadow:0 0 0 1px var(--u-line);flex:none;overflow:hidden}
+.uk-logo img{width:84%;height:84%;object-fit:contain}
+.uk-foot nav{display:flex;gap:16px;flex-wrap:wrap} .uk-foot nav a{color:#c9d6ea;text-decoration:none;font-size:.88rem}
+.uk-copy{flex-basis:100%;border-top:1px solid #34477a;padding-top:10px;color:#6f83a3;font-size:.78rem}
+/* 캠퍼스 배너 (정적 페이지 제목용) */
+.uk-hero,.univ-kit .uk-banner{position:relative;overflow:hidden;border-radius:16px;color:#fff;background:linear-gradient(115deg,var(--u-navy) 0%,#3f66cf 55%,var(--u-sky) 100%);margin:0 0 22px}
+.uk-hero::after,.univ-kit .uk-banner::after{content:"";position:absolute;inset:0;background:var(--u-art) right bottom/auto 100% no-repeat;pointer-events:none}
+.uk-hin{position:relative;z-index:1;padding:26px 30px;max-width:600px}
+.uk-kick{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:3px 12px;font-weight:700;font-size:.78rem;color:#e7efff}
+.uk-hero h1{color:#fff !important;margin:10px 0 4px !important;font-weight:900;letter-spacing:-.02em}
+.uk-hero p{color:#d9e5f7 !important;margin:0 !important}
+@media (max-width:720px){.uk-hero::after,.univ-kit .uk-banner::after{opacity:.3}.uk-hin{padding:22px 20px}}
+@media print{.uk-util,.uk-foot{display:none !important}.uk-hero{background:none;color:#000}.uk-hero::after{display:none}}
+
+/* ── ptbase: 기능해부학 · 병리학 (운동치료 웹앱과 같은 뼈대) ── */
+body[data-univ=ptbase]{--bg:var(--u-bg);--ink:var(--u-ink);--ink2:#46566f;--mute:#6b7a90;--line:var(--u-line);--acc:var(--u-blue);--acc2:#eaf0fe;--good:var(--u-green);--r:12px;--sh:var(--u-sh)}
+body[data-univ=ptbase] #nav{background:#fff;border-bottom:3px solid var(--u-navy);box-shadow:0 2px 10px rgba(10,42,92,.06)}
+body[data-univ=ptbase] .logo{width:36px;height:36px;border-radius:50%;background:#fff var(--u-logo) center/80% no-repeat !important;color:transparent !important;box-shadow:0 0 0 1px var(--u-line);font-size:0}
+body[data-univ=ptbase] .brand{color:var(--u-navy)}
+body[data-univ=ptbase] .links a{border-radius:0;color:var(--u-ink);font-weight:700;border-bottom:3px solid transparent;margin-bottom:-3px}
+body[data-univ=ptbase] .links a.on,body[data-univ=ptbase] .links a:hover{background:transparent;color:var(--u-blue);border-bottom-color:var(--u-blue)}
+body[data-univ=ptbase] .btn{border-radius:8px}
+body[data-univ=ptbase] .hero{position:relative;overflow:hidden;border-radius:16px;color:#fff;padding:28px 30px !important;margin-bottom:18px;background:linear-gradient(115deg,var(--u-navy) 0%,#3f66cf 55%,var(--u-sky) 100%)}
+body[data-univ=ptbase] .hero::after{content:"";position:absolute;inset:0;background:var(--u-art) right bottom/auto 100% no-repeat;pointer-events:none}
+body[data-univ=ptbase] .hero>*{position:relative;z-index:1;max-width:620px}
+body[data-univ=ptbase] .hero h1{color:#fff} body[data-univ=ptbase] .hero p,body[data-univ=ptbase] .hero .muted{color:#d9e5f7}
+body[data-univ=ptbase] .hero .how{max-width:none} body[data-univ=ptbase] .hero .how li{color:var(--u-ink)}
+body[data-univ=ptbase] .hero .btn.ghost{background:#fff;color:var(--u-navy);box-shadow:none}
+body[data-univ=ptbase] .wk{border-left-color:var(--u-blue)} body[data-univ=ptbase] .wk .n{color:var(--u-blue)}
+body[data-univ=ptbase] .wk.exam{border-left-color:var(--u-gold);background:#fffaf0}
+body[data-univ=ptbase] .card{border-radius:12px}
+body[data-univ=ptbase] .tabs a.on,body[data-univ=ptbase] .tabs button.on{background:var(--u-navy)}
+body[data-univ=ptbase] .pill{background:var(--u-navy)}
+@media (max-width:720px){body[data-univ=ptbase] .hero::after{opacity:.3}}
+
+/* ── learning: 생리학 · 스포츠재활 ── */
+body[data-univ=learning]{--navy:var(--u-navy);--blue:var(--u-blue);--bg:var(--u-bg);--line:var(--u-line);--ink:var(--u-ink);--green:var(--u-green)}
+body[data-univ=learning]>header{border-bottom:3px solid var(--u-navy);box-shadow:0 2px 10px rgba(10,42,92,.06);height:84px}
+body[data-univ=learning] .logo{border-radius:50%;width:46px;height:46px;padding:0;display:inline-block;font-size:0;color:transparent;background:#fff var(--u-logo) center/80% no-repeat !important;box-shadow:0 0 0 1px var(--u-line)}
+body[data-univ=learning] .logo span{display:none}
+body[data-univ=learning]>footer:not(.uk-foot){display:none}
+body[data-univ=learning] .hero{position:relative;overflow:hidden;border-radius:16px;color:#fff;padding:30px 32px;background:linear-gradient(115deg,var(--u-navy) 0%,#3f66cf 55%,var(--u-sky) 100%)}
+body[data-univ=learning] .hero::after{content:"";position:absolute;inset:0;background:var(--u-art) right bottom/auto 100% no-repeat;opacity:.55;pointer-events:none}
+body[data-univ=learning] .hero>*{position:relative;z-index:1}
+body[data-univ=learning] .hero h1{color:#fff} body[data-univ=learning] .hero .muted{color:#d9e5f7}
+body[data-univ=learning] .hero .eyebrow{color:var(--u-gold)}
+body[data-univ=learning] .hero .study-note{background:rgba(255,255,255,.92);border-left:4px solid var(--u-gold);border-radius:12px;color:var(--u-ink)}
+@media (max-width:720px){body[data-univ=learning] .hero::after{opacity:.25}body[data-univ=learning]>header{height:auto;min-height:72px}}
+
+/* ── aidx: AIDX 주간 결과물 ── */
+body[data-univ=aidx]{--bg:var(--u-bg);--ink:var(--u-ink);--line:var(--u-line);--brand:var(--u-navy);--brand2:#eaf0fe;--accent:var(--u-blue);--ok:var(--u-green)}
+body[data-univ=aidx] .top{border-bottom:3px solid var(--u-gold)}
+body[data-univ=aidx] .top .dot{color:var(--u-gold)}
+body[data-univ=aidx] .login-card{border-top:5px solid var(--u-navy)}
+
+/* ── quest: 환자 설문도구 ── */
+body[data-univ=quest]{--bg:var(--u-bg);--ink:var(--u-ink);--line:var(--u-line);--accent:var(--u-blue);--accent-soft:#eaf0fe;--accent-ink:var(--u-navy);--ok:var(--u-green)}
+body[data-univ=quest] header.top{border-bottom:3px solid var(--u-navy)}
+body[data-univ=quest] header.top .brand{color:var(--u-navy)}
+body[data-univ=quest] a.card{border-top:4px solid var(--u-blue)}
+body[data-univ=quest] .uk-hero{margin-bottom:24px}

@@ -183,3 +183,58 @@ body.web-view textarea.ws-ta-open{max-height:none!important;height:auto;min-heig
   body.web-view .ws-bannerback .ws-curstage{display:none}
   body.web-view .pt-banner>nav.ws-bannerback{padding-left:10px!important}
 }
+
+/* ===== 학과 테마 키트(univ-kit) — 환자 선택·목차 화면에만 적용 =====
+   키트 CSS(univ-kit.css)의 .uk-util · .uk-hero · .uk-foot 모양을 쓰고, 색·글꼴 값만 이 화면 안에서 바꿈.
+   기록지(영역 보기) 화면의 모양은 그대로 둠. */
+#wsShell{
+  --u-navy:#27417f; --u-blue:#5380f0; --u-sky:#5d8cf5; --u-gold:#f4de57; --u-green:#5e9a2e; --u-bg:#f4f7fd;
+  --u-line:#dde4ee; --u-ink:#363b4f; --u-sh:0 1px 2px rgba(10,42,92,.06),0 6px 18px rgba(10,42,92,.06);
+  --u-art:url("/web/univ-kit/campus.svg"); --u-logo:url("/web/univ-kit/logo.png");
+  --ws-paper:var(--u-bg); --ws-card:#fff; --ws-ink:var(--u-ink); --ws-ink2:#46566f; --ws-ink3:#6b7a90;
+  --ws-line:var(--u-line); --ws-line2:#c9d4e6; --ws-navy:var(--u-navy); --ws-navy2:var(--u-blue); --ws-navybg:#eaf0fe;
+  --ws-amber:#fdf3c4; --ws-ok:var(--u-green);
+  --ws-sans:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --ws-serif:var(--ws-sans);
+}
+#wsShell .uk-util{position:sticky;top:0}
+#wsShell .uk-foot{margin-top:10px}
+#wsShell .ws-page{max-width:1180px;padding-top:22px}
+#wsShell .uk-hero{margin-bottom:26px}
+#wsShell .uk-hero h1{font-size:30px}
+#wsShell .uk-hero p{font-size:15px;line-height:1.6}
+#wsShell .ws-sechead{display:flex;align-items:center;gap:12px;margin:0 0 14px}
+#wsShell .ws-sechead b{font-size:20px;font-weight:800;color:var(--u-navy)}
+#wsShell .ws-sechead .ws-step{margin-left:auto}
+#wsShell .ws-top{border-bottom:3px solid var(--u-navy);padding-bottom:14px;margin-bottom:22px}
+#wsShell .ws-toptitle b{display:block;font-size:20px;font-weight:800;color:var(--u-navy)}
+#wsShell .ws-toptitle small{display:block;font-size:12px;color:var(--ws-ink3);margin-top:2px}
+#wsShell .ws-pcard{border-top:4px solid var(--u-blue);border-radius:14px;box-shadow:var(--u-sh)}
+#wsShell .ws-pcard.cur{border-color:var(--u-navy);border-top-color:var(--u-navy)}
+#wsShell .ws-pinfo b,#wsShell .ws-pbar b,#wsShell .ws-stxt b,#wsShell .ws-add summary b,#wsShell .ws-avatar,#wsShell .ws-num{font-family:var(--ws-sans)!important;font-weight:800}
+#wsShell .ws-stage{box-shadow:var(--u-sh);border-left:4px solid var(--u-blue)}
+#wsShell .ws-num{background:#eaf0fe;color:var(--u-navy)}
+#wsShell .ws-sgo:hover .ws-num{background:var(--u-navy);color:#fff}
+#wsShell .ws-pbar{box-shadow:var(--u-sh)}
+
+/* 연계 도구: 학과 표준 설문도구 */
+#wsShell .ws-quest{margin-top:22px;background:#fff;border:1px solid var(--u-line);border-radius:14px;box-shadow:var(--u-sh);padding:18px}
+#wsShell .ws-qhead{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
+#wsShell .ws-qtag{flex:0 0 auto;font-size:12px;font-weight:800;color:var(--u-navy);background:var(--u-gold);border-radius:6px;padding:4px 8px}
+#wsShell .ws-qhead b{display:block;font-size:17px;font-weight:800;color:var(--u-ink)}
+#wsShell .ws-qhead small{display:block;font-size:12.5px;color:var(--ws-ink3);margin-top:3px;line-height:1.5}
+#wsShell .ws-qgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#wsShell .ws-qcard{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--u-line);border-top:3px solid var(--u-blue);border-radius:12px;text-decoration:none;color:var(--u-ink);background:#fff;transition:.15s}
+#wsShell .ws-qcard:hover{border-color:var(--u-blue);background:#f7f9ff}
+#wsShell .ws-qcard.pick{border-color:var(--u-navy);border-top-color:var(--u-gold);background:#fffdf2}
+#wsShell .ws-qicon{font-size:24px;line-height:1}
+#wsShell .ws-qtxt{min-width:0;flex:1}
+#wsShell .ws-qtxt b{display:block;font-size:14.5px;font-weight:800}
+#wsShell .ws-qtxt em{font-style:normal;font-size:11px;font-weight:800;color:var(--u-navy);background:var(--u-gold);border-radius:99px;padding:2px 7px;margin-left:4px;vertical-align:1px}
+#wsShell .ws-qtxt small{display:block;font-size:12px;color:var(--ws-ink3);margin-top:3px;line-height:1.45}
+#wsShell .ws-qgo{font-size:12.5px;font-weight:800;color:var(--u-blue);white-space:nowrap}
+@media (max-width:760px){
+  #wsShell .ws-qgrid{grid-template-columns:1fr}
+  #wsShell .uk-hero h1{font-size:24px}
+  #wsShell .ws-sechead .ws-step{display:none}
+}

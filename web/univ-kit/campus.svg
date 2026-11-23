@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" preserveAspectRatio="xMaxYMax slice" role="img" aria-label="산과 캠퍼스 건물 일러스트">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5d8cf5" stop-opacity=".0"/><stop offset="1" stop-color="#5d8cf5" stop-opacity=".25"/></linearGradient>
+    <linearGradient id="bld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset="1" stop-color="#d9e6f7" stop-opacity=".9"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fb6f2"/><stop offset="1" stop-color="#3d7fd0"/></linearGradient>
+  </defs>
+  <rect width="720" height="300" fill="url(#sky)"/>
+  <circle cx="590" cy="70" r="34" fill="#f4de57" opacity=".9"/>
+  <circle cx="590" cy="70" r="52" fill="#f4de57" opacity=".15"/>
+  <!-- 먼 산 -->
+  <path d="M0 210 L90 150 L160 185 L250 120 L340 175 L420 135 L520 180 L610 130 L720 175 L720 300 L0 300Z" fill="#3f66cf" opacity=".55"/>
+  <path d="M0 235 L110 190 L200 222 L300 175 L400 215 L500 185 L600 220 L720 195 L720 300 L0 300Z" fill="#2f4e9e" opacity=".7"/>
+  <!-- 본관 -->
+  <g transform="translate(300 150)">
+    <rect x="0" y="40" width="220" height="110" fill="url(#bld)"/>
+    <rect x="80" y="10" width="60" height="140" fill="#fff"/>
+    <polygon points="76,10 110,-14 144,10" fill="#f4de57"/>
+    <rect x="96" y="104" width="28" height="46" fill="#5380f0"/>
+    <g fill="url(#glass)">
+      <rect x="92" y="28" width="36" height="12"/><rect x="92" y="50" width="36" height="12"/><rect x="92" y="72" width="36" height="12"/>
+      <rect x="14" y="58" width="22" height="16"/><rect x="46" y="58" width="22" height="16"/><rect x="152" y="58" width="22" height="16"/><rect x="184" y="58" width="22" height="16"/>
+      <rect x="14" y="90" width="22" height="16"/><rect x="46" y="90" width="22" height="16"/><rect x="152" y="90" width="22" height="16"/><rect x="184" y="90" width="22" height="16"/>
+    </g>
+  </g>
+  <!-- 보건관 -->
+  <g transform="translate(540 190)">
+    <rect x="0" y="0" width="150" height="110" fill="url(#bld)"/>
+    <rect x="58" y="-18" width="34" height="34" rx="6" fill="#fff"/>
+    <path d="M70 -9 h10 v8 h8 v10 h-8 v8 h-10 v-8 h-8 v-10 h8z" fill="#e5484d"/>
+    <g fill="url(#glass)"><rect x="14" y="26" width="26" height="16"/><rect x="62" y="26" width="26" height="16"/><rect x="110" y="26" width="26" height="16"/><rect x="14" y="58" width="26" height="16"/><rect x="62" y="58" width="26" height="16"/><rect x="110" y="58" width="26" height="16"/></g>
+  </g>
+  <!-- 나무 -->
+  <g fill="#8db43f"><circle cx="270" cy="270" r="22"/><circle cx="292" cy="262" r="16"/><circle cx="525" cy="272" r="18"/><circle cx="700" cy="268" r="20"/></g>
+  <g fill="#5e7f2a"><rect x="268" y="276" width="5" height="24"/><rect x="523" y="280" width="4" height="20"/><rect x="698" y="278" width="4" height="22"/></g>
+  <rect x="0" y="296" width="720" height="4" fill="#ffffff" opacity=".35"/>
+</svg>
