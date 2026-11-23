@@ -100,8 +100,8 @@
 #wsShell .q-guide li{margin:3px 0}
 #wsShell .q-exgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 #wsShell .q-ex{border:1px solid var(--u-line);border-radius:12px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
-#wsShell .q-exfig{background:#fbfaf7;border-bottom:1px solid var(--u-line);padding:8px 14px}
-#wsShell .q-exfig svg{display:block;width:100%;max-height:170px}
+#wsShell .q-exfig{background:#fbfaf7;border-bottom:1px solid var(--u-line);padding:6px 14px;display:flex;justify-content:center}
+#wsShell .q-exfig svg{display:block;width:100%;max-width:300px;height:auto;max-height:150px}
 #wsShell .q-exbody{padding:12px 14px}
 #wsShell .q-exbody h5{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;margin:0 0 3px}
 #wsShell .q-exbody h5 span{width:22px;height:22px;border-radius:50%;background:var(--u-blue);color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center}
