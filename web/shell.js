@@ -10,8 +10,11 @@
   var LS_P = 'ggobugi_web_patients', LS_SNAP = 'ggobugi_web_snap_', SS_CUR = 'ggobugi_web_cur';
   var BASE_ID = 'kms';
   var STAGE_IDS = ['historyStart', 'evaluationStage', 'diagnosisStage', 'treatmentPlanStage', 'interventionStage', 'ixStage', 'oxStage'];
-  var main = document.querySelector('main');
-  if (!main) return;
+  /* 이 파일은 <head> 에서 바로 실행된다 → 기록지(2MB)를 그리기 전에 첫 화면부터 띄움.
+     기록지가 필요한 부분(main, 단계 이름표 등)은 문서를 다 읽은 뒤(init) 준비한다. */
+  var main = null;
+  var HTML = document.documentElement;
+  HTML.classList.add('ws-screen');
 
   var $ = function (q, r) { return (r || document).querySelector(q); };
   var $$ = function (q, r) { return [].slice.call((r || document).querySelectorAll(q)); };
@@ -24,12 +27,15 @@
   function ssSet(k, v) { try { if (v == null) sessionStorage.removeItem(k); else sessionStorage.setItem(k, v); } catch (e) { } }
 
   /* ---------- 단계 정보 (이름·설명은 기록지의 단계 목차 글자를 그대로 씀) ---------- */
-  var STAGES = STAGE_IDS.map(function (id, i) {
-    var a = $('.stage-nav a[href="#' + id + '"]');
-    var small = a && a.querySelector('small');
-    var title = a ? T(a).replace(small ? T(small) : '', '').trim() : (i + 1) + '.';
-    return { n: i + 1, id: id, title: title, desc: small ? T(small) : '' };
-  });
+  var STAGES = [];
+  function readStages() {
+    STAGES = STAGE_IDS.map(function (id, i) {
+      var a = $('.stage-nav a[href="#' + id + '"]');
+      var small = a && a.querySelector('small');
+      var title = a ? T(a).replace(small ? T(small) : '', '').trim() : (i + 1) + '.';
+      return { n: i + 1, id: id, title: title, desc: small ? T(small) : '' };
+    });
+  }
 
   /* main 의 직계 칸마다 단계 번호 붙이기 */
   function mapStages() {
@@ -112,7 +118,8 @@
 
   /* 지금 화면의 기록을 그 환자 칸에 보관 */
   function saveSnap(id) {
-    id = id || cur(); if (!id || typeof window.ptBackupData !== 'function') return false;
+    /* 기록지가 저장본·예시 환자를 다 채우기 전에 보관하면 빈 기록으로 덮어쓰므로, 준비된 뒤에만 */
+    id = id || cur(); if (!id || !pageReady || !restoreDone || typeof window.ptBackupData !== 'function') return false;
     var ok = false;
     try { ok = lsSet(LS_SNAP + id, window.ptBackupData()); } catch (e) { ok = false; }
     var a = patients();
@@ -135,13 +142,18 @@
   function openPatient(id) {
     if (busy) return;
     var p = getP(id); if (!p) return;
-    if (cur() === id) { navigate('#/toc'); return; }
+    if (cur() === id) {
+      if (!restoreDone) { loading(true, p.name); (restoreP || whenReady()).then(function () { loading(false); navigate('#/toc'); }); }
+      else navigate('#/toc');
+      return;
+    }
     busy = true; loading(true, p.name);
     var before = cur();
     (async function () {
       quietOn();
       try {
         await whenReady();
+        if (restoreP) await restoreP;
         if (before) saveSnap(before);
         var snap = lsGet(LS_SNAP + id, null);
         if (snap) {
@@ -192,14 +204,14 @@
   /* ---------- 화면 틀 ---------- */
   var shell = document.createElement('div');
   shell.id = 'wsShell'; shell.className = 'no-print'; shell.setAttribute('data-ix-own', '');
-  document.body.appendChild(shell);
+  HTML.appendChild(shell);
 
   var load = document.createElement('div');
   load.id = 'wsLoading'; load.className = 'no-print'; load.innerHTML = '<div class="ws-load-box"><div class="ws-spin"></div><b id="wsLoadName"></b><span>환자 기록을 준비하고 있습니다…</span></div>';
-  document.body.appendChild(load);
+  HTML.appendChild(load);
   function loading(on, name) { load.classList.toggle('on', !!on); if (name) $('#wsLoadName').textContent = name; }
 
-  var tst = document.createElement('div'); tst.id = 'wsToast'; tst.className = 'no-print'; document.body.appendChild(tst);
+  var tst = document.createElement('div'); tst.id = 'wsToast'; tst.className = 'no-print'; HTML.appendChild(tst);
   var tstT = null;
   function toast(msg) { tst.textContent = msg; tst.classList.add('on'); clearTimeout(tstT); tstT = setTimeout(function () { tst.classList.remove('on'); }, 3200); }
 
@@ -304,12 +316,9 @@
   var backWrap = document.createElement('nav');
   backWrap.className = 'ws-bannerback no-print'; backWrap.setAttribute('data-ix-own', '');
   backWrap.innerHTML = '<a href="#/toc" class="ws-tocbtn" title="목차로 돌아가기">← 목차</a><span class="ws-curstage" id="wsCurStage"></span>';
-  var banner = $('.pt-banner');
-  if (banner) banner.insertBefore(backWrap, banner.firstChild);
-
   var stageNav = document.createElement('nav');
   stageNav.id = 'wsStageNav'; stageNav.className = 'no-print'; stageNav.setAttribute('data-ix-own', ''); stageNav.setAttribute('data-ws', 'all');
-  main.appendChild(stageNav);
+  function isView() { return !!document.body && document.body.classList.contains('web-view'); }
 
   function renderStageNav(n) {
     var prev = STAGES[n - 2], next = STAGES[n];
@@ -368,7 +377,7 @@
 
   function showView(n, idx) {
     document.body.classList.add('web-view');
-    document.body.classList.remove('ws-screen');
+    HTML.classList.remove('ws-screen');
     setStage(n);
     if (idx != null) {
       var it = stageItems(n)[idx];
@@ -383,9 +392,8 @@
   }
   function showScreen(kind) {
     if (cur()) saveSnap(cur());
-    document.body.classList.remove('web-view');
-    document.body.classList.add('ws-screen');
-    document.body.removeAttribute('data-ws-stage');
+    if (document.body) { document.body.classList.remove('web-view'); document.body.removeAttribute('data-ws-stage'); }
+    HTML.classList.add('ws-screen');
     if (kind === 'toc') renderToc(); else renderPatients();
     shell.scrollTop = 0;
   }
@@ -393,7 +401,7 @@
   /* ---------- 주소(#/…)로 화면 바꾸기 → 브라우저 뒤로가기도 동작 ---------- */
   function route() {
     var h = location.hash || '';
-    if (h.indexOf('#/') !== 0) { if (!document.body.classList.contains('web-view')) showScreen('patients'); return; }
+    if (h.indexOf('#/') !== 0) { if (!isView()) showScreen('patients'); return; }
     var parts = h.slice(2).split('/');
     if (parts[0] === 's' && /^[1-7]$/.test(parts[1] || '')) {
       if (!cur()) { navigate('#/', true); return; }
@@ -410,12 +418,12 @@
 
   /* 기록지 안의 다른 단계로 가는 링크·목차(2번 키)·이동 단추 → 그 단계로 먼저 바꿈 */
   function ensureStageFor(el) {
-    if (!document.body.classList.contains('web-view') || !el) return;
+    if (!isView() || !el) return;
     var n = stageOf(el);
     if (n && n !== curStage) { setStage(n); history.replaceState(null, '', '#/s/' + n); clampSoon(); }
   }
   document.addEventListener('click', function (e) {
-    if (!document.body.classList.contains('web-view')) return;
+    if (!isView()) return;
     var a = e.target.closest && e.target.closest('a[href^="#"],[data-target],[data-goto]');
     if (!a) return;
     var href = a.getAttribute('href') || '';
@@ -439,7 +447,7 @@
   var BLOCK_SEL = 'p, div, blockquote, ul, ol';
   var STOP_SEL = 'input,select,textarea,button,table,details,summary,h1,h2,h3,canvas,svg,img,iframe,video,[contenteditable="true"]';
   function clampNow() {
-    if (!document.body.classList.contains('web-view')) return;
+    if (!isView()) return;
     $$('main > [data-ws]:not(.ws-off):not(#wsStageNav)').forEach(function (root) {
       $$(BLOCK_SEL, root).forEach(function (el) {
         if (el.hasAttribute('data-ws-clamp') || el.closest('[data-ws-clamp]')) return;
@@ -470,25 +478,63 @@
   });
   document.addEventListener('focusin', function (e) { if (e.target.hasAttribute && e.target.hasAttribute('data-ws-ta')) e.target.classList.add('ws-ta-open'); });
   document.addEventListener('focusout', function (e) { if (e.target.hasAttribute && e.target.hasAttribute('data-ws-ta')) e.target.classList.remove('ws-ta-open'); });
-  if (typeof MutationObserver !== 'undefined') new MutationObserver(function () { if (document.body.classList.contains('web-view')) clampSoon(); }).observe(main, { childList: true, subtree: true });
 
   /* ---------- 자동 보관 ---------- */
   var dirty = false;
   document.addEventListener('input', function (e) { if (e.target.closest && e.target.closest('main')) dirty = true; }, true);
   document.addEventListener('change', function (e) { if (e.target.closest && e.target.closest('main')) dirty = true; }, true);
-  setInterval(function () { if (dirty && cur() && !busy && document.body.classList.contains('web-view')) { dirty = false; saveSnap(cur()); } }, 15000);
+  setInterval(function () { if (dirty && cur() && !busy && isView()) { dirty = false; saveSnap(cur()); } }, 15000);
   window.addEventListener('pagehide', function () { if (cur() && !busy) saveSnap(cur()); });
   document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden' && cur() && !busy) saveSnap(cur()); });
 
   /* 기록지 스크립트가 다 준비될 때까지 */
+  var pageReady = false;
   var readyP = new Promise(function (res) {
-    var go = function () { setTimeout(res, 1600); };
+    var go = function () { setTimeout(function () { pageReady = true; res(); }, 1600); };
     if (document.readyState === 'complete') go(); else window.addEventListener('load', go, { once: true });
   });
   function whenReady() { return readyP; }
 
   window.ggobugiShell = { open: openPatient, save: saveSnap, patients: patients, stageItems: stageItems, go: navigate };
 
-  document.body.classList.add('ws-screen');
-  route();
+  var restoreP = null, restoreDone = false;
+  function restoreCurrent() {
+    var id = cur(), snap = id ? lsGet(LS_SNAP + id, null) : null;
+    if (!snap || typeof window.ptRestoreText !== 'function') { restoreDone = true; return Promise.resolve(); }
+    quietOn();
+    try { window.ptRestoreText(JSON.stringify(snap)); } catch (e) { console.error('[ggobugi] restore', e); }
+    return wait(900).then(function () {
+      quietOff();
+      try { if (window.ptAutoAnalyze) window.ptAutoAnalyze(); } catch (e) { }
+      restoreDone = true;
+    });
+  }
+
+  /* 1) 지금 바로: 첫 화면(환자 선택) 띄우기. 기록지는 그 뒤에서 마저 읽힘 */
+  var booted = false;
+  var h0 = location.hash || '';
+  if (h0.indexOf('#/s/') === 0 || h0 === '#/toc') loading(true, (getP(cur()) || {}).name || '꼬북이');
+  else renderPatients();
+
+  /* 2) 기록지를 다 읽은 뒤: 단계 이름표·목차 단추 준비하고 주소대로 화면 열기 */
+  function init() {
+    if (booted) return; booted = true;
+    main = document.querySelector('main');
+    if (!main) { console.warn('[ggobugi] main 없음'); return; }
+    readStages();
+    var banner = $('.pt-banner');
+    if (banner) banner.insertBefore(backWrap, banner.firstChild);
+    main.appendChild(stageNav);
+    if (document.body) [shell, load, tst].forEach(function (el) { document.body.appendChild(el); });
+    if (typeof MutationObserver !== 'undefined') new MutationObserver(function () { if (isView()) clampSoon(); }).observe(main, { childList: true, subtree: true });
+    /* 새로고침해도 지금 환자의 마지막 기록으로 되돌림 (기록지는 열 때 예시 환자로 다시 채워지므로) */
+    restoreP = whenReady().then(restoreCurrent);
+    var h = location.hash || '';
+    if (h.indexOf('#/s/') === 0 || h === '#/toc') {
+      restoreP.then(function () { loading(false); route(); });
+    } else if (!shell.querySelector('.ws-add[open]')) {
+      route(); /* 시나리오 이름표 등 기록지 글자를 넣어 다시 그림 */
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true }); else init();
 })();

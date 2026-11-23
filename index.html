@@ -4,6 +4,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- 꼬북이 웹 껍데기: 환자 선택 · 목차 · 영역 보기 (기록지 내용은 아래 그대로) -->
+<link rel="stylesheet" href="web/shell.css">
+<script src="web/shell.js"></script>
 <title>물리치료 평가 기록지 10주차</title>
 <style>
 :root{
@@ -7693,8 +7696,5 @@ document.addEventListener('click',function(e){var card=e.target.closest&&e.targe
  document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('button');if(b&&/clearForm/.test(b.getAttribute('onclick')||''))setTimeout(()=>{if(notYet())run()},800)},true);
 })();
 </script>
-<!-- 꼬북이 웹 껍데기: 환자 선택 · 목차 · 영역 보기 (기록지 내용은 위 그대로) -->
-<link rel="stylesheet" href="web/shell.css">
-<script src="web/shell.js"></script>
 </body>
 </html>

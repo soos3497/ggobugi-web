@@ -8,9 +8,9 @@
 }
 
 /* ===== 환자 선택 · 목차 화면 (기록지 위에 덮는 전체 화면) ===== */
-body.ws-screen{overflow:hidden!important}
+html.ws-screen,html.ws-screen body{overflow:hidden!important}
 #wsShell{display:none}
-body.ws-screen #wsShell{display:block;position:fixed;inset:0;z-index:2147483000;overflow:auto;background:var(--ws-paper);color:var(--ws-ink);font-family:var(--ws-sans);-webkit-font-smoothing:antialiased}
+html.ws-screen #wsShell{display:block;position:fixed;inset:0;z-index:2147483000;overflow:auto;background:var(--ws-paper);color:var(--ws-ink);font-family:var(--ws-sans);-webkit-font-smoothing:antialiased}
 #wsShell *{box-sizing:border-box}
 #wsShell .ws-page{max-width:1040px;margin:0 auto;padding:22px 20px 60px}
 #wsShell .ws-top{display:flex;align-items:center;gap:14px;padding:6px 0 18px;border-bottom:1px solid var(--ws-line);margin-bottom:26px}
