@@ -197,6 +197,7 @@
     if (!realConfirm.call(window, '「' + p.name + '」 환자와 이 환자의 기록을 지울까요? 되돌릴 수 없습니다.')) return;
     savePatients(patients().filter(function (x) { return x.id !== id; }));
     try { localStorage.removeItem(LS_SNAP + id); } catch (e) { }
+    if (window.GGQ && window.GGQ.removePatient) window.GGQ.removePatient(id);
     if (cur() === id) ssSet(SS_CUR, null);
     renderPatients();
   }
@@ -228,30 +229,24 @@
     return '<section class="uk-hero"><div class="uk-hin"><span class="uk-kick">' + esc(UNIV.univ + ' ' + UNIV.dept) + '</span><h1>' + esc(title) + '</h1><p>' + esc(text) + '</p></div></section>';
   }
 
-  /* 학과 표준 설문도구 앱(교수님 제공) — 목차에서 바로 열기. 기록지 내용과는 따로 열리는 외부 앱 */
-  var QUEST = 'https://pt-questionaires.vercel.app/';
-  var QUEST_AREAS = [
-    { k: 'spine', icon: '🧍', t: '목·등·허리·엉치엉덩관절', tools: 'NDI · FRI · ODI · RMDQ · PGQ · FABQ', re: /목|경추|등뼈|흉추|허리|요추|엉치|천장|골반|척추/ },
-    { k: 'upper', icon: '💪', t: '어깨·팔꿈치·손목·손', tools: 'QuickDASH · SPADI · PRTEE · PRWE · BCTQ', re: /어깨|팔꿈치|손목|손가락|손|회전근|테니스/ },
-    { k: 'lower', icon: '🦵', t: '엉덩관절·무릎·발목·발', tools: 'LEFS · OHS · OKS · Lysholm · FAAM · FFI', re: /엉덩관절|고관절|무릎|발목|발바닥|아킬레스|족저/ },
-    { k: 'perinatal', icon: '🤰', t: '산전·산후', tools: 'PGQ · ODI · ICIQ-UI SF · EPDS · SF-12 · SF-36 · DRAM · PFIQ-7', re: /임신|산전|산후|출산/ }
-  ];
-  function questPick() {
-    /* 의뢰 진단명에서 가장 앞에 나오는 부위로 추천 (예: '손목'은 '목'보다 손목 쪽) */
-    var txt = fieldVal('ref_medical_dx');
-    var best = null, bi = 1e9;
-    QUEST_AREAS.forEach(function (a) { var m = a.re.exec(txt); if (m && m.index < bi) { bi = m.index; best = a.k; } });
-    return best;
-  }
-  function renderQuest() {
-    var pick = questPick();
-    var cards = QUEST_AREAS.map(function (a) {
-      return '<a class="ws-qcard' + (a.k === pick ? ' pick' : '') + '" href="' + QUEST + a.k + '/" target="_blank" rel="noopener">' +
-        '<span class="ws-qicon">' + a.icon + '</span><span class="ws-qtxt"><b>' + esc(a.t) + (a.k === pick ? ' <em>이 환자 추천</em>' : '') + '</b><small>' + esc(a.tools) + '</small></span><span class="ws-qgo">열기 ↗</span></a>';
+  /* 설문도구(교수님 설문도구 구성을 우리 화면으로 새로 만든 것, web/quest/) — 목차 8번 칸 */
+  function questCtx() { return { pid: cur(), patient: getP(cur()) || defaultBase(), ui: { util: ukUtil, foot: ukFoot, toast: toast } }; }
+  function renderQuest(open) {
+    var G = window.GGQ;
+    if (!G || !G.tocGroups) return '';
+    var groups = G.tocGroups(questCtx());
+    var n = 0, done = 0;
+    var sub = groups.map(function (g) {
+      return '<li class="ws-grp' + (g.pick ? ' pick' : '') + '"><a href="#/q/' + g.k + '">' + esc(g.t) + '</a></li>' + g.items.map(function (it) {
+        n++; if (it.done) done++;
+        return '<li><a href="' + it.href + '" class="ws-sub' + (it.done ? ' done' : '') + '"><span class="ws-dot"></span>' + esc(it.label) + '</a></li>';
+      }).join('');
     }).join('');
-    return '<section class="ws-quest">' +
-      '<div class="ws-qhead"><span class="ws-qtag">연계 도구</span><div><b>학과 표준 설문도구</b><small>부위별 설문 채점 · 결과 해석 · 운동 처방 · 임상의사결정 연습 (새 창으로 열림 · 이 기록지에 자동으로 들어오지는 않음)</small></div></div>' +
-      '<div class="ws-qgrid">' + cards + '</div></section>';
+    return '<div class="ws-stage ws-stage-q' + (open ? ' open' : '') + '" data-n="q">' +
+      '<div class="ws-shead">' +
+      '<a class="ws-sgo" href="#/q"><span class="ws-num">8</span><span class="ws-stxt"><b>설문도구</b><small>부위별 표준 설문 · 채점·해석 · 운동 처방 · 임상의사결정 (기록지와 따로 저장)</small></span></a>' +
+      '<button type="button" class="ws-toggle" data-toggle="q" aria-expanded="' + (open ? 'true' : 'false') + '"><span>세부 ' + n + '</span>' + (done ? '<em>✔ ' + done + '</em>' : '') + '<i>▾</i></button>' +
+      '</div><ul class="ws-subs">' + sub + '</ul></div>';
   }
   function fmtDate(iso) { if (!iso) return ''; var d = new Date(iso); if (isNaN(d)) return ''; var p = function (n) { return String(n).padStart(2, '0'); }; return d.getFullYear() + '.' + p(d.getMonth() + 1) + '.' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes()); }
 
@@ -321,8 +316,7 @@
       '<header class="ws-top"><a class="ws-back" href="#/">← 환자 선택</a><div class="ws-toptitle"><b>목차</b><small>물리치료 평가 기록지</small></div><span class="ws-step">2 / 2 · 목차</span></header>' +
       '<section class="ws-pbar"><span class="ws-avatar">' + esc((p.name || '?').slice(0, 1)) + '</span><div><b>' + esc(p.name) + '</b><span>' + esc(as) + (p.job ? ' · ' + esc(p.job) : '') + '</span></div>' +
       '<div class="ws-tocbtns"><button type="button" class="ws-btn ghost" data-all="open">모두 펼치기</button><button type="button" class="ws-btn ghost" data-all="close">모두 접기</button></div></section>' +
-      '<div class="ws-stages">' + html + '</div>' +
-      renderQuest() +
+      '<div class="ws-stages">' + html + renderQuest(open.q) + '</div>' +
       '<p class="ws-foot">단계 이름을 누르면 그 단계 기록지가 열리고, <b>세부</b>를 누르면 항목이 펼쳐져 원하는 곳으로 바로 갈 수 있습니다. 기록지 안에서는 맨 위 <b>← 목차</b> 단추로 돌아옵니다.</p>' +
       '</div>' + ukFoot();
   }
@@ -426,11 +420,12 @@
     } else window.scrollTo({ top: 0, behavior: 'instant' });
     clampSoon();
   }
-  function showScreen(kind) {
+  function showScreen(kind, args) {
     if (cur()) saveSnap(cur());
     if (document.body) { document.body.classList.remove('web-view'); document.body.removeAttribute('data-ws-stage'); }
     HTML.classList.add('ws-screen');
-    if (kind === 'toc') renderToc(); else renderPatients();
+    if (kind === 'quest' && window.GGQ && window.GGQ.render) window.GGQ.render(shell, args || [], questCtx());
+    else if (kind === 'toc') renderToc(); else renderPatients();
     shell.scrollTop = 0;
   }
 
@@ -444,6 +439,7 @@
       showView(+parts[1], parts[2] != null && parts[2] !== '' ? +parts[2] : null); return;
     }
     if (parts[0] === 'toc') { if (!cur()) { navigate('#/', true); return; } showScreen('toc'); return; }
+    if (parts[0] === 'q') { if (!cur()) { navigate('#/', true); return; } showScreen('quest', parts.slice(1).filter(Boolean)); return; }
     showScreen('patients');
   }
   function navigate(h, replace) {
@@ -549,7 +545,8 @@
   /* 1) 지금 바로: 첫 화면(환자 선택) 띄우기. 기록지는 그 뒤에서 마저 읽힘 */
   var booted = false;
   var h0 = location.hash || '';
-  if (h0.indexOf('#/s/') === 0 || h0 === '#/toc') loading(true, (getP(cur()) || {}).name || '꼬북이');
+  var NEEDS_RECORD = /^#\/(s\/|toc|q)/;
+  if (NEEDS_RECORD.test(h0)) loading(true, (getP(cur()) || {}).name || '꼬북이');
   else renderPatients();
 
   /* 2) 기록지를 다 읽은 뒤: 단계 이름표·목차 단추 준비하고 주소대로 화면 열기 */
@@ -566,7 +563,7 @@
     /* 새로고침해도 지금 환자의 마지막 기록으로 되돌림 (기록지는 열 때 예시 환자로 다시 채워지므로) */
     restoreP = whenReady().then(restoreCurrent);
     var h = location.hash || '';
-    if (h.indexOf('#/s/') === 0 || h === '#/toc') {
+    if (NEEDS_RECORD.test(h)) {
       restoreP.then(function () { loading(false); route(); });
     } else if (!shell.querySelector('.ws-add[open]')) {
       route(); /* 시나리오 이름표 등 기록지 글자를 넣어 다시 그림 */
