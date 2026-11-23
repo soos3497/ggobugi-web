@@ -544,6 +544,13 @@
       return { k: a.k, t: a.icon + ' ' + a.t + (a.k === rA ? ' · 이 환자 추천' : ''), pick: a.k === rA, items: a.tools.map(function (id) { return { href: '#/q/' + a.k + '/' + id, label: T[id].short + ' · ' + T[id].name, done: complete(id) }; }).concat([{ href: '#/q/' + a.k + '/ex', label: '🏃 운동 안내문' }, { href: '#/q/' + a.k + '/cdm', label: '🧭 임상의사결정' }, { href: '#/q/' + a.k + '/sum', label: '📋 결과 요약' }]) };
     });
   }
+  /* 새 가상환자를 처음 열 때: 이 환자에게 맞는 추천 설문(주 + 보조)만 가상 환자 응답으로 채움. 비어 있는 설문만 채우고, 추천이 아닌 설문은 그대로 빈칸 */
+  G.autoFill = function (c) {
+    ctx = c; S = load();
+    var rel = simProfile().rel, done = [];
+    rel.forEach(function (id) { if (T[id] && !progress(id).n) { simulate(id); done.push(T[id].short); } });
+    return done;
+  };
   G.render = render; G.tocGroups = tocGroups;
   G.removePatient = function (pid) { try { localStorage.removeItem('ggobugi_web_q_' + pid); } catch (e) { } };
 })();

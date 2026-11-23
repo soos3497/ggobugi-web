@@ -253,3 +253,7 @@ body.web-view textarea.ws-ta-open{max-height:none!important;height:auto;min-heig
 #wsShell .ws-genprev:empty{display:none}
 #wsShell .ws-formbtns{gap:8px;flex-wrap:wrap}
 @media (max-width:760px){#wsShell .ws-row.two{grid-template-columns:1fr}}
+#wsShell .ws-autoq{flex-direction:row!important;align-items:flex-start;gap:10px!important;border:1px solid var(--u-blue,#5380f0);background:#f2f6ff;border-radius:12px;padding:12px;cursor:pointer;font-weight:400!important}
+#wsShell .ws-autoq input{margin-top:3px;accent-color:var(--ws-navy);flex:none}
+#wsShell .ws-autoq b{display:block;font-size:14px;color:var(--ws-ink)}
+#wsShell .ws-autoq small{display:block;font-size:12.5px;line-height:1.5;color:var(--ws-ink2);margin-top:3px}

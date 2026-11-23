@@ -178,6 +178,13 @@
         }
         ssSet(SS_CUR, id);
         try { if (window.ptAutoAnalyze) window.ptAutoAnalyze(); } catch (e) { }
+        /* 새 가상환자: 추천 설문도 자동 채우기(만들 때 체크한 경우, 처음 열 때 한 번만) */
+        if (!snap && p.gen && p.autoQuest && window.GGQ && window.GGQ.autoFill) {
+          try {
+            var qd = window.GGQ.autoFill({ pid: id, patient: p, ui: { util: ukUtil, foot: ukFoot, toast: toast } });
+            if (qd.length) setTimeout(function () { toast('추천 설문 ' + qd.join('·') + '도 가상 환자 응답으로 채웠습니다.'); }, 600);
+          } catch (e) { console.warn('[ggobugi] auto quest', e); }
+        }
         await wait(500);
         saveSnap(id);
       } catch (e) { console.error('[ggobugi] patient open', e); }
@@ -201,6 +208,7 @@
       '<label>질환(환자 유형)<select name="wsCond">' + opt(conds) + '</select></label></div>' +
       '<div class="ws-row"><label>심한 정도<select name="wsSev">' + opt(G.SEV) + '</select></label><label>발병 시기<select name="wsDur">' + opt(G.DUR) + '</select></label><label>아픈 쪽<select name="wsSide">' + opt(G.SIDE) + '</select></label></div>' +
       '<fieldset class="ws-xset"><legend>기타사항 <small>(아무것도 안 고르면 랜덤 · "없음"을 고르면 없음)</small></legend><div class="ws-xgrid">' + ex + '</div></fieldset>' +
+      '<label class="ws-autoq"><input type="checkbox" name="wsAutoQ" checked><span><b>추천 설문도 자동 채우기</b><small>8번 설문도구에서 이 환자에게 맞는 설문만(예: 목 통증 → NDI·FABQ, 기록지에 허리 불편이 있으면 ODI·RMDQ도) 기록지와 맞게 채웁니다. 맞지 않는 설문은 빈칸으로 둡니다. 직접 연습하려면 끄세요.</small></span></label>' +
       '<div class="ws-genprev" id="wsGenPrev"></div>' +
       '<div class="ws-formbtns"><button type="button" class="ws-btn ghost" data-genrand>🎲 전부 랜덤으로 채우기</button><button type="button" class="ws-btn ghost" data-genclear>비우기</button><button type="button" class="ws-btn" data-add>환자 만들기</button></div>' +
       '</form>';
@@ -208,7 +216,8 @@
   function readGenForm(form) {
     var g = function (n) { var e = form.querySelector('[name="' + n + '"]'); return e ? String(e.value || '').trim() : ''; };
     var xs = [].slice.call(form.querySelectorAll('[name="wsX"]:checked')).map(function (e) { return e.value; });
-    return { name: g('wsName'), age: g('wsAge'), sex: g('wsSex'), job: g('wsJob'), cond: g('wsCond'), sev: g('wsSev'), dur: g('wsDur'), side: g('wsSide'), extras: xs.indexOf('none') >= 0 ? [] : xs.length ? xs : null };
+    var aq = form.querySelector('[name="wsAutoQ"]');
+    return { autoQ: aq ? aq.checked : true, name: g('wsName'), age: g('wsAge'), sex: g('wsSex'), job: g('wsJob'), cond: g('wsCond'), sev: g('wsSev'), dur: g('wsDur'), side: g('wsSide'), extras: xs.indexOf('none') >= 0 ? [] : xs.length ? xs : null };
   }
   function genRandomFill(form) {
     var G = window.GGGEN; if (!G) return;
@@ -232,7 +241,8 @@
       p = { id: 'p' + Date.now().toString(36), base: 'blank', name: nm, age: f.age, sex: f.sex, job: f.job, updated: '' };
     } else {
       var r = G.resolve(f);
-      p = { id: 'p' + Date.now().toString(36), gen: r, name: r.name, age: String(r.age), sex: r.sex, job: r.job, updated: '' };
+      delete r.autoQ;
+      p = { id: 'p' + Date.now().toString(36), gen: r, autoQuest: f.autoQ, name: r.name, age: String(r.age), sex: r.sex, job: r.job, updated: '' };
     }
     var a = patients(); a.push(p); savePatients(a);
     renderPatients();
