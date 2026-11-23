@@ -96,8 +96,9 @@
       var arr = Array.isArray(v) ? v : [];
       opts = it.o.map(function (o) { return '<button type="button" class="q-opt multi' + (arr.indexOf(o[0]) >= 0 ? ' on' : '') + '" data-qa="' + id + '" data-qi="' + i + '" data-qm="' + esc(o[0]) + '">' + esc(o[1]) + '</button>'; }).join('');
     } else {
-      opts = it.o.map(function (o) { return '<button type="button" class="q-opt' + (it.scale ? ' sc' : '') + (it.yn ? ' yn' : '') + (v !== undefined && v !== null && v !== 'na' && +v === o[0] ? ' on' : '') + '" data-qa="' + id + '" data-qi="' + i + '" data-qv="' + o[0] + '">' + esc(o[1]) + '</button>'; }).join('');
+      opts = it.o.map(function (o) { return '<button type="button" class="q-opt' + (it.scale ? ' sc' : '') + (it.yn ? ' yn' : '') + (v !== undefined && v !== null && v !== 'na' && v !== 'unk' && +v === o[0] ? ' on' : '') + '" data-qa="' + id + '" data-qi="' + i + '" data-qv="' + o[0] + '">' + esc(o[1]) + '</button>'; }).join('');
       if (it.na) opts += '<button type="button" class="q-opt na' + (v === 'na' ? ' on' : '') + '" data-qa="' + id + '" data-qi="' + i + '" data-qv="na">해당 없음</button>';
+      opts += '<button type="button" class="q-opt unk' + (v === 'unk' ? ' on' : '') + '" data-qa="' + id + '" data-qi="' + i + '" data-qv="unk" title="기록지에 근거가 없거나 알 수 없을 때 — 점수에서 빠짐">모르겠음</button>';
     }
     var done = it.multi ? (Array.isArray(v) && v.length) : (v !== undefined && v !== null);
     return '<div class="q-item' + (done ? ' done' : '') + (it.danger ? ' danger' : '') + '" id="qi-' + id + '-' + i + '"><div class="q-qt"><span class="q-n">' + (i + 1) + '</span><b>' + esc(it.t) + '</b></div><div class="q-opts' + (it.scale ? ' scale' : '') + (it.yn ? ' yn' : '') + '">' + opts + '</div></div>';
@@ -169,6 +170,15 @@
       if (rn && rn[i] !== null && rn[i] !== undefined) { out[i] = rn[i]; return; } /* 기록지 C-14 NDI 와 같게 */
       var tx = it.t, b = pr.f;
       if (it.multi) { out[i] = id === 'iciq' ? (pr.f > 0.2 ? ['stress', 'exercise'] : ['never']) : []; return; }
+      /* 기록지에 근거가 없어 아무거나 고르면 안 되는 문항 → '모르겠음' */
+      var unk = function () { out[i] = 'unk'; };
+      if (/성생활/.test(tx)) return unk();
+      if (/운전/.test(tx) && !pr.drives) return unk();
+      if (/보조기/.test(tx)) { if (/깔창|보조기/.test(fv('ref_orthosis'))) { /* 사용 중 → 아래에서 답 */ } else { out[i] = 'na'; return; } }
+      if (/아이를 들어|아이 /.test(tx) && !/주부/.test(fv('job'))) return unk();
+      if (id === 'fabq' && i === 7) return unk(); /* 산재·보상 — 기록지에 정보 없음 */
+      if ((id === 'sf36' && i === 1)) return unk(); /* 1년 전과 비교 — 기록지에 정보 없음 */
+      if (/두통/.test(tx) && !(/두통/.test(fv('main_symptom') + fv('quality_detail') + fv('time_detail') + fv('additional')) || recordSpecPos()['Flexion-Rotation Test'])) return unk();
       if (id === 'fabq') { b = 0.22 + (pr.mood ? 0.3 : 0) + (pr.chronic ? 0.1 : 0) + (pr.f > 0.5 ? 0.12 : 0); if (i >= 5) b += pr.lift ? 0.08 : -0.05; if (i === 7) b = 0.05; }
       else if (id === 'epds' || (id === 'dram' && i < 23)) { b = pr.mood ? 0.5 : 0.15; if (id === 'epds' && i === 9) { out[i] = 0; return; } } /* 자해 문항은 자동으로 만들지 않음 */
       else if (id === 'dram') b = pr.mood ? 0.35 : 0.1;
@@ -185,7 +195,6 @@
         if (/읽기|집중/.test(tx)) b += pr.desk ? 0.06 : -0.04;
         if (/두통/.test(tx)) b -= pr.key === 'neck' ? 0.05 : 0.25;
         if (/들기|나르기|무거운/.test(tx)) b += pr.lift ? 0.08 : 0;
-        if (it.na && (/운전/.test(tx) && !pr.drives || /성생활/.test(tx) || /보조기/.test(tx))) { out[i] = 'na'; return; }
         if (it.yn) { out[i] = rnd() < Math.min(0.95, b * 1.15 + noise(0.05)) ? 1 : 0; return; }
       }
       b = Math.max(0, Math.min(1, b + noise()));
@@ -224,7 +233,7 @@
   function topItems(id) {
     var t = T[id], a = ans(id), out = [];
     t.items.forEach(function (it, i) {
-      if (it.multi) return; var v = a[i]; if (v === undefined || v === null || v === 'na') return;
+      if (it.multi) return; var v = a[i]; if (v === undefined || v === null || v === 'na' || v === 'unk') return;
       var vals = it.o.map(function (o) { return o[0]; }), max = Math.max.apply(null, vals), min = Math.min.apply(null, vals);
       var bad = t.better === 'high' ? (max - (+v)) / (max - min || 1) : ((+v) - min) / (max - min || 1);
       if (bad >= 0.6) out.push(it.t + ' (' + (it.o.filter(function (o) { return o[0] === +v; })[0] || [0, v])[1] + ')');
@@ -472,7 +481,7 @@
   /* ---------- 그리기 ---------- */
   var route = { area: null, tab: null };
   function render(shell, args, c) {
-    ctx = c; ctx.shell = shell; S = load();
+    ctx = c; ctx.shell = shell; S = load(); try { ensureAuto(); } catch (e) { console.warn('[quest] auto', e); }
     var area = AREAS.filter(function (a) { return a.k === args[0]; })[0] || null;
     var html;
     if (!area) { route = { area: null, tab: null }; html = renderHub(); }
@@ -504,7 +513,7 @@
       if (b) {
         var id = b.getAttribute('data-qa'), i = +b.getAttribute('data-qi'), a = ans(id);
         if (b.hasAttribute('data-qm')) { var m = b.getAttribute('data-qm'), arr = Array.isArray(a[i]) ? a[i].slice() : []; var k = arr.indexOf(m); if (k >= 0) arr.splice(k, 1); else arr.push(m); a[i] = arr; }
-        else { var v = b.getAttribute('data-qv'); a[i] = v === 'na' ? 'na' : +v; }
+        else { var v = b.getAttribute('data-qv'); a[i] = v === 'na' || v === 'unk' ? v : +v; }
         S.when[id] = today(); if (S.auto && S.auto[id]) S.auto[id] = 'edited'; save(); refreshTool(id, i);
         if (!b.hasAttribute('data-qm')) { var nx = shell.querySelector('#qi-' + id + '-' + (i + 1)); if (nx && !nx.classList.contains('done')) { var r = nx.getBoundingClientRect(); if (r.top > window.innerHeight * 0.75) shell.scrollBy({ top: r.top - window.innerHeight * 0.35, behavior: 'smooth' }); } }
         return;
@@ -539,12 +548,20 @@
 
   /* 목차 '8. 설문도구' 칸에 넣을 세부 항목 */
   function tocGroups(c) {
-    ctx = c; S = load(); var rA = recArea();
+    ctx = c; S = load(); try { ensureAuto(); } catch (e) { } var rA = recArea();
     return AREAS.map(function (a) {
       return { k: a.k, t: a.icon + ' ' + a.t + (a.k === rA ? ' · 이 환자 추천' : ''), pick: a.k === rA, items: a.tools.map(function (id) { return { href: '#/q/' + a.k + '/' + id, label: T[id].short + ' · ' + T[id].name, done: complete(id) }; }).concat([{ href: '#/q/' + a.k + '/ex', label: '🏃 운동 안내문' }, { href: '#/q/' + a.k + '/cdm', label: '🧭 임상의사결정' }, { href: '#/q/' + a.k + '/sum', label: '📋 결과 요약' }]) };
     });
   }
   /* 새 가상환자를 처음 열 때: 이 환자에게 맞는 추천 설문(주 + 보조)만 가상 환자 응답으로 채움. 비어 있는 설문만 채우고, 추천이 아닌 설문은 그대로 빈칸 */
+  /* 추천 설문은 설문마다 처음 한 번 자동으로 채움(만들 때 '자동 채우기'를 끈 환자는 제외). 사용자가 지운 설문은 다시 채우지 않음 */
+  function ensureAuto() {
+    if (!ctx || !ctx.pid || (ctx.patient && ctx.patient.autoQuest === false)) return;
+    S.autoInit = S.autoInit || {};
+    var ch = false;
+    simProfile().rel.forEach(function (id) { if (!T[id] || S.autoInit[id]) return; if (!progress(id).n) simulate(id); S.autoInit[id] = 1; ch = true; });
+    if (ch) save();
+  }
   G.autoFill = function (c) {
     ctx = c; S = load();
     var rel = simProfile().rel, done = [];

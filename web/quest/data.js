@@ -9,7 +9,9 @@
   function OR(list) { /* 거꾸로 점수(첫 보기가 가장 높은 점수) */ var n = list.length - 1; return list.map(function (t, i) { return [n - i, t]; }); }
   function N010(lo, hi) { var a = []; for (var i = 0; i <= 10; i++) a.push([i, i === 0 ? '0 ' + lo : i === 10 ? '10 ' + hi : String(i)]); return a; }
 
-  function ansList(tool, ans) { var a = []; tool.items.forEach(function (it, i) { var v = ans[i]; if (v !== undefined && v !== null && v !== 'na') a.push({ i: i, v: +v }); }); return a; }
+  /* 'na'(해당 없음)·'unk'(모르겠음)은 점수에서 뺌 */
+  function isNum(v) { return v !== undefined && v !== null && v !== 'na' && v !== 'unk' && !Array.isArray(v) && !isNaN(+v); }
+  function ansList(tool, ans) { var a = []; tool.items.forEach(function (it, i) { var v = ans[i]; if (isNum(v)) a.push({ i: i, v: +v }); }); return a; }
   function countNA(tool, ans) { var n = 0; tool.items.forEach(function (it, i) { if (ans[i] === 'na') n++; }); return n; }
   function answered(tool, ans) { var n = 0; tool.items.forEach(function (it, i) { if (ans[i] !== undefined && ans[i] !== null) n++; }); return n; }
   function sumOf(list) { return list.reduce(function (s, x) { return s + x.v; }, 0); }
@@ -131,10 +133,11 @@
     groups: [{ from: 0, to: 4, t: '신체 활동에 대한 생각' }, { from: 5, to: 15, t: '일(학업)에 대한 생각' }],
     items: FABQ_T.map(function (t) { return { t: t, o: [[0, '0 전혀 동의 안 함'], [1, '1'], [2, '2'], [3, '3 잘 모르겠다'], [4, '4'], [5, '5'], [6, '6 매우 동의']], scale: true }; }),
     score: function (ans) {
-      var g = function (i) { var v = ans[i - 1]; return v === undefined || v === null ? null : +v; };
+      var g = function (i) { var v = ans[i - 1]; return isNum(v) ? +v : null; };
       var pa = [2, 3, 4, 5].map(g), w = [6, 7, 9, 10, 11, 12, 15].map(g);
-      var pS = pa.every(function (x) { return x !== null; }) ? pa.reduce(function (s, x) { return s + x; }, 0) : null;
-      var wS = w.every(function (x) { return x !== null; }) ? w.reduce(function (s, x) { return s + x; }, 0) : null;
+      /* 모르겠음이 조금 있으면 답한 문항 평균으로 채워 계산(신체 4문항 중 3개, 일 7문항 중 5개 이상) */
+      var pro = function (arr, need) { var x = arr.filter(function (q) { return q !== null; }); return x.length >= need ? Math.round(x.reduce(function (s, q) { return s + q; }, 0) / x.length * arr.length) : null; };
+      var pS = pro(pa, 3), wS = pro(w, 5);
       if (pS === null && wS === null) { var a = ansList(this, ans); if (!a.length) return null; }
       var high = (pS !== null && pS > 15) || (wS !== null && wS > 34);
       var lvl = high ? 3 : ((pS !== null && pS > 14) || (wS !== null && wS > 29)) ? 2 : 0;
@@ -355,7 +358,7 @@
       { t: '언제 새나요? (해당하는 것 모두, 점수 없음)', multi: true, o: [['never', '전혀 새지 않는다'], ['urge', '화장실에 가기 전에 샌다'], ['stress', '기침·재채기할 때 샌다'], ['sleep', '잠잘 때 샌다'], ['exercise', '운동하거나 몸을 움직일 때 샌다'], ['after', '소변을 본 뒤 옷을 입을 때 샌다'], ['noreason', '뚜렷한 이유 없이 샌다'], ['always', '늘 샌다']] }
     ],
     score: function (ans) {
-      var s = 0, n = 0; [0, 1, 2].forEach(function (i) { if (ans[i] !== undefined && ans[i] !== null) { s += +ans[i]; n++; } });
+      var s = 0, n = 0; [0, 1, 2].forEach(function (i) { if (isNum(ans[i])) { s += +ans[i]; n++; } });
       if (!n) return null;
       var b = band(s, [[0, '요실금 없음', 0], [5, '경도', 1], [12, '중등도', 2], [18, '중증', 3], [21, '매우 중증', 4]]);
       var w = ans[3] || [], type = '';
@@ -383,7 +386,7 @@
     ],
     score: function (ans) {
       var a = ansList(this, ans); if (!a.length) return null;
-      var s = sumOf(a), harm = ans[9] !== undefined && +ans[9] > 0;
+      var s = sumOf(a), harm = isNum(ans[9]) && +ans[9] > 0;
       var b = band(s, [[9, '우울 가능성 낮음', 0], [12, '우울 가능성 있음', 2], [30, '우울 가능성 높음', 3]]);
       return { main: s, unit: '/ 30', label: b.label, level: harm ? 4 : b.level, epdsHarm: harm, lines: ['응답 ' + a.length + ' / 10'].concat(harm ? ['⚠ 10번(자해 생각)에 응답 — 즉시 안전 확인과 의뢰'] : []), formula: 'EPDS = 10문항 합(0–30). 10–12 가능성 있음 · 13 이상 가능성 높음(전문가 의뢰). 10번 문항이 0점이 아니면 점수와 상관없이 즉시 확인합니다.' };
     }
@@ -411,6 +414,7 @@
     .concat(['나는 다른 사람보다 쉽게 아픈 것 같다', '나는 내가 아는 누구 못지않게 건강하다', '내 건강은 나빠질 것 같다', '내 건강은 아주 좋다'].map(function (t) { return { t: t, o: TRUE5 }; }));
   /* 문항 번호(1부터) → 0–100 바꾸기 규칙 */
   function rec36(n, v) {
+    if (!isNum(v)) return null;
     v = +v;
     if (n === 1 || n === 34 || n === 36 || n === 20 || n === 22) return [100, 75, 50, 25, 0][v - 1];
     if (n >= 3 && n <= 12) return [0, 50, 100][v - 1];
@@ -424,7 +428,7 @@
   var SF36_SCALES = [['신체 기능', [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], ['신체 역할 제한', [13, 14, 15, 16]], ['감정 역할 제한', [17, 18, 19]], ['활력', [23, 27, 29, 31]], ['정서 건강', [24, 25, 26, 28, 30]], ['사회 기능', [20, 32]], ['통증', [21, 22]], ['일반 건강', [1, 33, 34, 35, 36]]];
   function scales36(ans, map) {
     return SF36_SCALES.map(function (sc) {
-      var vals = sc[1].map(function (n) { var i = map ? map[n] : n - 1; if (i === undefined) return null; var v = ans[i]; return v === undefined || v === null ? null : rec36(n, v); }).filter(function (x) { return x !== null && x !== undefined; });
+      var vals = sc[1].map(function (n) { var i = map ? map[n] : n - 1; if (i === undefined) return null; var v = ans[i]; return rec36(n, v); }).filter(function (x) { return x !== null && x !== undefined && !isNaN(x); });
       var need = map ? sc[1].filter(function (n) { return map[n] !== undefined; }).length : sc[1].length;
       return { name: sc[0], v: vals.length ? vals.reduce(function (s, x) { return s + x; }, 0) / vals.length : null, n: vals.length, need: need };
     }).filter(function (x) { return x.need > 0; });
@@ -452,7 +456,7 @@
     score: function (ans) {
       var a = ansList(this, ans); if (!a.length) return null;
       var inv = {}; Object.keys(SF12_MAP).forEach(function (n) { inv[n] = SF12_MAP[n]; });
-      var val = function (n) { var i = inv[n], v = ans[i]; return v === undefined || v === null ? null : rec36(+n, v); };
+      var val = function (n) { var i = inv[n], v = ans[i]; return rec36(+n, v); };
       var avg = function (ns) { var x = ns.map(val).filter(function (q) { return q !== null && q !== undefined; }); return x.length ? x.reduce(function (s, q) { return s + q; }, 0) / x.length : null; };
       var phys = avg([1, 4, 6, 14, 15, 22]), ment = avg([18, 19, 26, 27, 28, 32]);
       var m = [phys, ment].filter(function (x) { return x !== null; }); var mean = m.reduce(function (s, x) { return s + x; }, 0) / (m.length || 1);
