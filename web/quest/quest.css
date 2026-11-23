@@ -167,3 +167,10 @@
 #wsShell .ws-grp a{color:inherit;text-decoration:none}
 #wsShell .ws-grp a:hover{color:var(--u-blue)}
 #wsShell .ws-grp.pick{color:var(--u-navy)}
+/* 가상 환자 응답 */
+#wsShell .q-sim{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px;padding:10px 12px;border:1px solid var(--u-blue);background:#f2f6ff;border-radius:10px;font-size:13.5px;line-height:1.55}
+#wsShell .q-sim span{flex:1;min-width:240px}
+#wsShell .q-sim em{font-style:normal;font-size:11.5px;font-weight:800;color:#3b6b1c;background:#e6f3dc;border-radius:6px;padding:1px 7px;margin-left:4px}
+#wsShell .q-sim.off{border-style:dashed;border-color:var(--u-line);background:#fafbfd;color:var(--ws-ink3)}
+#wsShell .q-tab b u{text-decoration:none;font-size:10.5px;font-weight:800;color:var(--u-navy);background:var(--u-gold);border-radius:99px;padding:1px 6px;vertical-align:2px}
+#wsShell .q-tab.rec{border-color:#c9d6f5}

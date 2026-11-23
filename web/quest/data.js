@@ -515,5 +515,5 @@
 
   window.GGQ = window.GGQ || {};
   window.GGQ.TOOLS = TOOLS; window.GGQ.AREAS = AREAS;
-  window.GGQ.util = { answered: answered, countNA: countNA };
+  window.GGQ.util = { answered: answered, countNA: countNA, rec36: rec36, sf12map: SF12_MAP };
 })();

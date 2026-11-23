@@ -65,7 +65,8 @@
       '<nav class="q-areas">' + areaChips + '</nav>';
   }
   function tabsRow(area, tab) {
-    var tools = area.tools.map(function (id) { var t = T[id], pr = progress(id); return '<a class="q-tab' + (tab === id ? ' on' : '') + '" href="#/q/' + area.k + '/' + id + '"><b>' + esc(t.short) + '</b><small>' + esc(t.name) + '</small><i class="' + (complete(id) ? 'ok' : pr.n ? 'part' : '') + '">' + pr.n + '/' + pr.of + '</i></a>'; }).join('');
+    var rel = simProfile().rel;
+    var tools = area.tools.map(function (id) { var t = T[id], pr = progress(id); return '<a class="q-tab' + (tab === id ? ' on' : '') + (rel.indexOf(id) >= 0 ? ' rec' : '') + '" href="#/q/' + area.k + '/' + id + '"><b>' + esc(t.short) + (rel.indexOf(id) >= 0 ? ' <u>추천</u>' : '') + '</b><small>' + esc(t.name) + '</small><i class="' + (complete(id) ? 'ok' : pr.n ? 'part' : '') + '">' + pr.n + '/' + pr.of + '</i></a>'; }).join('');
     var extra = [['ex', '🏃 운동 안내문', '부위별 운동 그림 · 인쇄'], ['cdm', '🧭 임상의사결정', '위험신호 · 분류 · 치료 방향'], ['sum', '📋 결과 요약', '전체 점수 · 복사 · 인쇄']].map(function (x) { return '<a class="q-tab q-tab2' + (tab === x[0] ? ' on' : '') + '" href="#/q/' + area.k + '/' + x[0] + '"><b>' + x[1] + '</b><small>' + x[2] + '</small></a>'; }).join('');
     return '<nav class="q-tabs" aria-label="설문 탭">' + tools + extra + '</nav>';
   }
@@ -109,15 +110,90 @@
     });
     return out;
   }
+  function recordSpecPos() {
+    var seen = {}, pos = {};
+    $$('main #specialTable tbody tr').forEach(function (tr) {
+      var n = (tr.querySelector('select[name="spec_name"]') || {}).value, r = (tr.querySelector('select[name="pn_result"]') || {}).value;
+      if (!n) return; seen[n] = (seen[n] || 0) + 1; var k = seen[n] > 1 ? n + '#' + seen[n] : n;
+      if (r === 'Positive') pos[k] = true;
+    });
+    return pos;
+  }
   function recordNdi() {
     var rows = $$('main #ndi select[name="ndi_score"]'); if (!rows.length) return null;
     var vals = rows.map(function (s) { return s.value === '' ? null : +s.value; });
     return vals.some(function (v) { return v !== null; }) ? vals : null;
   }
+  /* ---------- 가상 환자 응답: 기록지(진단·통증·수면·기능·직업)와 맞게 답 만들기 ---------- */
+  var REL = { neck: ['ndi', 'fabq'], lbp: ['odi', 'rmdq', 'fabq'], lumbar: ['odi', 'rmdq', 'fabq'], thoracic: ['fri', 'fabq'], sij: ['pgq', 'odi'], shoulder: ['spadi', 'qdash'], elbow: ['prtee', 'qdash'], wrist: ['prwe', 'bctq', 'qdash'], hip: ['ohs', 'lefs'], knee: ['oks', 'lefs'], ankle: ['faam', 'lefs'], pelvic: ['pgq', 'odi', 'iciq', 'epds'], stroke: ['lefs', 'sf36'], sci: ['lefs', 'sf36'] };
+  function simProfile() {
+    var g = (ctx.patient || {}).gen || null;
+    var key = g ? g.cond : recPart();
+    var nrsEl = $('main input[name="nowpain"]:checked'), wEl = $('main input[name="worstpain"]:checked');
+    var nrs = nrsEl ? +nrsEl.value : null, worst = wEl ? +wEl.value : null;
+    var f = g && !/stroke|sci/.test(g.cond) ? { 1: 0.18, 2: 0.33, 3: 0.55 }[g.sev] || 0.33 : g ? 0.55 : nrs !== null ? Math.max(0.12, Math.min(0.7, nrs / 10 * 0.85)) : 0.3;
+    var funcs = fv('function'), prov = fv('provocation'), tw = fv('time_worse');
+    var job = fv('job') || (g && g.job) || '';
+    return {
+      key: key, rel: REL[key] || [], f: f, nrs: nrs === null ? Math.round(f * 10) : nrs, worst: worst === null ? Math.min(10, Math.round(f * 10) + 2) : worst,
+      mood: !!(g && g.extras && g.extras.indexOf('mood') >= 0), chronic: g ? g.dur === 'chronic' : /달|1년/.test(fv('onset_time')),
+      sleepBad: fv('sleep') === '5시간 미만' || /밤/.test(tw) || /수면/.test(prov) || /수면/.test(funcs),
+      funcs: funcs, drives: /버스|택배|운전/.test(job) || /운전/.test(funcs), desk: /대학생|사무|프로그래머|교사/.test(job), lift: /택배|건설|간호|요리|농업|운동선수|주부/.test(job)
+    };
+  }
+  function seeded(str) { var h = 1779033703 ^ str.length; for (var i = 0; i < str.length; i++) { h = Math.imul(h ^ str.charCodeAt(i), 3432918353); h = h << 13 | h >>> 19; } return function () { h = Math.imul(h ^ h >>> 16, 2246822507); h = Math.imul(h ^ h >>> 13, 3266489909); h ^= h >>> 16; return (h >>> 0) / 4294967296; }; }
+  function optBad(id, it, idx, v) {
+    var U = G.util || {};
+    if ((id === 'sf36' || id === 'sf12') && U.rec36) {
+      var n = id === 'sf36' ? idx + 1 : +Object.keys(U.sf12map).filter(function (k) { return U.sf12map[k] === idx; })[0];
+      var r = U.rec36(n, v); return r === null || r === undefined ? 0.5 : 1 - r / 100;
+    }
+    var vals = it.o.map(function (o) { return o[0]; }), mx = Math.max.apply(null, vals), mn = Math.min.apply(null, vals);
+    var b = (v - mn) / ((mx - mn) || 1);
+    return T[id].better === 'high' ? 1 - b : b;
+  }
+  function simulate(id) {
+    var t = T[id], pr = simProfile(), rnd = seeded((ctx.pid || '') + ':' + id), out = {};
+    var noise = function (k) { return (rnd() - 0.5) * 2 * (k || 0.08); };
+    var rn = id === 'ndi' ? recordNdi() : null;
+    t.items.forEach(function (it, i) {
+      if (rn && rn[i] !== null && rn[i] !== undefined) { out[i] = rn[i]; return; } /* 기록지 C-14 NDI 와 같게 */
+      var tx = it.t, b = pr.f;
+      if (it.multi) { out[i] = id === 'iciq' ? (pr.f > 0.2 ? ['stress', 'exercise'] : ['never']) : []; return; }
+      if (id === 'fabq') { b = 0.22 + (pr.mood ? 0.3 : 0) + (pr.chronic ? 0.1 : 0) + (pr.f > 0.5 ? 0.12 : 0); if (i >= 5) b += pr.lift ? 0.08 : -0.05; if (i === 7) b = 0.05; }
+      else if (id === 'epds' || (id === 'dram' && i < 23)) { b = pr.mood ? 0.5 : 0.15; if (id === 'epds' && i === 9) { out[i] = 0; return; } } /* 자해 문항은 자동으로 만들지 않음 */
+      else if (id === 'dram') b = pr.mood ? 0.35 : 0.1;
+      else if (id === 'sf36' || id === 'sf12') { var n0 = id === 'sf36' ? i + 1 : +Object.keys(G.util.sf12map).filter(function (k) { return G.util.sf12map[k] === i; })[0]; b = (n0 >= 17 && n0 <= 19) || (n0 >= 23 && n0 <= 31) ? (pr.mood ? 0.5 : 0.2) : n0 === 2 ? 0.5 : pr.f * 0.9; }
+      else {
+        if (/통증 강도|평소.*통증|쉬고 있을 때|지금.*통증/.test(tx)) b = pr.nrs / 10;
+        else if (/가장 심할 때|가장 심함/.test(tx)) b = pr.worst / 10;
+        else if (/가장 덜 아플/.test(tx)) b = Math.max(0, pr.nrs - 2) / 10;
+        if (/수면|잠|밤/.test(tx)) b += pr.sleepBad ? 0.15 : -0.12;
+        if (/계단/.test(tx)) b += /계단/.test(pr.funcs) ? 0.12 : -0.05;
+        if (/옷|양말|스타킹|셔츠|바지|씻|목욕|머리 감기/.test(tx)) b += /옷|샤워/.test(pr.funcs) ? 0.1 : -0.06;
+        if (/걷|보행/.test(tx)) b += /걷기/.test(pr.funcs) ? 0.1 : 0;
+        if (/달리|뛰|점프|착지|스포츠|운동|격렬|방향/.test(tx)) b += 0.15;
+        if (/읽기|집중/.test(tx)) b += pr.desk ? 0.06 : -0.04;
+        if (/두통/.test(tx)) b -= pr.key === 'neck' ? 0.05 : 0.25;
+        if (/들기|나르기|무거운/.test(tx)) b += pr.lift ? 0.08 : 0;
+        if (it.na && (/운전/.test(tx) && !pr.drives || /성생활/.test(tx) || /보조기/.test(tx))) { out[i] = 'na'; return; }
+        if (it.yn) { out[i] = rnd() < Math.min(0.95, b * 1.15 + noise(0.05)) ? 1 : 0; return; }
+      }
+      b = Math.max(0, Math.min(1, b + noise()));
+      var best = it.o[0][0], bd = 9; it.o.forEach(function (o) { var d = Math.abs(optBad(id, it, i, o[0]) - b); if (d < bd) { bd = d; best = o[0]; } });
+      out[i] = best;
+    });
+    S.ans[id] = out; S.when[id] = today(); S.auto = S.auto || {}; S.auto[id] = 'auto'; save();
+  }
+  function simBox(id) {
+    var pr = simProfile(), rel = pr.rel.indexOf(id) >= 0, st = (S.auto || {})[id];
+    if (!rel) return '<div class="q-sim off"><span>🧑‍⚕️ 이 환자(' + esc(((ctx.patient || {}).gen || {}).condLabel || fv('ref_medical_dx') || '현재 환자') + ')에게 우선 쓰는 설문이 아니어서 가상 환자 응답을 만들지 않습니다. 직접 답해 볼 수 있어요.' + (pr.rel.length ? ' 추천: ' + pr.rel.map(function (x) { return T[x].short; }).join('·') : '') + '</span></div>';
+    return '<div class="q-sim"><span>🧑‍⚕️ <b>가상 환자 응답 불러오기</b> — 기록지의 진단·통증(NRS ' + pr.nrs + ')·수면·기능 제한·직업에 맞게 이 환자가 답했을 법한 응답을 채웁니다.' + (id === 'ndi' && recordNdi() ? ' NDI는 기록지 C-14 값과 같게 넣습니다.' : '') + (st ? ' <em>' + (st === 'edited' ? '자동 응답 · 수정함' : '자동으로 채운 답') + '</em>' : '') + '</span><button type="button" class="ws-btn" data-qsim="' + id + '">' + (st ? '다시 불러오기' : '불러오기') + '</button></div>';
+  }
   function renderTool(area, id) {
     var t = T[id], idx = area.tools.indexOf(id), next = area.tools[idx + 1];
     var rn = id === 'ndi' ? recordNdi() : null;
-    return '<section class="q-card q-intro"><h2>' + esc(t.short) + ' · ' + esc(t.name) + '</h2><p class="q-full">' + esc(t.full) + '</p><p>' + esc(t.intro) + '</p>' +
+    return '<section class="q-card q-intro"><h2>' + esc(t.short) + ' · ' + esc(t.name) + '</h2><p class="q-full">' + esc(t.full) + '</p><p>' + esc(t.intro) + '</p>' + simBox(id) +
       (rn ? '<div class="q-import"><span>기록지 <b>C-14 NDI</b>에 답이 있습니다 (' + rn.filter(function (v) { return v !== null; }).length + '/10). 같은 도구이므로 그대로 불러올 수 있어요. 기록지는 바뀌지 않습니다.</span><button type="button" class="ws-btn ghost" data-qimport="ndi">기록지 값 불러오기</button></div>' : '') + '</section>' +
       '<section class="q-card q-sticky" id="qScore">' + scoreBox(id) + '</section>' +
       '<section class="q-card q-items">' + itemsHtml(id) + '</section>' +
@@ -204,6 +280,22 @@
   /* ---------- 임상의사결정 ---------- */
   function autoFinds(part) {
     var a = {}; /* 'k:i' → 이유 */
+    /* 기록지 특수검사에서 양성인 검사 → 해당 소견 자동 체크 (기록지는 읽기만) */
+    var pos = recordSpecPos(), addIf = function (tests, k) { tests.some(function (tn) { if (pos[tn]) { a[k] = '기록지 특수검사 ' + tn + ' 양성'; return true; } return false; }); };
+    if (part === 'neck') { addIf(['Flexion-Rotation Test'], 'ha:1'); addIf(['Spurling test'], 'rad:1'); }
+    if (part === 'shoulder') { addIf(['Neer', 'Hawkins-Kennedy'], 'sais:0'); addIf(['Empty Can / Jobe'], 'sais:1'); addIf(['Apprehension / Relocation'], 'ins:0'); }
+    if (part === 'lumbar') addIf(['Straight Leg Raise', 'Slump'], 'trac:0');
+    if (part === 'knee') { addIf(['McMurray'], 'men:1'); addIf(['Lachman'], 'acl:1'); }
+    if (part === 'ankle') addIf(['Anterior drawer#2'], 'spr:1');
+    if (part === 'wrist') addIf(['Phalen', 'Tinel'], 'cts:1');
+    if (part === 'hip') addIf(['FADIR'], 'fai:0');
+    /* 기록지 병력에서 읽는 소견 */
+    var age = num('age'), dx = fv('ref_medical_dx');
+    if (part === 'knee' && /무릎/.test(dx)) {
+      if (age !== null && age >= 50 && /뻣뻣/.test(fv('time_detail'))) a['oa:0'] = '기록지 ' + age + '세 · 아침 뻣뻣함';
+      if (/마찰음/.test(fv('quality_detail'))) a['oa:1'] = '기록지 마찰음';
+    }
+    if (part === 'ankle' && /발목/.test(dx) && /운동 중|넘어진/.test(fv('onset_context')) && /발목/.test(fv('region'))) a['spr:0'] = '기록지 발병 계기·부위';
     /* 다른 부위 자료만으로 판정하지 않도록: 그 부위 설문을 했거나(또는 이 환자의 부위일 때)만 자동 소견을 씀 */
     if (part === 'neck' && !(recPart() === 'neck' || progress('ndi').n)) return a;
     if (part === 'lumbar' && !(progress('odi').n || progress('rmdq').n)) return a;
@@ -226,7 +318,9 @@
       return { k: c.k, t: c.t, n: n, of: c.f.length, ref: !!c.ref, tx: c.tx, strong: n >= c.f.length };
     });
   }
-  function partHasData(part) { return (G.PART_TOOLS[part] || []).some(function (id) { return progress(id).n; }) || Object.keys(S.find[part] || {}).some(function (k) { return S.find[part][k]; }) || Object.keys(autoFinds(part)).length > 0; }
+  /* 여러 부위가 같이 쓰는 설문(LEFS·QuickDASH)만으로는 그 부위를 판정하지 않음 — 그 부위 전용 설문·소견이 있거나 이 환자의 부위일 때만 */
+  var SHARED = ['lefs', 'qdash'];
+  function partHasData(part) { return (G.PART_TOOLS[part] || []).some(function (id) { return SHARED.indexOf(id) < 0 && progress(id).n; }) || recPart() === part || Object.keys(S.find[part] || {}).some(function (k) { return S.find[part][k]; }) || Object.keys(autoFinds(part)).length > 0; }
   function renderCdm(area) {
     var rf = recordRedFlags(), man = S.red[area.k] || {};
     var redList = G.RED[area.k] || [];
@@ -265,7 +359,7 @@
       if (hit.length) {
         label = hit[0].t; cls = hit.some(function (x) { return x.ref; }) ? 'bad' : 'ok';
         body = hit.map(function (x) { return '<div class="q-dxr' + (x.ref ? ' ref' : '') + '"><b>' + esc(x.t) + '</b> <span>' + (x.strong ? '가능성 높음' : '의심') + ' (' + x.n + '/' + x.of + ')</span><p>→ ' + esc(x.tx) + '</p></div>'; }).join('');
-      } else if (sc && D.def) {
+      } else if (sc && D.def && partHasData(p[0])) {
         var d = D.list.filter(function (c) { return c.k === D.def; })[0];
         label = d.t + ' (기본 분류)'; cls = 'ok';
         body = '<p>체크한 검사 소견이 없어 기본 분류를 적용했습니다.</p><div class="q-dxr"><b>' + esc(d.t) + '</b><p>→ ' + esc(d.tx) + '</p></div>';
@@ -327,7 +421,7 @@
       return '<tr><td><a href="#/q/' + area.k + '/' + r.id + '"><b>' + esc(r.t.short) + '</b></a><br><small>' + esc(r.t.name) + '</small></td><td>' + (r.s ? '<b>' + esc(r.s.main) + '</b> ' + esc(r.s.unit) : '–') + '</td><td>' + (r.s ? '<span class="q-badge lv' + r.s.level + '">' + esc(r.s.label) + '</span>' : '미시행') + '</td><td>' + r.pr.n + ' / ' + r.pr.of + '</td><td>' + esc(r.when || '') + '</td></tr>';
     }).join('');
     return '<section class="q-card"><h2>결과 요약 · ' + esc(area.t) + '</h2><div class="q-tablewrap"><table class="q-table"><thead><tr><th>도구</th><th>점수</th><th>판정</th><th>응답</th><th>마지막 응답</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
-      '<div class="q-actions"><button type="button" class="ws-btn" data-qcopy="' + area.k + '">텍스트 복사</button><button type="button" class="ws-btn ghost" data-qprint="report">🖨 결과 보고서 인쇄</button></div><pre class="q-pre" id="qSumText">' + esc(summaryText(area)) + '</pre></section>';
+      '<div class="q-actions">' + (simProfile().rel.some(function (x) { return area.tools.indexOf(x) >= 0; }) ? '<button type="button" class="ws-btn" data-qsimall="1">🧑‍⚕️ 추천 설문 모두 가상 환자 응답으로 채우기</button>' : '') + '<button type="button" class="ws-btn ghost" data-qcopy="' + area.k + '">텍스트 복사</button><button type="button" class="ws-btn ghost" data-qprint="report">🖨 결과 보고서 인쇄</button></div><pre class="q-pre" id="qSumText">' + esc(summaryText(area)) + '</pre></section>';
   }
 
   /* ---------- 인쇄 ---------- */
@@ -401,7 +495,7 @@
         var id = b.getAttribute('data-qa'), i = +b.getAttribute('data-qi'), a = ans(id);
         if (b.hasAttribute('data-qm')) { var m = b.getAttribute('data-qm'), arr = Array.isArray(a[i]) ? a[i].slice() : []; var k = arr.indexOf(m); if (k >= 0) arr.splice(k, 1); else arr.push(m); a[i] = arr; }
         else { var v = b.getAttribute('data-qv'); a[i] = v === 'na' ? 'na' : +v; }
-        S.when[id] = today(); save(); refreshTool(id, i);
+        S.when[id] = today(); if (S.auto && S.auto[id]) S.auto[id] = 'edited'; save(); refreshTool(id, i);
         if (!b.hasAttribute('data-qm')) { var nx = shell.querySelector('#qi-' + id + '-' + (i + 1)); if (nx && !nx.classList.contains('done')) { var r = nx.getBoundingClientRect(); if (r.top > window.innerHeight * 0.75) shell.scrollBy({ top: r.top - window.innerHeight * 0.35, behavior: 'smooth' }); } }
         return;
       }
@@ -413,7 +507,11 @@
         return;
       }
       var cl = e.target.closest('[data-qclear]');
-      if (cl) { var cid = cl.getAttribute('data-qclear'); if (confirm(T[cid].short + ' 응답을 모두 지울까요?')) { S.ans[cid] = {}; delete S.when[cid]; save(); rerenderBody(); } return; }
+      if (cl) { var cid = cl.getAttribute('data-qclear'); if (confirm(T[cid].short + ' 응답을 모두 지울까요?')) { S.ans[cid] = {}; delete S.when[cid]; if (S.auto) delete S.auto[cid]; save(); rerenderBody(); } return; }
+      var sm = e.target.closest('[data-qsim]');
+      if (sm) { var sid = sm.getAttribute('data-qsim'); if (progress(sid).n && !(S.auto && S.auto[sid] === 'auto') && !confirm('지금 응답을 가상 환자 응답으로 바꿀까요?')) return; simulate(sid); rerenderBody(); ctx.ui.toast(T[sid].short + ' — 가상 환자 응답을 불러왔습니다.'); return; }
+      var sa = e.target.closest('[data-qsimall]');
+      if (sa) { var rel = simProfile().rel.filter(function (x) { return route.area.tools.indexOf(x) >= 0; }); var fill = rel.filter(function (x) { return !progress(x).n; }); fill.forEach(simulate); rerenderBody(); ctx.ui.toast(fill.length ? fill.map(function (x) { return T[x].short; }).join('·') + ' 응답을 불러왔습니다.' : '불러올 빈 추천 설문이 없습니다.'); return; }
       var im = e.target.closest('[data-qimport]');
       if (im) { var vals = recordNdi(); if (vals) { var na = ans('ndi'); vals.forEach(function (v, k) { if (v !== null) na[k] = v; }); S.when.ndi = today(); save(); rerenderBody(); ctx.ui.toast('기록지 C-14 NDI 값을 불러왔습니다.'); } return; }
       var pp = e.target.closest('[data-qpart]:not([data-qprint])'); if (pp) { S.part[route.area.k] = pp.getAttribute('data-qpart'); save(); rerenderBody(); return; }
