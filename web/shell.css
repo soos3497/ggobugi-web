@@ -238,3 +238,18 @@ body.web-view textarea.ws-ta-open{max-height:none!important;height:auto;min-heig
   #wsShell .uk-hero h1{font-size:24px}
   #wsShell .ws-sechead .ws-step{display:none}
 }
+
+/* 랜덤 가상환자 만들기 */
+#wsShell .ws-genhint{margin:0;font-size:13px;color:var(--ws-ink2);background:#eaf0fe;border-radius:10px;padding:9px 12px}
+#wsShell .ws-row.two{grid-template-columns:1fr 1fr}
+#wsShell .ws-xset legend small{font-weight:500;color:var(--ws-ink3)}
+#wsShell .ws-xset{display:block}
+#wsShell .ws-xgrid{display:flex;flex-wrap:wrap;gap:8px}
+#wsShell .ws-xchip{flex-direction:row!important;align-items:center;gap:6px!important;border:1px solid var(--ws-line);border-radius:999px;padding:7px 12px;cursor:pointer;font-weight:600!important;color:var(--ws-ink)!important}
+#wsShell .ws-xchip:has(input:checked){background:var(--ws-navy);border-color:var(--ws-navy);color:#fff!important}
+#wsShell .ws-xchip input{display:none}
+#wsShell .ws-xchip.none{border-style:dashed}
+#wsShell .ws-genprev{font-size:13.5px;color:var(--ws-ink2);border:1px dashed var(--ws-line2);border-radius:10px;padding:9px 12px;min-height:20px}
+#wsShell .ws-genprev:empty{display:none}
+#wsShell .ws-formbtns{gap:8px;flex-wrap:wrap}
+@media (max-width:760px){#wsShell .ws-row.two{grid-template-columns:1fr}}

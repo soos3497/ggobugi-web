@@ -166,9 +166,14 @@
           try { localStorage.removeItem('ggobugi_ix_v1'); } catch (e) { }
           var K = typeof KEY !== 'undefined' ? KEY : null;
           if (K) { ssSet(K + '_plan', null); ssSet(K + '_planExtra', null); }
-          if (typeof window.applyScenario === 'function') window.applyScenario(p.base || 'blank');
-          await wait(1400);
-          if (!p.fixed) { setField('name', p.name); setField('age', p.age); setField('sex', p.sex); setField('job', p.job); }
+          if (p.gen && window.GGGEN) {
+            /* 랜덤 가상환자: 환자 유형 틀로 기록지 전체 채우기 */
+            await window.GGGEN.fill(p.gen);
+          } else {
+            if (typeof window.applyScenario === 'function') window.applyScenario(p.base || 'blank');
+            await wait(1400);
+            if (!p.fixed) { setField('name', p.name); setField('age', p.age); setField('sex', p.sex); setField('job', p.job); }
+          }
           try { if (window.ptIxReload) window.ptIxReload(); } catch (e) { }
         }
         ssSet(SS_CUR, id);
@@ -181,16 +186,57 @@
     })();
   }
 
+  /* ---------- 랜덤 가상환자 만들기 (web/gen/gen.js) ---------- */
+  function genForm() {
+    var G = window.GGGEN; if (!G) return '<p class="ws-foot">생성기를 불러오는 중입니다…</p>';
+    var opt = function (list, rand) { return '<option value="">' + (rand || '🎲 랜덤') + '</option>' + list.map(function (x) { return '<option value="' + esc(x[0]) + '">' + esc(x[1]) + '</option>'; }).join(''); };
+    var conds = Object.keys(G.CONDS).map(function (k) { return [k, G.CONDS[k].t]; }).concat([['blank', '빈 양식(직접 작성)']]);
+    var jobs = G.JOBS.map(function (j) { return '<option value="' + esc(j.t) + '">'; }).join('');
+    var ex = G.EXTRAS.map(function (x) { return '<label class="ws-xchip"><input type="checkbox" name="wsX" value="' + x[0] + '"><span>' + esc(x[1]) + '</span></label>'; }).join('') + '<label class="ws-xchip none"><input type="checkbox" name="wsX" value="none"><span>없음</span></label>';
+    return '<form class="ws-addform ws-gen" autocomplete="off" onsubmit="return false">' +
+      '<p class="ws-genhint">원하는 칸만 고르세요. <b>비워 둔 칸은 랜덤</b>으로 채워집니다.</p>' +
+      '<div class="ws-row"><label>이름<input name="wsName" placeholder="🎲 랜덤 (자동으로 (가상) 붙음)"></label><label>나이<input name="wsAge" inputmode="numeric" placeholder="🎲 질환에 맞게"></label>' +
+      '<label>성별<select name="wsSex">' + opt([['남성', '남성'], ['여성', '여성']]) + '</select></label></div>' +
+      '<div class="ws-row two"><label>직업<input name="wsJob" list="wsJobList" placeholder="🎲 랜덤 또는 직접 입력"><datalist id="wsJobList">' + jobs + '</datalist></label>' +
+      '<label>질환(환자 유형)<select name="wsCond">' + opt(conds) + '</select></label></div>' +
+      '<div class="ws-row"><label>심한 정도<select name="wsSev">' + opt(G.SEV) + '</select></label><label>발병 시기<select name="wsDur">' + opt(G.DUR) + '</select></label><label>아픈 쪽<select name="wsSide">' + opt(G.SIDE) + '</select></label></div>' +
+      '<fieldset class="ws-xset"><legend>기타사항 <small>(아무것도 안 고르면 랜덤 · "없음"을 고르면 없음)</small></legend><div class="ws-xgrid">' + ex + '</div></fieldset>' +
+      '<div class="ws-genprev" id="wsGenPrev"></div>' +
+      '<div class="ws-formbtns"><button type="button" class="ws-btn ghost" data-genrand>🎲 전부 랜덤으로 채우기</button><button type="button" class="ws-btn ghost" data-genclear>비우기</button><button type="button" class="ws-btn" data-add>환자 만들기</button></div>' +
+      '</form>';
+  }
+  function readGenForm(form) {
+    var g = function (n) { var e = form.querySelector('[name="' + n + '"]'); return e ? String(e.value || '').trim() : ''; };
+    var xs = [].slice.call(form.querySelectorAll('[name="wsX"]:checked')).map(function (e) { return e.value; });
+    return { name: g('wsName'), age: g('wsAge'), sex: g('wsSex'), job: g('wsJob'), cond: g('wsCond'), sev: g('wsSev'), dur: g('wsDur'), side: g('wsSide'), extras: xs.indexOf('none') >= 0 ? [] : xs.length ? xs : null };
+  }
+  function genRandomFill(form) {
+    var G = window.GGGEN; if (!G) return;
+    var cur0 = readGenForm(form); var r = G.resolve(cur0);
+    var set = function (n, v) { var e = form.querySelector('[name="' + n + '"]'); if (e) e.value = v; };
+    set('wsName', r.name); set('wsAge', r.age); set('wsSex', r.sex); set('wsJob', r.job); set('wsCond', r.cond); set('wsSev', r.sev); set('wsDur', r.dur); set('wsSide', r.side);
+    [].forEach.call(form.querySelectorAll('[name="wsX"]'), function (e) { e.checked = r.extras.length ? r.extras.indexOf(e.value) >= 0 : e.value === 'none'; });
+    genPreview(form);
+  }
+  function genPreview(form) {
+    var G = window.GGGEN, box = form.querySelector('#wsGenPrev'); if (!G || !box) return;
+    var f = readGenForm(form);
+    if (f.cond === 'blank') { box.innerHTML = '<b>빈 양식</b> — 이름·나이·성별·직업만 채우고 나머지는 직접 작성합니다.'; return; }
+    var parts = [f.name || '이름 🎲', f.age ? f.age + '세' : '나이 🎲', f.sex || '성별 🎲', f.job || '직업 🎲', f.cond ? G.CONDS[f.cond].t : '질환 🎲'];
+    box.innerHTML = '<b>만들 환자</b> ' + parts.map(esc).join(' · ');
+  }
   function addPatient(form) {
-    var name = form.querySelector('[name="wsName"]').value.trim();
-    if (!name) { form.querySelector('[name="wsName"]').focus(); toast('이름을 적어 주세요.'); return; }
-    var p = {
-      id: 'p' + Date.now().toString(36), base: (form.querySelector('[name="wsBase"]:checked') || {}).value || 'blank',
-      name: name, age: form.querySelector('[name="wsAge"]').value.trim(), sex: form.querySelector('[name="wsSex"]').value,
-      job: form.querySelector('[name="wsJob"]').value.trim(), updated: ''
-    };
+    var G = window.GGGEN, f = readGenForm(form), p;
+    if (f.cond === 'blank' || !G) {
+      var nm = f.name || '새 환자'; if (!/가상/.test(nm)) nm += '(가상)';
+      p = { id: 'p' + Date.now().toString(36), base: 'blank', name: nm, age: f.age, sex: f.sex, job: f.job, updated: '' };
+    } else {
+      var r = G.resolve(f);
+      p = { id: 'p' + Date.now().toString(36), gen: r, name: r.name, age: String(r.age), sex: r.sex, job: r.job, updated: '' };
+    }
     var a = patients(); a.push(p); savePatients(a);
     renderPatients();
+    toast('「' + p.name + '」 환자를 만들었습니다. 카드를 누르면 기록지가 채워집니다.');
   }
   function deletePatient(id) {
     var p = getP(id); if (!p || p.fixed) return;
@@ -255,7 +301,7 @@
     var list = patients();
     var cards = list.map(function (p) {
       var as = [p.age ? p.age + '세' : '', p.sex].filter(Boolean).join(' / ');
-      var base = sc[p.base] ? sc[p.base].title : (p.base === 'blank' ? '빈 양식' : '');
+      var base = p.gen && window.GGGEN ? window.GGGEN.label(p.gen) : sc[p.base] ? sc[p.base].title : (p.base === 'blank' ? '빈 양식' : '');
       return '<div class="ws-pcard' + (p.id === c ? ' cur' : '') + '">' +
         '<button type="button" class="ws-popen" data-open="' + esc(p.id) + '">' +
         '<span class="ws-avatar">' + esc((p.name || '?').slice(0, 1)) + '</span>' +
@@ -267,24 +313,14 @@
         (p.fixed ? '<span class="ws-fixed">기본 환자</span>' : '<button type="button" class="ws-pdel" data-del="' + esc(p.id) + '" title="환자 지우기" aria-label="환자 지우기">×</button>') +
         '</div>';
     }).join('');
-    var baseOpts = ['blank', 'fhp', 'stroke', 'sci'].map(function (k, i) {
-      var s = sc[k]; var t = k === 'blank' ? '빈 양식' : (s ? s.no + ' · ' + s.title : k);
-      var d = k === 'blank' ? '이름·나이·성별·직업만 채우고 나머지는 직접 작성' : (s ? s.desc : '');
-      return '<label class="ws-base"><input type="radio" name="wsBase" value="' + k + '"' + (i === 0 ? ' checked' : '') + '><span><b>' + esc(t) + '</b><small>' + esc(d) + '</small></span></label>';
-    }).join('');
+    var form = genForm();
     shell.innerHTML = ukUtil() +
       '<div class="ws-page ws-patients">' +
       ukHero('물리치료 평가 기록지', '환자를 고르면 그 환자의 검진부터 결과까지 모든 기록이 준비되고 목차가 열립니다.') +
       '<div class="ws-sechead"><b>어떤 환자의 기록지를 열까요?</b><span class="ws-step">1 / 2 · 환자 선택</span></div>' +
       '<div class="ws-pgrid">' + cards +
-      '<details class="ws-add"><summary><span class="ws-plus">+</span><span><b>가상 환자 추가</b><small>새 가상 환자를 만들어 따로 기록합니다</small></span></summary>' +
-      '<form class="ws-addform" autocomplete="off" onsubmit="return false">' +
-      '<div class="ws-row"><label>이름 <i>*</i><input name="wsName" placeholder="예: 이지은(가상)"></label><label>나이<input name="wsAge" inputmode="numeric" placeholder="예: 35"></label>' +
-      '<label>성별<select name="wsSex"><option value="">선택</option><option>남성</option><option>여성</option></select></label></div>' +
-      '<label class="ws-wide">직업<input name="wsJob" placeholder="예: 사무직"></label>' +
-      '<fieldset><legend>기록지 시작 방법</legend>' + baseOpts + '</fieldset>' +
-      '<div class="ws-formbtns"><button type="button" class="ws-btn" data-add>환자 추가</button></div>' +
-      '</form></details>' +
+      '<details class="ws-add"><summary><span class="ws-plus">🎲</span><span><b>가상 환자 만들기</b><small>나이·성별·직업·질환·기타사항을 고르면(빈칸은 랜덤) 그 환자 유형으로 기록지를 자동으로 채웁니다</small></span></summary>' +
+      form + '</details>' +
       '</div>' +
       '<p class="ws-foot">환자마다 기록은 이 브라우저에 따로 보관됩니다. 다른 컴퓨터로 옮길 때는 기록지 위쪽의 💾 JSON 백업을 쓰세요. · 모든 가상 환자는 교육·실습용입니다.</p>' +
       '</div>' + ukFoot();
@@ -325,6 +361,8 @@
     var o = e.target.closest('[data-open]'); if (o) { openPatient(o.getAttribute('data-open')); return; }
     var d = e.target.closest('[data-del]'); if (d) { deletePatient(d.getAttribute('data-del')); return; }
     if (e.target.closest('[data-add]')) { addPatient(e.target.closest('form')); return; }
+    if (e.target.closest('[data-genrand]')) { genRandomFill(e.target.closest('form')); return; }
+    if (e.target.closest('[data-genclear]')) { var fm = e.target.closest('form'); fm.reset(); genPreview(fm); return; }
     var t = e.target.closest('[data-toggle]');
     if (t) {
       var st = t.closest('.ws-stage'); var on = !st.classList.contains('open'); st.classList.toggle('open', on); t.setAttribute('aria-expanded', on ? 'true' : 'false');
@@ -337,6 +375,14 @@
       lsSet('ggobugi_web_tocopen', o2);
     }
   });
+  shell.addEventListener('change', function (e) {
+    var fm = e.target.closest && e.target.closest('.ws-gen'); if (!fm) return;
+    if (e.target.name === 'wsX') { /* '없음'과 다른 항목은 함께 고르지 않음 */
+      [].forEach.call(fm.querySelectorAll('[name="wsX"]'), function (x) { if (e.target.checked && x !== e.target && (x.value === 'none' || e.target.value === 'none')) x.checked = false; });
+    }
+    genPreview(fm);
+  });
+  shell.addEventListener('input', function (e) { var fm = e.target.closest && e.target.closest('.ws-gen'); if (fm) genPreview(fm); });
   shell.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && e.target.closest && e.target.closest('.ws-addform') && e.target.tagName === 'INPUT') { e.preventDefault(); addPatient(e.target.closest('form')); }
   });
