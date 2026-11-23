@@ -134,8 +134,16 @@
     var f = g && !/stroke|sci/.test(g.cond) ? { 1: 0.18, 2: 0.33, 3: 0.55 }[g.sev] || 0.33 : g ? 0.55 : nrs !== null ? Math.max(0.12, Math.min(0.7, nrs / 10 * 0.85)) : 0.3;
     var funcs = fv('function'), prov = fv('provocation'), tw = fv('time_worse');
     var job = fv('job') || (g && g.job) || '';
+    /* 기록지에 체크된 아픈 부위(region)로 보조 추천 — 예: 목 환자인데 등·허리도 불편 → FRI·ODI·RMDQ (점수는 주 증상보다 가볍게) */
+    var main = REL[key] || [], reg = fv('region'), sec = [];
+    var addSec = function (ids) { ids.forEach(function (x) { if (main.indexOf(x) < 0 && sec.indexOf(x) < 0) sec.push(x); }); };
+    if (/허리/.test(reg)) addSec(['odi', 'rmdq']);
+    if (/(^|, )등($|,)/.test(reg)) addSec(['fri']);
+    if (/어깨/.test(reg) && key !== 'neck') addSec(['spadi']);
+    if (/무릎/.test(reg)) addSec(['lefs']);
+    if (/발목/.test(reg)) addSec(['faam']);
     return {
-      key: key, rel: REL[key] || [], f: f, nrs: nrs === null ? Math.round(f * 10) : nrs, worst: worst === null ? Math.min(10, Math.round(f * 10) + 2) : worst,
+      key: key, rel: main.concat(sec), sec: sec, f: f, nrs: nrs === null ? Math.round(f * 10) : nrs, worst: worst === null ? Math.min(10, Math.round(f * 10) + 2) : worst,
       mood: !!(g && g.extras && g.extras.indexOf('mood') >= 0), chronic: g ? g.dur === 'chronic' : /달|1년/.test(fv('onset_time')),
       sleepBad: fv('sleep') === '5시간 미만' || /밤/.test(tw) || /수면/.test(prov) || /수면/.test(funcs),
       funcs: funcs, drives: /버스|택배|운전/.test(job) || /운전/.test(funcs), desk: /대학생|사무|프로그래머|교사/.test(job), lift: /택배|건설|간호|요리|농업|운동선수|주부/.test(job)
@@ -154,6 +162,7 @@
   }
   function simulate(id) {
     var t = T[id], pr = simProfile(), rnd = seeded((ctx.pid || '') + ':' + id), out = {};
+    if (pr.sec.indexOf(id) >= 0) { pr.f = pr.f * 0.55; pr.nrs = Math.max(1, Math.round(pr.nrs * 0.6)); pr.worst = Math.max(pr.nrs + 1, Math.round(pr.worst * 0.6)); } /* 보조 부위는 가볍게 */
     var noise = function (k) { return (rnd() - 0.5) * 2 * (k || 0.08); };
     var rn = id === 'ndi' ? recordNdi() : null;
     t.items.forEach(function (it, i) {
@@ -188,7 +197,8 @@
   function simBox(id) {
     var pr = simProfile(), rel = pr.rel.indexOf(id) >= 0, st = (S.auto || {})[id];
     if (!rel) return '<div class="q-sim off"><span>🧑‍⚕️ 이 환자(' + esc(((ctx.patient || {}).gen || {}).condLabel || fv('ref_medical_dx') || '현재 환자') + ')에게 우선 쓰는 설문이 아니어서 가상 환자 응답을 만들지 않습니다. 직접 답해 볼 수 있어요.' + (pr.rel.length ? ' 추천: ' + pr.rel.map(function (x) { return T[x].short; }).join('·') : '') + '</span></div>';
-    return '<div class="q-sim"><span>🧑‍⚕️ <b>가상 환자 응답 불러오기</b> — 기록지의 진단·통증(NRS ' + pr.nrs + ')·수면·기능 제한·직업에 맞게 이 환자가 답했을 법한 응답을 채웁니다.' + (id === 'ndi' && recordNdi() ? ' NDI는 기록지 C-14 값과 같게 넣습니다.' : '') + (st ? ' <em>' + (st === 'edited' ? '자동 응답 · 수정함' : '자동으로 채운 답') + '</em>' : '') + '</span><button type="button" class="ws-btn" data-qsim="' + id + '">' + (st ? '다시 불러오기' : '불러오기') + '</button></div>';
+    var secNote = pr.sec.indexOf(id) >= 0 ? ' <b>보조 추천</b>: 기록지에 이 부위 불편도 체크되어 있어 주 증상보다 가볍게 채웁니다.' : '';
+    return '<div class="q-sim"><span>🧑‍⚕️ <b>가상 환자 응답 불러오기</b> — 기록지의 진단·통증(NRS ' + pr.nrs + ')·수면·기능 제한·직업에 맞게 이 환자가 답했을 법한 응답을 채웁니다.' + secNote + (id === 'ndi' && recordNdi() ? ' NDI는 기록지 C-14 값과 같게 넣습니다.' : '') + (st ? ' <em>' + (st === 'edited' ? '자동 응답 · 수정함' : '자동으로 채운 답') + '</em>' : '') + '</span><button type="button" class="ws-btn" data-qsim="' + id + '">' + (st ? '다시 불러오기' : '불러오기') + '</button></div>';
   }
   function renderTool(area, id) {
     var t = T[id], idx = area.tools.indexOf(id), next = area.tools[idx + 1];
