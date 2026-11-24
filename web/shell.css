@@ -302,6 +302,9 @@ html body main:not(#wa1):not(#wa2):not(#wa3):not(#wa4) .wa-tabs button.on{backgr
 .wa-meth-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-bottom:6px}
 .wa-meth-h b{font-size:14px;color:#1d3a6e}
 .wa-meth-h .wa-mfill{margin-left:auto}
+.ix-abs-v>.wa-meth{margin-top:0}
+.wa-morig{display:none;margin-top:6px;padding-top:6px;border-top:1px dashed #d6cdbd}
+.wa-morig.open{display:block}
 .wa-mrow{display:grid;grid-template-columns:150px 1fr;gap:8px;padding:6px 0;border-top:1px dashed #d6deee}
 .wa-mk{font-size:13px;font-weight:800;color:#1f2937}
 .wa-mv{font-size:13px;line-height:1.55;color:#374151}

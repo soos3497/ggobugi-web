@@ -218,9 +218,23 @@
     var hasM = secs.some(function (s) { return s.kind === 'method'; });
     if (!hasM) secs.forEach(function (s) { if (s.kind === 'other') s.kind = 'method'; });
     var res = classify(secs);
-    var after = rows.filter(function (r) { return /방법/.test(((r.querySelector('.ix-abs-k') || {}).textContent || '')); }).pop() || rows[rows.length - 1];
-    var w = document.createElement('div'); w.innerHTML = methHtml(res, null);
-    after.parentNode.insertBefore(w.firstChild, after.nextSibling);
+    var w = document.createElement('div'); w.innerHTML = methHtml(res, null); var el = w.firstChild;
+    /* 같은 문장이 두 번 보이지 않게: '연구 방법' 칸 안에 4갈래로 나눠 넣고, 원래 문장 목록은 [원래 순서로 보기]로 접어 둠 */
+    var mrow = rows.filter(function (r) { return /방법/.test(((r.querySelector('.ix-abs-k') || {}).textContent || '')); }).pop();
+    var mv = mrow && mrow.querySelector('.ix-abs-v');
+    if (mv) {
+      var orig = document.createElement('div'); orig.className = 'wa-morig';
+      while (mv.firstChild) orig.appendChild(mv.firstChild);
+      mv.appendChild(el);
+      var tg = document.createElement('button'); tg.type = 'button'; tg.className = 'ix-btn ghost sm wa-morig-tg'; tg.textContent = '원래 순서로 보기 ▾';
+      tg.addEventListener('click', function () { var o = orig.classList.toggle('open'); tg.textContent = o ? '원래 순서 접기 ▴' : '원래 순서로 보기 ▾'; });
+      mv.appendChild(tg); mv.appendChild(orig);
+    } else {
+      var row = document.createElement('div'); row.className = 'ix-abs-row';
+      row.innerHTML = '<div class="ix-abs-k">연구 방법</div><div class="ix-abs-v"></div>';
+      row.lastChild.appendChild(el);
+      var last = rows[rows.length - 1]; last.parentNode.insertBefore(row, last.nextSibling);
+    }
     abs.setAttribute('data-wa-meth', '1');
   }
   /* 근거 목록 카드: 저장된 초록(구분 제목 포함)으로 정리 + 근거 칸 채우기 */
