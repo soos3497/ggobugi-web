@@ -539,7 +539,7 @@
     if (!isView()) return;
     $$('main > [data-ws]:not(.ws-off):not(#wsStageNav)').forEach(function (root) {
       $$(BLOCK_SEL, root).forEach(function (el) {
-        if (el.hasAttribute('data-ws-clamp') || el.closest('[data-ws-clamp]')) return;
+        if (el.hasAttribute('data-ws-clamp') || el.closest('[data-ws-clamp]') || el.closest('.wa-fitt')) return;
         if (el.offsetHeight < CLAMP_H || el.querySelector(STOP_SEL)) return;
         if (T(el).length < 300) return;
         var cs = getComputedStyle(el);
