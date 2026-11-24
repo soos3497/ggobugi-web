@@ -257,3 +257,43 @@ body.web-view textarea.ws-ta-open{max-height:none!important;height:auto;min-heig
 #wsShell .ws-autoq input{margin-top:3px;accent-color:var(--ws-navy);flex:none}
 #wsShell .ws-autoq b{display:block;font-size:14px;color:var(--ws-ink)}
 #wsShell .ws-autoq small{display:block;font-size:12.5px;line-height:1.5;color:var(--ws-ink2);margin-top:3px}
+
+/* ===== 교수님 안내서 보완 (web/addons.js) — 기록지 화면 안 ===== */
+.wa-evadd{margin:14px 0;border:1px solid #c9d4e6;border-radius:12px;background:#fbfcff;font-family:"Noto Sans KR","Malgun Gothic",sans-serif}
+.wa-evadd>summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;padding:12px 14px}
+.wa-evadd>summary::-webkit-details-marker{display:none}
+.wa-evadd>summary b{font-size:15px;color:#1d3a6e}
+.wa-evadd>summary span{font-size:12.5px;color:#6b7280}
+.wa-evadd[open]>summary{border-bottom:1px solid #e3e8f0}
+.wa-tabs{display:flex;gap:6px;padding:10px 14px 0}
+html body main:not(#wa1):not(#wa2):not(#wa3):not(#wa4) .wa-tabs button{border:1px solid #d3dbe6!important;background:#fff!important;color:#334155!important;border-radius:999px!important;padding:6px 12px!important;font-size:13px!important;font-weight:700!important;cursor:pointer}
+html body main:not(#wa1):not(#wa2):not(#wa3):not(#wa4) .wa-tabs button.on{background:#1d3a6e!important;border-color:#1d3a6e!important;color:#fff!important}
+.wa-pane{display:none;padding:10px 14px 14px}
+.wa-pane.on{display:block}
+.wa-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.wa-row.end{justify-content:flex-end;margin-top:10px}
+.wa-row input{flex:1;min-width:200px}
+.wa-evadd input,.wa-evadd select,.wa-evadd textarea{border:1px solid #d3dbe6;border-radius:8px;padding:8px 10px;font:14px "Noto Sans KR","Malgun Gothic",sans-serif;background:#fff;width:100%;box-sizing:border-box}
+.wa-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wa-grid label{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:700;color:#374151}
+.wa-grid label i{color:#b4532a;font-style:normal}
+.wa-full{grid-column:1/-1}
+.wa-hint{font-size:12.5px;color:#6b7280;margin:8px 0;line-height:1.55}
+.wa-muted{font-size:13px;color:#6b7280}
+.wa-fail{font-size:13px;color:#9a3a12;background:#fff1ec;border-radius:8px;padding:8px 10px}
+.wa-card{border:1px solid #d3dbe6;border-radius:10px;padding:10px 12px;margin-top:8px;background:#fff}
+.wa-card b{display:block;font-size:14.5px;color:#1f2937}
+.wa-card small{display:block;font-size:12.5px;color:#6b7280;margin-top:3px}
+.wa-card p{font-size:13px;line-height:1.6;margin:8px 0 0;color:#374151}
+.wa-neuro{margin-top:14px}
+.wa-neuro h3{margin:0 0 6px;font-size:17px}
+.wa-neuro h3 small{font-size:12px;font-weight:500;color:#6b7280}
+.wa-tw{overflow-x:auto}
+.wa-t{width:100%;border-collapse:collapse;font-size:13.5px}
+.wa-t th,.wa-t td{border:1px solid #d9d3ca;padding:7px 9px;vertical-align:top;text-align:left}
+.wa-t th{background:#f2efe9}
+.wa-t td small{display:block;font-size:12px;color:#6b7280;margin-top:3px;line-height:1.45}
+.wa-t select,.wa-t textarea{width:100%;box-sizing:border-box;border:1px solid #d3dbe6;border-radius:6px;padding:5px 7px;font:13px "Noto Sans KR","Malgun Gothic",sans-serif}
+.wa-warn{margin-top:5px;font-size:12px;font-weight:700;color:#9a3a12}
+@media (max-width:760px){.wa-grid{grid-template-columns:1fr}}
+@media print{.wa-evadd{display:none!important}}

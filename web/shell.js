@@ -254,6 +254,7 @@
     savePatients(patients().filter(function (x) { return x.id !== id; }));
     try { localStorage.removeItem(LS_SNAP + id); } catch (e) { }
     if (window.GGQ && window.GGQ.removePatient) window.GGQ.removePatient(id);
+    try { localStorage.removeItem('ggobugi_web_neuro_' + id); } catch (e) { }
     if (cur() === id) ssSet(SS_CUR, null);
     renderPatients();
   }
@@ -616,6 +617,8 @@
     main.appendChild(stageNav);
     if (document.body) [shell, load, tst].forEach(function (el) { document.body.appendChild(el); });
     if (typeof MutationObserver !== 'undefined') new MutationObserver(function () { if (isView()) clampSoon(); }).observe(main, { childList: true, subtree: true });
+    /* 교수님 안내서 보완 기능(근거 직접 추가, 7 결과 신경학적 재검사) — index.html 은 그대로 두고 여기서 불러옴 */
+    try { var ad = document.createElement('script'); ad.src = 'web/addons.js'; ad.defer = true; document.head.appendChild(ad); } catch (e) { }
     /* 새로고침해도 지금 환자의 마지막 기록으로 되돌림 (기록지는 열 때 예시 환자로 다시 채워지므로) */
     restoreP = whenReady().then(restoreCurrent);
     var h = location.hash || '';
