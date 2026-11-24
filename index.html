@@ -1773,19 +1773,19 @@ main:not(#hx):not(#hx) #ptPlanProblems .pt-priority-rank select::-ms-expand{disp
   <h2 style="margin-top:28px">4-2. 목표설정 및 재평가</h2>
   <p class="desc">4-1의 문제를 성격별로 묶어 단기목표 4개와 장기목표 4개로 자동 제안하며, 평가자가 수정·확정합니다. 목표 번호는 분류 번호이며 치료 순서는 4-1의 우선순위를 따릅니다. 목표 문장은 ABCDE(대상·행동·조건·정도·기간)로 구성되며, 문장의 각 부분을 눌러 바로 고칠 수 있습니다. 정도(D)의 수치는 입력된 측정값과 선정 이유에 적힌 기준으로 자동 제안되며, 측정값이 없으면 ___로 남습니다. 각 요소의 포함 여부는 문장 아래에 표시됩니다. ICF에 따라 단기목표는 신체기능·구조 손상, 장기목표는 활동 제한과 참여 제한을 대상으로 작성하고, 각 목표의 정도는 ICF 평가점 0–4의 5단계로 기록합니다. 각각의 초기 상태와 재평가 결과를 비교하며 수치·시점은 평가자가 근거에 따라 확정합니다.</p>
   <p id="goalCountClinicalNote"><b>학습용 안내:</b> 본 과제에서는 단기목표 4개와 장기목표 4개를 제안하는 형식을 유지합니다. 다만 실제 임상에서는 목표 개수가 정해져 있는 것이 아니며, 환자의 문제 수와 중요도, 기능 수준, 우선순위 및 환자와 합의한 치료 방향에 따라 개별적으로 조정할 수 있습니다.</p>
-  <div id="ptPlanGoals" class="result">문제목록 자동 분석 후 목표·재평가 기록이 생성됩니다.</div><p class="tiny">근거: APTA 초기 평가·목표 설정 및 재검진 문서화 지침. 초기값과 재평가값을 비교하여 목표 달성 및 치료계획 변경 필요성을 판단합니다. 수치·개선 기간은 임의로 확정하지 않습니다.</p>
-    <h2 id="ptPlanIvHead" style="margin-top:28px">4-3. 중재 내용(방법) · 재평가 판단기준</h2><p class="desc">문제별 중재 방법과 재평가 판단기준을 좌우로 비교합니다. 재평가 시 동일 검사 조건의 기능 변화와 안전성, 측정오차 및 환자와 합의한 목표를 함께 확인합니다.</p><style>.pt-iv-card{margin-bottom:8px;padding-bottom:10px!important}.pt-iv-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);gap:12px;align-items:stretch;margin-top:8px}.pt-iv-grid>.pt-iv-box{min-width:0;overflow-wrap:anywhere}.pt-iv-box ul{padding-right:3px}@media(max-width:820px){.pt-iv-grid{grid-template-columns:1fr;gap:9px}}@media print{.pt-iv-grid{grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);gap:8px}.pt-iv-card{break-inside:avoid}}.pt-iv-box{border-radius:10px;padding:9px 14px;border:1px solid #eae7e1;background:#fbf9f4}.pt-iv-box.re{background:#fffaf0;border-color:#f0c36a}.pt-iv-box>b{display:block;font-size:13px;margin-bottom:4px;color:#1d3a6e}.pt-iv-box.re>b{color:#8a4b12}.pt-iv-box ul{margin:0;padding-left:20px;font-size:14px;line-height:1.5;outline:none}.pt-iv-box li{margin:0 0 2px}.pt-iv-box ul:focus{background:rgba(255,255,255,.6);border-radius:6px}</style><p class="tiny" style="margin:8px 2px 10px">※ 중재별 방법·빈도·시간·기간·운동 용량은 평가 자료에 맞춘 검토용 초안입니다. 시행 전 환자 반응과 금기사항을 확인하여 개별 조정합니다.</p><div id="ptPlanInterventions" class="result">문제목록에 맞는 중재 초안이 자동 작성됩니다.</div><div class="helper" style="margin:10px 0 0;font-size:13px"><b>공통 안전 주의사항:</b> 새로운 위험징후 또는 유의한 증상 악화가 발생하면 중재를 중단하거나 조정하고 즉시 상태를 확인합니다. 필요하면 의료진에게 의뢰하며, 응급 위험징후는 응급 대응을 우선합니다.<br><b>재평가 공통 근거:</b> APTA 재검진·재평가 및 목표 기록 원칙, Shirley Ryan AbilityLab 평가도구 데이터베이스. MDC·MCID는 해당 환자군에 적용 가능한 값이 확인된 경우에만 해석합니다.</div>
+  <div id="ptPlanGoals" class="result">문제목록 자동 분석 후 목표·재평가 기록이 생성됩니다.</div><div class="pt-plan-src" id="ptSrcG42"></div><p class="tiny">근거: APTA 초기 평가·목표 설정 및 재검진 문서화 지침. 초기값과 재평가값을 비교하여 목표 달성 및 치료계획 변경 필요성을 판단합니다. 수치·개선 기간은 임의로 확정하지 않습니다.</p>
+    <h2 id="ptPlanIvHead" style="margin-top:28px">4-3. 중재 내용(방법) · 재평가 판단기준</h2><p class="desc">문제별 중재 방법과 재평가 판단기준을 좌우로 비교합니다. 재평가 시 동일 검사 조건의 기능 변화와 안전성, 측정오차 및 환자와 합의한 목표를 함께 확인합니다.</p><style>.pt-iv-card{margin-bottom:8px;padding-bottom:10px!important}.pt-iv-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);gap:12px;align-items:stretch;margin-top:8px}.pt-iv-grid>.pt-iv-box{min-width:0;overflow-wrap:anywhere}.pt-iv-box ul{padding-right:3px}@media(max-width:820px){.pt-iv-grid{grid-template-columns:1fr;gap:9px}}@media print{.pt-iv-grid{grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);gap:8px}.pt-iv-card{break-inside:avoid}}.pt-iv-box{border-radius:10px;padding:9px 14px;border:1px solid #eae7e1;background:#fbf9f4}.pt-iv-box.re{background:#fffaf0;border-color:#f0c36a}.pt-iv-box>b{display:block;font-size:13px;margin-bottom:4px;color:#1d3a6e}.pt-iv-box.re>b{color:#8a4b12}.pt-iv-box ul{margin:0;padding-left:20px;font-size:14px;line-height:1.5;outline:none}.pt-iv-box li{margin:0 0 2px}.pt-iv-box ul:focus{background:rgba(255,255,255,.6);border-radius:6px}</style><p class="tiny" style="margin:8px 2px 10px">※ 중재별 방법·빈도·시간·기간·운동 용량은 평가 자료에 맞춘 검토용 초안입니다. 시행 전 환자 반응과 금기사항을 확인하여 개별 조정합니다.</p><div id="ptPlanInterventions" class="result">문제목록에 맞는 중재 초안이 자동 작성됩니다.</div><div class="pt-plan-src" id="ptSrcI43"></div><div class="helper" style="margin:10px 0 0;font-size:13px"><b>공통 안전 주의사항:</b> 새로운 위험징후 또는 유의한 증상 악화가 발생하면 중재를 중단하거나 조정하고 즉시 상태를 확인합니다. 필요하면 의료진에게 의뢰하며, 응급 위험징후는 응급 대응을 우선합니다.<br><b>재평가 공통 근거:</b> APTA 재검진·재평가 및 목표 기록 원칙, Shirley Ryan AbilityLab 평가도구 데이터베이스. MDC·MCID는 해당 환자군에 적용 가능한 값이 확인된 경우에만 해석합니다.</div>
   <!-- 4-4~4-6: APTA 치료계획(Plan of Care) 구성요소. 입력칸 대신 편집 가능한 칸을 써서 기존 순서 기반 저장에 영향을 주지 않는다 -->
   <div id="ptPlanExtra">
    <h2 id="ptPlanCoord" style="margin-top:28px">4-4. 협력 및 의사소통</h2>
    <p class="desc">담당 의사·다른 전문직·보호자·학교/직장과 무엇을, 언제, 어떻게 공유하고 언제 보고·의뢰할지 정합니다.</p>
-   <div class="pt-px-table" data-sec="coord"></div>
+   <div class="pt-px-table" data-sec="coord"></div><div class="pt-plan-src" id="ptSrcC44"></div>
    <h2 id="ptPlanEdu" style="margin-top:28px">4-5. 환자 및 보호자 교육</h2>
    <p class="desc">누구에게, 무엇을, 어떤 방법으로 교육하고 이해했는지 어떻게 확인할지 정합니다. 가정운동의 빈도·용량은 4-3의 중재 내용을 따릅니다.</p>
-   <div class="pt-px-table" data-sec="edu"></div>
+   <div class="pt-px-table" data-sec="edu"></div><div class="pt-edu4" id="ptEduFrom4"></div><div class="pt-plan-src" id="ptSrcE45"></div>
    <h2 id="ptPlanDischarge" style="margin-top:28px">4-6. 퇴원 계획 및 퇴원 후 필요한 서비스</h2>
    <p class="desc">언제·어떤 기준으로 물리치료를 종결할지, 종결 후 환자가 이어서 이용할 서비스와 자가관리를 정합니다.</p>
-   <div class="pt-px-table" data-sec="dc"></div>
+   <div class="pt-px-table" data-sec="dc"></div><div class="pt-plan-src" id="ptSrcD46"></div>
    <p class="tiny" style="margin-top:6px">※ 앞 단계 입력값으로 만든 초안입니다. 칸을 눌러 바로 고칠 수 있고, 고친 칸은 다시 자동 생성해도 바뀌지 않습니다. 근거: APTA Guide to Physical Therapist Practice — 치료계획(Plan of Care)의 협력·의사소통·문서화, 환자 교육, 퇴원(종결) 계획.</p>
   </div>
   <div style="display:none"><label><select id="ptFrequency" name="plan_frequency"><option value="주 2회">주 2회</option><option value="주 3회">주 3회</option><option value="주 1회">주 1회</option><option value="환자별 조정">환자별 조정</option></select></label><textarea id="ptDuration" name="plan_duration" rows="1" style="min-height:0;resize:none">총 8주 (4주 시점 단기목표 재평가)</textarea><p class="tiny" id="ptAutoScheduleReason" aria-live="polite">자동 평가 후 문제목록을 기준으로 빈도와 기간이 설정됩니다.</p></div>
@@ -2473,7 +2473,8 @@ function analyzeUnified(){
      세 표는 한 격자에 놓여 문제별 줄 높이가 서로 맞고, 표 사이에는 큰 가로 화살표가 하나씩. 좁은 화면에서는 문제별로 세로로 쌓음 */
   const _N=problems.length,_rs=`grid-row:1 / span ${_N+1}`;
   const _evOf=p=>{const fs=F.filter(f=>f.cat===p.cat);if(!fs.length)return '<span class="tiny">해당 분류의 자동 추출 소견 없음(치료사 입력)</span>';return fs.slice(0,2).map(f=>'· '+escU(String(f.label).replace(/\s*\n\s*/g,' '))+': '+escU(String(f.detail).replace(/\s*\n\s*/g,' ').slice(0,60))).join('<br>')+(fs.length>2?`<br><span class="tiny">외 ${fs.length-2}건 (위 이상소견 목록 참조)</span>`:'')};
-  const problemTableHtml=_N?`<div class="pt-flow">
+  /* 2026-11-23: 문장별 근거 표시 — 공용 함수 ptSrcHtml(아래 4-1 앞에 있음) 사용 */ const _LIT='lit3',_LIT4='lit4';const _srcOf=(p,i,M,tag)=>ptSrcHtml(p,i,M,tag,F);
+  const problemTableHtml=_N?`<div class="pt-src-bar"><span>문장 끝의 <b class="pt-src-k pt">자료</b> <b class="pt-src-k lt">문헌</b> 표시를 누르면 그 문장의 근거가 펼쳐집니다.</span><button type="button" class="pt-src-all">근거 모두 펼치기</button></div><div class="pt-flow">
    <div class="pt-fl-bg" style="grid-column:1 / span 3;${_rs}"></div><div class="pt-fl-bg" style="grid-column:5;${_rs}"></div><div class="pt-fl-bg" style="grid-column:7;${_rs}"></div>
    <div class="pt-fl-bigar" style="grid-column:4;${_rs}" aria-hidden="true"><span>→</span></div><div class="pt-fl-bigar" style="grid-column:6;${_rs}" aria-hidden="true"><span>→</span></div>
    <div class="pt-fl-th n" style="grid-column:1;grid-row:1">#</div>
@@ -2485,8 +2486,8 @@ function analyzeUnified(){
     return `<div class="pt-fl-td n${sf}" style="grid-column:1;${r}"><span class="pt-fl-num">${i+1}</span></div>
     <div class="pt-fl-td pr${sf}" style="grid-column:2;${r}"><b>${escU(p.title)}</b><span class="pt-fl-icf ${p.cat==='safety'?'sf':''}">${icfLabel(p.cat)}</span></div>
     <div class="pt-fl-td ev${sf}" style="grid-column:3;${r}">${_evOf(p)}</div>
-    <div class="pt-fl-td${sf}" style="grid-column:5;${r}"><span class="pt-fl-m">${i+1}. 2-3 임상적 의미</span>${escU(p.meaning)}</div>
-    <div class="pt-fl-td${sf}" style="grid-column:7;${r}"><span class="pt-fl-m">${i+1}. 2-4 물리치료적 평가</span>${escU(p.evals)}</div>`}).join('')}</div>
+    <div class="pt-fl-td${sf}" style="grid-column:5;${r}"><span class="pt-fl-m">${i+1}. 2-3 임상적 의미</span>${escU(p.meaning)}${_srcOf(p,i,_LIT,'s')}</div>
+    <div class="pt-fl-td${sf}" style="grid-column:7;${r}"><span class="pt-fl-m">${i+1}. 2-4 물리치료적 평가</span>${escU(p.evals)}${_srcOf(p,i,_LIT4,'e')}</div>`}).join('')}</div>
    <style>
    #analysisResult .pt-flow{display:grid;grid-template-columns:46px minmax(0,1fr) minmax(0,1.15fr) 50px minmax(0,1.25fr) 50px minmax(0,1.25fr);margin:12px 0 4px}
    #analysisResult .pt-fl-bg{position:relative;z-index:3;pointer-events:none;border:1.5px solid #8f877a!important;background:transparent!important;border-radius:0!important}
@@ -4088,9 +4089,9 @@ function ptInterventionNarrative(p,brief,problems,findings,urgent){
  const plan={
   pain:{f:'매일 짧게 나누어 수행하는 방안 검토',d:'증상 허용범위의 가벼운 능동 움직임부터 시작하고 통증·다음날 반응에 따라 조정',ev:'증상 반응 기반 개별화(고정된 반복수 근거 없음)'},
   mobility:{f:'매일 또는 주중 여러 날, 관절 상태에 따라 결정',d:'관절별 금기·통증·가동범위를 확인한 뒤 반복수와 유지시간 개별 설정',ev:'관절·진단별 가이드라인 확인 필요'},
-  strength:{f:'주 2일 이상을 출발점으로 검토하고 회복일을 고려',d:'성인 일반 저항운동 근거: 한 운동당 2~3세트가 참고 범위. 반복수·부하·보조 수준은 실제 근력과 안전성 평가로 결정',ev:'ACSM 2026 저항운동 지침(건강한 성인); WHO 2020 신체활동 지침'},
+  strength:{f:'주 2일 이상을 출발점으로 검토하고 회복일을 고려',d:'성인 일반 저항운동 근거: 한 운동당 2~3세트가 참고 범위. 반복수·부하·보조 수준은 실제 근력과 안전성 평가로 결정',ev:'ACSM 2026 저항운동 지침(건강한 성인; Currier 2026, PMID 41843416); WHO 2020 신체활동 지침(Bull 2020, PMID 33239350)'},
   motorcontrol:{f:'짧은 과제를 여러 날 반복하도록 제안하되 실제 빈도는 평가 후 결정',d:'정확한 움직임이 가능한 반복수·유지시간으로 시작하고 보상운동 또는 피로 시 조정',ev:'과제 특이성 원칙에 따른 개별 제안; 범용 횟수 근거 없음'},
-  balance:{f:'낙상 예방을 위한 정기적 훈련을 권장하되 안전 조건 확인 후 결정',d:'지지면·보호 수준을 먼저 정하고 유지시간·반복수를 평가에 따라 개별 설정',ev:'WHO 2020 다요소 활동 지침(고령자 3일 이상/주); 개별 균형 과제 용량은 별도 판단'},
+  balance:{f:'낙상 예방을 위한 정기적 훈련을 권장하되 안전 조건 확인 후 결정',d:'지지면·보호 수준을 먼저 정하고 유지시간·반복수를 평가에 따라 개별 설정',ev:'WHO 2020 다요소 활동 지침(Bull 2020, PMID 33239350)(고령자 3일 이상/주); 개별 균형 과제 용량은 별도 판단'},
   gait:{f:'보행 평가와 회복 반응을 바탕으로 주당 횟수 결정',d:'보행 보조도구·감독 필요성·거리·속도·피로를 확인하고 시간과 거리를 점진 조정',ev:'평가 기반 과제특이적 훈련 제안; 질환별 진료지침 필요'},
   activity:{f:'일상에서 반복 가능한 빈도로 설정',d:'환자가 선택한 실제 활동의 시간·반복을 초기 수행 능력과 증상에 맞춰 설정',ev:'환자중심 목표·기능 평가 기반 개별화'},
   participation:{f:'학업·직장·사회활동 일정과 피로에 맞추어 결정',d:'복귀 활동을 작은 과제로 나누고 활동 지속시간과 휴식 간격을 점진 조정',ev:'참여 목표 및 실제 수행 능력 기반 개별화'},
@@ -4104,7 +4105,7 @@ function ptInterventionNarrative(p,brief,problems,findings,urgent){
  if(!safety&&p.cat==='strength'&&(neurological||highPain)){
   selected.f='주 2일 이상을 참고하되 신경학적 상태·통증 및 회복 반응에 따라 조정';
   selected.d='가벼운 또는 보조된 저항운동에서 시작할지 먼저 평가하고 반복수·세트·강도는 개별 확정';
-  selected.ev='ACSM 2026 일반 성인 지침(직접 처방 아님); 질환별 근거 추가 확인';
+  selected.ev='ACSM 2026 일반 성인 지침(Currier 2026, PMID 41843416)(직접 처방 아님); 질환별 근거 추가 확인';
  }
  if(!safety&&p.cat==='balance'&&(concern||!observedBalance)){
   selected.f='낙상 위험·감독 가능 여부 평가 후 결정';
@@ -4315,14 +4316,26 @@ function ptRenderPrognosis(problems,urgent){
  const durNeck='약 8–12주(4주 시점 단기목표 재평가 → 8주 시점 장기목표 판정 → 미달성 시 12주까지 연장 재평가 후 자가관리 전환). 근거: 기계적 목 통증 운동 중재 메타분석에서 4–9주 프로그램과 10주 이상 프로그램 모두 대조군 대비 임상적으로 의미 있는 통증 호전을 보였으나 운동 용량은 결과를 예측하지 못해 최적 기간은 확립되지 않았고(Wilhelm 2020, JOSPT 50(11):607–621), 심부목굽힘근 훈련 시험도 6주 단위로 효과를 평가했습니다(Jull 2009, Man Ther 14:696–701). 따라서 이 기간은 이 양식의 재평가 일정(4·8·12주)에 맞춘 잠정 추정이며 치료 반응에 따라 조정합니다.';
  const dur=urgent?['의학적 평가 전 기능 회복 기간 추정 보류']:['2주: 초기 증상·수행 반응 및 안전성 확인','4주: 단기목표에 따른 신체기능·기본 활동 변화를 재평가','8주: 장기목표에 따른 일상생활·참여 변화를 재평가','12주: 필요 시 유지관리 및 자가관리 수준 확인'];
  const ul=a=>'<ul contenteditable="true" spellcheck="false">'+a.map(x=>'<li>'+escU(x)+'</li>').join('')+'</ul>';
- box.innerHTML=`<div class="reason-card pt-pg-card"><h4>5-1. 최고의 기능적 수준</h4><div class="tiny pt-pg-rednote">※ 최고의 기능적 수준: 치료 후 환자가 현실적으로 도달할 것으로 예상되는 최적의 기능적 수행 수준을 의미하며, 일상생활활동(Functional ADL)과 사회적 참여, 필요한 보조도구 및 도움 수준을 포함합니다.</div><div class="tiny" style="margin-top:3px">단기·장기목표 달성 이후 예상되는 최종 기능적 수준입니다.</div>
- <div class="pt-pg-grid pt-pg-peak-grid"><div class="pt-pg-box lt"><b>예상되는 최고 기능 수준</b><div contenteditable="true" spellcheck="false">${escU(longT)}</div></div><div class="pt-pg-box pt-pg-peak-evidence"><b>판단 근거</b><div class="pt-pg-evidence-text" contenteditable="true" spellcheck="false" aria-label="최고 기능 수준 판단 근거 직접 수정">${peakEvidenceHTML}</div></div></div></div>
+ /* 2026-11-23: 5-1~5-4 카드마다 근거 표시(자료·문헌). 고칠 수 있는 칸 밖, 카드 맨 아래에 둠 */
+ const _pf=cats=>{const F=(typeof ptLastFindings!=='undefined'&&ptLastFindings||[]).filter(f=>cats.includes(f.cat));return F.slice(0,6).map(f=>'· '+(f.source?'['+escU(f.source)+'] ':'')+escU(String(f.label).replace(/\s+/g,' '))+': '+escU(String(f.detail).replace(/\s+/g,' '))).join('<br>')+(F.length>6?`<br>· 외 ${F.length-6}건 (2-1 이상소견 목록에 모두 있음)`:'')};
+ const _pgSrc=(k,dat)=>`<div class="pt-pg-src">${ptSrcHtml({cat:k,dat:dat||'· 자동 추출된 관련 소견 없음'},'','lit5',k,[])}</div>`;
+ const _allC=['safety','pain','neuro','mobility','strength','motorcontrol','gait','balance','activity','participation'];
+ const src1=_pgSrc('pg1','· 4-2 장기목표에서 이어짐<br>'+_pf(['pain','activity','participation']));
+ const src2=_pgSrc('pg2','· 4-2 목표의 재평가 시점(4주 단기 · 8주 장기)<br>'+_pf(['pain','activity']));
+ const src3=_pgSrc('pg3',_pf(_allC));
+ const src4=_pgSrc('pg4','· 5-4 칸에 고르거나 적은 개인·환경·경제 요인<br>· A 단계 문진 응답(직업·생활환경·과거력 등)');
+ /* 2026-11-23: '예후 판단' 상자 대신 4단계 순서 안내 줄 — 단계마다 근거(문헌) 상태, 누르면 그 카드로 이동 */
+ const _pgN=s=>{const m=String(s).match(/>문헌 (\d+)</);return m?+m[1]:0};
+ const _pgStep=(n,code,name,src)=>{const c=_pgN(src);return `<button type="button" class="pt-pgf-st" data-pgjump="${n}"><span class="pt-pgf-n">${'①②③④'[n]} ${code}</span><span class="pt-pgf-t">${name}</span><span class="pt-pgf-tg ${c?'ok':'need'}">${c?'근거 '+c+'편':'확인 필요'}</span></button>`};
+ const flowHTML=`<div class="pt-pgflow"><div class="pt-pgf-row">${_pgStep(0,'5-1','최고 기능 수준',src1)}<span class="pt-pgf-ar">→</span>${_pgStep(1,'5-2','도달 기간',src2)}<span class="pt-pgf-ar">→</span>${_pgStep(2,'5-3','재활잠재력',src3)}<span class="pt-pgf-ar">→</span>${_pgStep(3,'5-4','영향 요인',src4)}</div><p class="pt-pgf-desc">앞 단계 입력값으로 자동 정리한 가설적 예후예요. 단계를 누르면 그 카드로 이동합니다.</p></div>`;
+ box.innerHTML=flowHTML+`<div class="pt-src-bar"><span>각 카드 아래의 <b class="pt-src-k pt">자료</b> <b class="pt-src-k lt">문헌</b> 표시를 누르면 그 판단의 근거가 펼쳐집니다.</span><button type="button" class="pt-src-all">근거 모두 펼치기</button></div><div class="reason-card pt-pg-card"><h4>5-1. 최고의 기능적 수준</h4><div class="tiny pt-pg-rednote">※ 최고의 기능적 수준: 치료 후 환자가 현실적으로 도달할 것으로 예상되는 최적의 기능적 수행 수준을 의미하며, 일상생활활동(Functional ADL)과 사회적 참여, 필요한 보조도구 및 도움 수준을 포함합니다.</div><div class="tiny" style="margin-top:3px">단기·장기목표 달성 이후 예상되는 최종 기능적 수준입니다.</div>
+ <div class="pt-pg-grid pt-pg-peak-grid"><div class="pt-pg-box lt"><b>예상되는 최고 기능 수준</b><div contenteditable="true" spellcheck="false">${escU(longT)}</div></div><div class="pt-pg-box pt-pg-peak-evidence"><b>판단 근거</b><div class="pt-pg-evidence-text" contenteditable="true" spellcheck="false" aria-label="최고 기능 수준 판단 근거 직접 수정">${peakEvidenceHTML}</div></div></div>${src1}</div>
  <div class="pt-pg-arrow">↓</div>
- <div class="reason-card pt-pg-card"><h4>5-2. 기능적 수준에 도달하는 데 소요되는 기간</h4><div class="pt-pg-box" style="margin-top:10px"><b>예상 최고 기능 수준 도달 기간</b><div contenteditable="${urgent?'false':'true'}" spellcheck="false" aria-label="예상 최고 기능 수준 도달 기간" style="margin:6px 0 12px">${urgent?'의학적 평가 전 기간 추정 보류':(neckCase?durNeck:'초기 평가 및 장기목표를 근거로 치료사가 설정한 예상 기간: 개별 평가 후 결정')}</div><b>단계별 재평가 일정 (예시)</b>${ul(dur)}<div class="tiny" style="margin-top:6px">※ 위 일정은 재평가 시점의 예시이며, 실제 최고 기능 수준에 도달하는 기간은 환자의 상태와 치료 반응에 따라 달라질 수 있습니다.</div></div></div>
+ <div class="reason-card pt-pg-card"><h4>5-2. 기능적 수준에 도달하는 데 소요되는 기간</h4><div class="pt-pg-box" style="margin-top:10px"><b>예상 최고 기능 수준 도달 기간</b><div contenteditable="${urgent?'false':'true'}" spellcheck="false" aria-label="예상 최고 기능 수준 도달 기간" style="margin:6px 0 12px">${urgent?'의학적 평가 전 기간 추정 보류':(neckCase?durNeck:'초기 평가 및 장기목표를 근거로 치료사가 설정한 예상 기간: 개별 평가 후 결정')}</div><b>단계별 재평가 일정 (예시)</b>${ul(dur)}<div class="tiny" style="margin-top:6px">※ 위 일정은 재평가 시점의 예시이며, 실제 최고 기능 수준에 도달하는 기간은 환자의 상태와 치료 반응에 따라 달라질 수 있습니다.</div></div>${src2}</div>
  <div class="pt-pg-arrow">↓</div>
- <div class="reason-card pt-pg-card"><h4>5-3. 재활잠재력</h4><div class="pt-pg-box" style="margin-top:10px"><b style="font-size:18px">재활잠재력:</b>${potSelect}<div class="pt-potential-status tiny" style="margin-top:5px">${ptRehabPotentialOverride?'치료사 선택 · 근거 검토 필요':'평가자료 기반 자동 제안 · 잠정 평가'}</div><div style="margin-top:8px;font-weight:700">판단 근거 (자동 생성 · 잠정 평가)</div>${potList}</div></div>
+ <div class="reason-card pt-pg-card"><h4>5-3. 재활잠재력</h4><div class="pt-pg-box" style="margin-top:10px"><b style="font-size:18px">재활잠재력:</b>${potSelect}<div class="pt-potential-status tiny" style="margin-top:5px">${ptRehabPotentialOverride?'치료사 선택 · 근거 검토 필요':'평가자료 기반 자동 제안 · 잠정 평가'}</div><div style="margin-top:8px;font-weight:700">판단 근거 (자동 생성 · 잠정 평가)</div>${potList}</div>${src3}</div>
  <div class="pt-pg-arrow">↓</div>
- <div class="reason-card pt-pg-card"><h4>5-4. 예후에 영향을 미치는 긍정적·부정적 요인</h4><div class="pt-pg-grid"><div class="pt-pg-box pos"><b>＋ 긍정적 요인 <span class="pt-fc">${ptFactorCount('positive')}</span></b>${ptFactorSection('positive','personal','개인적 요인')}${ptFactorSection('positive','environment','환경적 요인')}${ptFactorSection('positive','economic','경제적 요인')}</div><div class="pt-pg-box neg"><b>－ 부정적 요인 <span class="pt-fc">${ptFactorCount('negative')}</span></b>${ptFactorSection('negative','personal','개인적 요인')}${ptFactorSection('negative','environment','환경적 요인')}${ptFactorSection('negative','economic','경제적 요인')}</div></div></div>
+ <div class="reason-card pt-pg-card"><h4>5-4. 예후에 영향을 미치는 긍정적·부정적 요인</h4><div class="pt-pg-grid"><div class="pt-pg-box pos"><b>＋ 긍정적 요인 <span class="pt-fc">${ptFactorCount('positive')}</span></b>${ptFactorSection('positive','personal','개인적 요인')}${ptFactorSection('positive','environment','환경적 요인')}${ptFactorSection('positive','economic','경제적 요인')}</div><div class="pt-pg-box neg"><b>－ 부정적 요인 <span class="pt-fc">${ptFactorCount('negative')}</span></b>${ptFactorSection('negative','personal','개인적 요인')}${ptFactorSection('negative','environment','환경적 요인')}${ptFactorSection('negative','economic','경제적 요인')}</div></div>${src4}</div>
  <div class="tiny">※ 검사 결과에 기초한 가설적 예후이며 환자 참여도·기저 상태·추가 검사 및 실제 반응 확인 후 확정합니다.</div>`;
 }
 function ptAutoPrognosis(problems,urgent){
@@ -4565,6 +4578,54 @@ function ptGoalReevalHTML(problems,urgent){
    ];
    return result;
  };
+/* 2026-11-23: 문장별 근거 표시 공용 함수 — 2-3 임상적 의미(lit3) · 2-4 물리치료적 평가(lit4) · 4-1 치료 우선순위(lit41).
+   [자료] 그 문장이 나온 환자 소견, [문헌] PubMed에서 PMID를 확인한 문헌. 진단에 맞는 문헌이 없으면 "출처 확인 필요" — 지어내지 않는다 */
+function ptSrcHtml(p,i,mapName,tag,F){F=F||[];
+  /* 2026-11-23: 2-4 평가에도 같은 표시. 문헌마다 적용 대상을 붙임 — neck: 목 통증, stroke: 뇌졸중, sci: 척수손상, 빈칸: 공통.
+     진단에 맞는 문헌만 보여 주고, 맞는 문헌이 없으면 '출처 확인 필요' */
+  const _R={
+   fin:['Finucane LM 외 (2020)','심각한 척추 병리 위험징후(레드플래그) 국제 지침','J Orthop Sports Phys Ther','32438853','neck|sci'],
+   bl:['Blanpied PR 외 (2017)','목 통증 임상진료지침 개정판','J Orthop Sports Phys Ther','28666405','neck'],
+   wai:['Wainner RS 외 (2003)','목 신경뿌리병증 임상검사(신경역동검사 등)의 신뢰도·진단정확도','Spine','12544957','neck'],
+   jull:['Jull GA 외 (2008)','심부목굽힘근 임상평가: 머리-목 굽힘 검사(CCFT)','J Manipulative Physiol Ther','18804003','neck'],
+   yng:['Young IA 외 (2019)','기계적 목 통증에서 NPRS·NDI의 신뢰도·타당도·반응성','Physiother Theory Pract','29856244','neck'],
+   wil:['Williams MA 외 (2010)','목 능동·수동 관절가동범위 측정법의 신뢰도·타당도 체계적 고찰','J Manipulative Physiol Ther','20170780','neck'],
+   win:['Winstein CJ 외 (2016)','성인 뇌졸중 재활·회복 가이드라인(AHA/ASA)','Stroke','27145936','stroke'],
+   kir:['Kirshblum SC 외 (2011)','척수손상 국제 신경학적 분류기준(ISNCSCI) 2011 개정 해설','J Spinal Cord Med','22330109','sci'],
+   fri:['Fritz S, Lusardi M (2009)','보행속도: 여섯 번째 활력징후','J Geriatr Phys Ther','20039582',''],
+   ats:['ATS 위원회 (2002)','6분 걷기 검사(6MWT) 지침','Am J Respir Crit Care Med','12091180',''],
+   sc:['Shumway-Cook A 외 (2000)','TUG로 지역사회 노인의 낙상 확률 예측','Phys Ther','10960937',''],
+   berg:['Berg KO 외 (1992)','노인 균형 측정 도구(BBS)의 타당도','Can J Public Health','1468055',''],
+   who:['World Health Organization (2001)','국제기능장애건강분류(ICF) — 활동·참여 제한과 환경·개인 요인의 정의','WHO, Geneva','',''],
+   str:['Stratford P 외 (1995)','환자특이 기능척도(PSFS)','Physiotherapy Canada 47(4):258–263','',''],
+   horn:['Horn KK 외 (2012)','PSFS의 측정 특성과 임상 결과지표로서의 활용','J Orthop Sports Phys Ther','22031594','']
+  };
+  /* 2-3 임상적 의미(해석)를 뒷받침하는 문헌 */
+  const _LIT={safety:['fin'],pain:['bl'],neuro:['wai','bl','win','kir'],mobility:['bl'],strength:['bl','win','kir'],motorcontrol:['jull','win'],gait:['fri','win'],balance:['sc','win'],activity:['who','win'],participation:['who','str']};
+  /* 2-4 물리치료적 평가(검사도구)를 뒷받침하는 문헌 */
+  const _LIT4={safety:['fin'],pain:['yng'],neuro:['wai','kir','win'],mobility:['wil'],strength:['kir','win'],motorcontrol:['jull','win'],gait:['fri','ats','win'],balance:['sc','berg','win'],activity:['str','win'],participation:['horn','str']};
+  const _dxT=((document.querySelector('[name="ref_medical_dx"]')||{}).value||'')+' '+((document.querySelector('[name="pt_dx_medical"]')||{}).value||'');
+  const _dxK=/척수|SCI|AIS|spinal cord/i.test(_dxT)?'sci':/뇌졸중|stroke|편마비|뇌경색|뇌출혈/i.test(_dxT)?'stroke':'neck';
+  const _litFor=(M,cat)=>(M[cat]||[]).map(k=>_R[k]).filter(x=>x&&(!x[4]||x[4].split('|').includes(_dxK)));
+  /* 4-1 치료 우선순위를 정하는 원칙을 뒷받침하는 문헌 — HOAC II: 문제를 환자 목표·안전과 연결해 우선순위를 정하는 임상추론 틀 */
+  _R.hoac=['Rothstein JM 외 (2003)','HOAC II: 문제 우선순위를 정하는 환자 관리 임상추론 틀','Phys Ther','12718711',''];
+  const _LIT41={safety:['fin','hoac'],pain:['hoac','bl'],neuro:['hoac','bl','win'],mobility:['hoac','bl'],strength:['hoac','bl','win'],motorcontrol:['hoac','jull','win'],gait:['hoac','win'],balance:['hoac','win'],activity:['hoac','who','win'],participation:['hoac','who'],manual:['hoac']};
+  /* 5 예후(lit5): pg1 최고 기능 수준 · pg2 도달 기간 · pg3 재활잠재력 · pg4 긍정적·부정적 요인 */
+  _R.car=['Carroll LJ 외 (2008)','일반 인구 목 통증의 경과와 예후 요인(Bone and Joint Decade 태스크포스)','Spine','18204403','neck'];
+  _R.wilh=['Wilhelm MP 외 (2020)','운동 용량이 목 통증·장애에 미치는 효과: 체계적 고찰·메타분석','J Orthop Sports Phys Ther','33131392','neck'];
+  _R.jull09=['Jull GA 외 (2009)','만성 목 통증 환자의 치료적 운동과 심부목굽힘근 활성','Man Ther','19632880','neck'];
+  const _LIT5={pg1:['yng','str','horn','win','kir'],pg2:['wilh','jull09','win'],pg3:['car','hoac','win','kir'],pg4:['who','car','win']};
+  /* 4-2~4-6(lit4x): g42 목표 · i43 중재·재평가 · c44 협력 · e45 교육 · d46 퇴원 */
+  _R.apta=['American Physical Therapy Association (2023)','Guide to Physical Therapist Practice 4.0 — 치료계획(목표·중재·협력·교육·종결) 문서화','APTA (guide.apta.org)','',''];
+  _R.rand=['Randall KE, McEwen IR (2000)','환자 중심 기능적 목표 작성법','Phys Ther','11087306',''];
+  _R.sra=['Shirley Ryan AbilityLab','재활 평가도구 데이터베이스(MDC·MCID 등 측정 특성)','sralab.org/rehabilitation-measures','',''];
+  const _LIT4x={g42:['rand','yng','horn','str','win','kir','apta'],i43:['bl','wilh','win','sra','apta'],c44:['apta','win'],e45:['bl','win','apta'],d46:['apta','win']};
+  const M={lit3:_LIT,lit4:_LIT4,lit41:_LIT41,lit5:_LIT5,lit4x:_LIT4x}[mapName]||{};
+  const id=tag+i,fs=F.filter(f=>f.cat===p.cat),L=_litFor(M,p.cat);if(Array.isArray(p.extra))p.extra.forEach(x=>L.push(x));/* 2026-11-23: 학생이 ②에서 연결한 논문 등 추가 문헌 */
+   const dat=p.dat?p.dat:fs.length?fs.slice(0,6).map(f=>'· '+(f.source?'['+escU(f.source)+'] ':'')+escU(String(f.label).replace(/\s+/g,' '))+': '+escU(String(f.detail).replace(/\s+/g,' '))).join('<br>')+(fs.length>6?`<br>· 외 ${fs.length-6}건 (2-1 이상소견 목록에 모두 있음)`:''):(p.cat==='manual'?'· 치료사가 직접 입력한 이상소견·임상적 의미':'· 해당 분류의 자동 추출 소견 없음');
+   const lit=L.length?L.map((x,k)=>`${k+1}) ${escU(x[0])} ${escU(x[1])}. <i>${escU(x[2])}</i>${x[3]?` · <a href="https://pubmed.ncbi.nlm.nih.gov/${x[3]}/" target="_blank" rel="noopener">PMID ${x[3]}</a>`:''}`).join('<br>'):'아직 확인된 문헌이 없습니다. ②에서 논문을 찾아 연결하거나 교과서 쪽수를 적어 주세요.';
+   return `<span class="pt-src-chs"><button type="button" class="pt-src-ch pt" data-src="${id}a">자료</button>${L.length?`<button type="button" class="pt-src-ch lt" data-src="${id}b">문헌 ${L.length}</button>`:`<button type="button" class="pt-src-ch un" data-src="${id}b">출처 확인 필요</button>`}</span>
+    <div class="pt-src-d" data-srcd="${id}a"><b>환자 자료</b><br>${dat}</div><div class="pt-src-d" data-srcd="${id}b"><b>${L.length?'문헌':'출처 확인 필요'}</b><br>${lit}</div>`};
 /* 4-1 치료 우선순위: 치료사가 검토할 임상적 제안이며 자동 확정 처방이 아님 */
 function ptPriorityScore(p,urgent,hasGait){
  const cat=String(p.cat||'').toLowerCase(),title=String(p.title||'');
@@ -4609,10 +4670,10 @@ function ptPriorityHTML(problems,urgent){
  records.sort((a,b)=>b.score-a.score||a.i-b.i);
  const n=records.length;
  const warning=urgent?'<p class="pt-priority-warning"><b>안전 확인 우선:</b> 긴급 위험징후가 있으면 일반 중재의 우선순위를 확정하지 않고 의학적 평가 또는 의뢰를 우선합니다.</p>':'';
- return warning+'<table class="pt-priority-table"><thead><tr><th>문제</th><th>선정 근거(평가 결과 기반)</th><th>우선순위</th></tr></thead><tbody class="pt-priority-list">'+records.map((r,j)=>({...r,rank:j+1})).sort((a,b)=>a.i-b.i).map(r=>{/* 2026-11-18: 줄은 문제 번호순, 우선순위는 맨 끝 칸 */
+ return warning+'<div class="pt-src-bar"><span>선정 근거 끝의 <b class="pt-src-k pt">자료</b> <b class="pt-src-k lt">문헌</b> 표시를 누르면 그 근거가 펼쳐집니다.</span><button type="button" class="pt-src-all">근거 모두 펼치기</button></div><table class="pt-priority-table"><thead><tr><th>문제</th><th>선정 근거(평가 결과 기반)</th><th>우선순위</th></tr></thead><tbody class="pt-priority-list">'+records.map((r,j)=>({...r,rank:j+1})).sort((a,b)=>a.i-b.i).map(r=>{/* 2026-11-18: 줄은 문제 번호순, 우선순위는 맨 끝 칸 */
   const rank=r.rank;
   const opts=Array.from({length:n},(_,i)=>`<option value="${i+1}"${i+1===rank?' selected':''}>${i+1}</option>`).join('');
-  return `<tr class="pt-priority-item" data-problem-index="${r.i}"><td class="pt-priority-problem">${r.i+1}. ${escU(r.p.title)}</td><td class="pt-priority-reason">${escU(r.reason)}</td><td class="pt-priority-rank"><select class="pt-priority-select" data-rank="${rank}" aria-label="문제 ${r.i+1} 우선순위">${opts}</select></td></tr>`;
+  return `<tr class="pt-priority-item" data-problem-index="${r.i}"><td class="pt-priority-problem">${r.i+1}. ${escU(r.p.title)}</td><td class="pt-priority-reason">${escU(r.reason)}${ptSrcHtml(r.p,r.i,'lit41','p',ptLastFindings)}</td><td class="pt-priority-rank"><select class="pt-priority-select" data-rank="${rank}" aria-label="문제 ${r.i+1} 우선순위">${opts}</select></td></tr>`;
  }).join('')+'</tbody></table><p class="tiny" style="margin-top:10px">※ 우선순위는 문제목록의 원래 번호를 변경하지 않습니다. 위 순위는 자동 제안이며, 환자 목표·중증도·예후·치료 반응을 확인해 치료사가 조정하세요.</p>';
 }
 /* 드롭다운으로 두 문제의 순위를 교환하며 선택 상태를 저장 HTML에 반영 */
@@ -6079,27 +6140,61 @@ window.ptScrollTop=function(el){if(!el)return;const bn=document.querySelector('.
  function drawLinkPanel(box){const id=box.dataset.ev;if(!S.ev.some(z=>z.id===id)){box.remove();return}const cards=S.cards||[];
   if(!cards.length){box.innerHTML=`<div class="ix-link-h"><b>이 논문을 어느 중재의 근거로 쓸까요?</b><button type="button" class="ix-link-x" data-lclose="1">닫기 ✕</button></div><div class="ix-link-empty">③ 환자맞춤 중재 프로그램에 중재가 아직 없어요. ③에서 <b>[④ 치료 계획(4-3)의 중재 불러오기]</b>를 먼저 눌러 주세요.</div><div class="ix-link-f"><span class="ix-sp"></span><button type="button" class="ix-link-go" data-lgo="1">③ 중재 프로그램으로 가기 →</button></div>`;return}
   const n=cards.filter(c=>(c.evid||[]).includes(id)).length;
-  box.innerHTML=`<div class="ix-link-h"><b>이 논문을 어느 중재의 근거로 쓸까요?</b><span class="ix-link-sub">여러 개 고를 수 있어요 · ③ 환자맞춤 중재 프로그램의 중재 ${cards.length}개</span><button type="button" class="ix-link-x" data-lclose="1">닫기 ✕</button></div><div class="ix-link-sub" style="margin:0 0 10px">★ = 논문 제목·초록에 나온 중재와 비슷해서 추천</div><div class="ix-link-chips">`+cards.map((c,i)=>{const on=(c.evid||[]).includes(id);const key=ixLinkKey(c.name+' '+c.cls);const rec=key&&LINK_EN[key]&&LINK_EN[key].test(box._txt||'');return `<button type="button" class="ix-lchip${on?' on':''}" data-lc="${i}">${on?'✓ ':''}${rec?'★ ':''}${i+1}. ${esc(c.name||'(중재명 미입력)')}</button>`}).join('')+`</div><div class="ix-link-f"><span class="ix-link-msg">${n?`${n}개 중재에 연결됨 — ③ 카드와, 그 카드에서 만든 ④ 가정운동에 근거가 표시돼요`:'아직 연결한 중재가 없어요'}</span><span class="ix-sp"></span><button type="button" class="ix-link-go" data-lgo="1">③ 중재 프로그램에서 보기 →</button></div>`+edLinkHtml(box,id)}
-  /* 2026-11-23: ④ 환자 교육 내용(4가지)도 이 논문의 근거로 연결 — 연결 이유를 꼭 써야 연결됨. 가정운동은 ③ 카드에서 자동으로 이어받으므로 여기서 연결하지 않음 */
+  /* 2026-11-23: 중재·교육 연결 모두 — 연결 이유는 자동 초안을 채우고 학생이 확인·수정. 고치지 않고 연결하면 '자동 초안 · 미확인'으로 남음.
+     설명은 한 줄로 줄이고 나머지는 '도움말' 안에 접음. 아직 중재가 정해지지 않은 자리표시 카드는 고를 수 없음 */
+  const lp=box._lpend,lpc=lp!=null&&lp!==''?cards[+lp]:null;
+  const lcDraft=lpc?ixDraftWhy(id,(+lp+1)+'. '+(lpc.name||'중재'),'iv'):'';const lcMis=lpc?ixPopMismatch(id):'';
+  box.innerHTML=`<div class="ix-link-h"><b>이 논문을 어느 중재의 근거로 쓸까요?</b><span class="ix-link-sub">여러 개 고를 수 있어요</span><button type="button" class="ix-link-x" data-lclose="1">닫기 ✕</button></div><div class="ix-steps">① 중재 고르기 → ② 자동 초안 확인·수정 → ③ 연결</div><div class="ix-link-chips">`+cards.map((c,i)=>{const on=(c.evid||[]).includes(id);const ph=ixIsPlaceholder(c);const key=ixLinkKey(c.name+' '+c.cls);const rec=!ph&&key&&LINK_EN[key]&&LINK_EN[key].test(box._txt||'');
+   if(ph&&!on)return `<button type="button" class="ix-lchip ix-lchip-off" disabled title="아직 중재가 정해지지 않은 항목이라 근거를 연결할 수 없어요. ③에서 중재를 먼저 정하세요.">${i+1}. ${esc(c.name||'(중재명 미입력)')} · 중재 미정</button>`;
+   return `<button type="button" class="ix-lchip${on?' on':''}${+lp===i&&lp!==''&&lp!=null?' pend':''}" data-lc="${i}">${on?'✓ ':''}${rec?'★ ':''}${i+1}. ${esc(c.name||'(중재명 미입력)')}</button>`}).join('')+`</div>`
+   +(lpc?ixWhyBox(`${(+lp)+1}. ${esc(lpc.name||'중재')}`,'ix-lcwhy-in',lcDraft,lcMis,'data-lcok','data-lcx','ix-lcwhy-msg ix-edwhy-msg'):'')
+   +cards.map((c,i)=>(c.evid||[]).includes(id)?`<div class="ix-edwhy-list">✓ <b>${i+1}. ${esc(c.name||'중재')}</b> — ${((c.evwhy||{})[id])?esc(c.evwhy[id])+' '+ixWhyTag((c.evauto||{})[id]):'<span style="color:#8a5a00">연결 이유 미작성 (칩을 다시 눌러 해제한 뒤 다시 연결하세요)</span>'}</div>`:'').join('')
+   +`<div class="ix-link-f"><span class="ix-link-msg">${n?`${n}개 중재에 연결됨`:'아직 연결한 중재가 없어요'}</span><span class="ix-sp"></span><button type="button" class="ix-link-go" data-lgo="1">③ 중재 프로그램에서 보기 →</button></div>`+edLinkHtml(box,id)
+   +`<details class="ix-lhelp"><summary>도움말</summary><div>★ = 논문 제목·초록의 단어가 중재 이름과 비슷하다는 참고 표시일 뿐, 논문이 그 중재를 검증했다는 뜻은 아니에요.<br>연결 이유 초안은 ②에 적어 둔 '연구 대상·중재군·결과'로 만들고, 비어 있으면 초록의 결론 문장을 써요. 연구 대상 경고는 초록 단어로만 판단한 참고 알림이에요.<br>③ 카드에 연결한 논문은 그 카드에서 만든 ④ 가정운동에도 근거로 이어져요. 교육 내용 4가지는 아래에서 따로 연결해요.<br>논문이 검증한 범위(프로그램 전체 / 특정 항목)를 확인한 뒤 연결하세요.</div></details>`}
+  function ixIsPlaceholder(c){return /확정 후 중재 선택|중재 미정|평가 지표 확정/.test(String(c.name||''))}
+  /* 2026-11-23: 연결 이유 자동 초안 · 연구 대상 차이 알림 · 확인 표시 */
+  function ixPaperOf(id){const e=(S.ev||[]).find(z=>z.id===id)||{};const r=(typeof RESULTS!=='undefined'&&RESULTS||[]).find(z=>z.id===id)||{};/* 초록은 [{label,text}] 배열 — 결론(Conclusion) 구간이 있으면 그것만, 없으면 전체를 이어 붙임 */
+   const raw=r.abs||r.abstract||e.abs||'';let abs='';if(Array.isArray(raw)){const cc=raw.filter(a=>/conclu|interpret/i.test(String(a&&a.label||'')));abs=(cc.length?'Conclusion: ':'')+(cc.length?cc:raw).map(a=>String(a&&a.text||a||'')).join(' ')}else abs=String(raw);return {e,r,abs}}
+  function ixDraftWhy(id,target,kind){const {e,r,abs}=ixPaperOf(id);const f=e.f||{};const clip=(t,n)=>{t=String(t||'').replace(/\s+/g,' ').trim();return t.length>n?t.slice(0,n)+'…':t};
+   const au=String(e.authors||r.authors||'').trim(),a=au.split(/[,;]/)[0].trim(),yr=e.year||r.year||'';const who=(a?a+(/[,;]/.test(au)?' 외':''):'이 논문')+(yr?'('+yr+')':'');
+   let body='';if([f.pop,f.ig,f.out].some(x=>String(x||'').trim()))body=[String(f.pop||'').trim()&&clip(f.pop,40)+' 대상',String(f.ig||'').trim()&&clip(f.ig,40),String(f.out||'').trim()&&'→ '+clip(f.out,70)].filter(Boolean).join(', ');
+   else{const m=abs.match(/(?:conclusions?|interpretation)\s*[:.]?\s*([\s\S]+?)(?:\s+(?:trial registration|keywords?|registration)\b|$)/i);let c=m?m[1]:'';if(!c){const ss=abs.split(/(?<=[.!?])\s+/).filter(x=>x.trim());c=ss[ss.length-1]||''}body=c?'초록 결론: '+clip(c,150):'(초록 없음 — ②에서 이 논문의 연구 대상·중재군·결과를 적어 두면 초안이 채워져요)'}
+   return `${who}: ${body} → ${target}의 근거`+(kind==='caution'||kind==='worse'?' (⚠ 중재 효과 연구라면 이 기준을 실제로 다뤘는지 확인)':'')}
+  function ixPopMismatch(id){const {e,abs}=ixPaperOf(id);const tx=((e.title||'')+' '+abs+' '+((e.f||{}).pop||'')).toLowerCase();const age=parseInt(v('age'),10),dx=v('ref_medical_dx');const out=[];
+   if(/older adult|elderly|geriatric|aged (6[5-9]|[7-9]\d)|노인|고령/.test(tx)&&!(age>=60))out.push('노인 대상 연구');
+   if(/\bchild|children|pediatric|paediatric|adolescen|아동|청소년/.test(tx)&&!(age<19))out.push('아동·청소년 대상 연구');
+   if(/stroke|hemipleg|뇌졸중/.test(tx)&&!/뇌졸중|stroke|편마비/i.test(dx))out.push('뇌졸중 환자 대상 연구');
+   if(/spinal cord injur|척수손상/.test(tx)&&!/척수|SCI|AIS/i.test(dx))out.push('척수손상 환자 대상 연구');
+   return out.length?`⚠ 연구 대상이 이 환자와 다를 수 있음: ${out.join(', ')}${age?` (이 환자 ${age}세${dx?' · '+esc(dx.slice(0,24)):''})`:''}`:''}
+  function ixWhyTag(auto){return auto?'<span class="ix-wtag auto">자동 초안 · 미확인</span>':'<span class="ix-wtag ok">학생 확인</span>'}
+  function ixWhyBox(label,cls,draft,mis,okAttr,xAttr,msgCls){return `<div class="ix-edwhy ix-whybox"><div class="ix-whyhd"><b>${label}</b> 연결 이유 <span class="ix-wtag auto" data-dtag="1">자동 초안 · 미확인</span></div><textarea class="${cls}" rows="2" data-draft="${esc(draft)}">${esc(draft)}</textarea>${mis?`<div class="ix-mis">${mis}</div>`:''}<div class="ix-whyft"><button type="button" class="ix-btn sm" ${okAttr}="1">연결</button><button type="button" class="ix-btn ghost sm" ${xAttr}="1">취소</button><span class="ix-mini">고치지 않고 연결하면 "자동 초안 · 미확인"으로 남아요</span><span class="${msgCls}"></span></div></div>`}
+  /* 2026-11-23: ④ 환자 교육 내용(4가지)도 이 논문의 근거로 연결 — 연결 이유는 자동 초안을 확인·수정. 가정운동은 ③ 카드에서 자동으로 이어받으므로 여기서 연결하지 않음 */
   const ED_TOPICS=[['explain','질환·회복 과정 설명',/neuroscience|education|explain|pain science|reassur/],['daily','일상·업무 조절',/activit|ergonom|work|pacing|posture/],['caution','주의사항·중단 기준',/safety|adverse|contraindic|precaution/],['worse','증상 악화 시 대처',/flare|exacerbat|self-manag|coping/]];
   function edLinks(){S.edu=S.edu||{rows:[]};S.edu.rows=S.edu.rows||[];S.edu.evlinks=S.edu.evlinks||{};return S.edu.evlinks}
   function edLinkHtml(box,id){const L=edLinks();const has=k=>(L[k]||[]).some(z=>z.id===id);const n=ED_TOPICS.filter(([k])=>has(k)).length;const pend=box._pend||'';const pl=pend?(ED_TOPICS.find(t=>t[0]===pend)||[])[1]:'';
-   return `<div class="ix-edlink"><div class="ix-link-h"><b>환자 교육 내용의 근거로도 쓸까요?</b><span class="ix-link-sub">④ 교육 내용 · 가정운동은 ③에서 자동으로 이어받아요 · 연결 이유 필수</span></div><div class="ix-link-chips">`+ED_TOPICS.map(([k,l,re])=>{const on=has(k);const rec=re.test(box._txt||'');return `<button type="button" class="ix-lchip${on?' on':''}${pend===k?' pend':''}" data-et="${k}">${on?'✓ ':''}${esc(l)}${rec?' <span class="ix-edsim">★ 비슷한 단어</span>':''}</button>`}).join('')+`</div>`
-    +(pend?`<div class="ix-edwhy"><b>${esc(pl)}</b> 연결 이유 <em>필수</em><input type="text" class="ix-edwhy-in" placeholder="예: PNE가 통증 인식·두려움 감소에 효과 → 회복 과정 설명의 근거"><button type="button" class="ix-btn sm" data-etok="1">연결</button><button type="button" class="ix-btn ghost sm" data-etx="1">취소</button><span class="ix-edwhy-msg"></span></div>`:'')
-    +ED_TOPICS.filter(([k])=>has(k)).map(([k,l])=>`<div class="ix-edwhy-list">✓ <b>${esc(l)}</b> — ${esc((L[k].find(z=>z.id===id)||{}).why||'')}</div>`).join('')
-    +`<div class="ix-link-sub" style="margin-top:6px">★는 논문 제목·초록에 비슷한 단어가 있다는 참고 표시일 뿐이며 자동으로 선택되지 않습니다. 논문이 검증한 범위(프로그램 전체 / 특정 항목)를 확인한 뒤 연결하세요.</div><div class="ix-link-f"><span class="ix-link-msg">${n?`${n}개 교육 항목에 연결됨`:'아직 연결한 교육 항목이 없어요'}</span><span class="ix-sp"></span><button type="button" class="ix-link-go" data-lgo4="1">④ 환자 교육·가정운동에서 보기 →</button></div></div>`}
+   return `<div class="ix-edlink"><div class="ix-link-h"><b>이 논문을 환자 교육에도 쓸까요?</b><span class="ix-link-sub">(선택 사항)</span></div><div class="ix-steps">① 어떤 설명에 쓸지 고르기 → ② 자동 초안 확인·수정 → ③ 연결</div><div class="ix-link-chips">`+ED_TOPICS.map(([k,l,re])=>{const on=has(k);const rec=re.test(box._txt||'');const gl=k==='caution'||k==='worse';return `<button type="button" class="ix-lchip${on?' on':''}${pend===k?' pend':''}" data-et="${k}">${on?'✓ ':''}${esc(l)}${gl?' <span class="ix-edgl">지침 권장</span>':''}${rec?' <span class="ix-edsim">★ 비슷한 단어</span>':''}</button>`}).join('')+`</div><div class="ix-link-sub" style="margin:4px 0 0">지침 권장 = 이 두 가지는 보통 진료지침이 근거예요.</div>`
+    +(pend?ixWhyBox(esc(pl),'ix-edwhy-in',ixDraftWhy(id,pl,pend),ixPopMismatch(id),'data-etok','data-etx','ix-edwhy-msg'):'')
+    +ED_TOPICS.filter(([k])=>has(k)).map(([k,l])=>{const z=L[k].find(z=>z.id===id)||{};return `<div class="ix-edwhy-list">✓ <b>${esc(l)}</b> — ${esc(z.why||'')} ${ixWhyTag(z.auto)}</div>`}).join('')
+    +`<div class="ix-link-f"><span class="ix-link-msg">${n?`${n}개 교육 항목에 연결됨`:'아직 연결한 교육 항목이 없어요'}</span><span class="ix-sp"></span><button type="button" class="ix-link-go" data-lgo4="1">④ 환자 교육·가정운동에서 보기 →</button></div></div>`}
   $('#ixResults').addEventListener('click',e=>{const box=e.target.closest('.ix-link');if(!box)return;const id=box.dataset.ev;const L=edLinks();const refresh=()=>{try{window.ptIxEduRefresh&&window.ptIxEduRefresh()}catch(x){}};
    const t=e.target.closest('[data-et]');if(t){const k=t.dataset.et;const arr=L[k]=L[k]||[];const q=arr.findIndex(z=>z.id===id);if(q>=0){arr.splice(q,1);box._pend='';save();status();drawLinkPanel(box);refresh()}else{box._pend=k;drawLinkPanel(box);const inp=box.querySelector('.ix-edwhy-in');if(inp)inp.focus()}return}
    if(e.target.closest('[data-etx]')){box._pend='';drawLinkPanel(box);return}
-   if(e.target.closest('[data-etok]')){const inp=box.querySelector('.ix-edwhy-in');const why=(inp&&inp.value||'').trim();if(!why){const m=box.querySelector('.ix-edwhy-msg');if(m)m.textContent='연결 이유를 적어야 연결돼요';if(inp)inp.focus();return}(L[box._pend]=L[box._pend]||[]).push({id,why});box._pend='';save();status();drawLinkPanel(box);refresh();return}
+   if(e.target.closest('[data-etok]')){const inp=box.querySelector('.ix-edwhy-in');const why=(inp&&inp.value||'').trim();if(!why){const m=box.querySelector('.ix-edwhy-msg');if(m)m.textContent='연결 이유를 적어야 연결돼요';if(inp)inp.focus();return}(L[box._pend]=L[box._pend]||[]).push({id,why,auto:why===String(inp.dataset.draft||'').trim()});box._pend='';save();status();drawLinkPanel(box);refresh();return}
    if(e.target.closest('[data-lgo4]')){if(window.ptIxShowTab)ptIxShowTab(4);setTimeout(()=>{const k=ED_TOPICS.map(x=>x[0]).find(k=>(L[k]||[]).some(z=>z.id===id));const el=k?document.querySelector(`#ptIx .ix-pane[data-pane="4"] [data-edtopic="${k}"]`):null;const go=el||document.querySelector('#ptIx .ix-tabs')||document.getElementById('ptIx');if(el){el.classList.remove('ix-ev-flash');void el.offsetWidth;el.classList.add('ix-ev-flash')}setTimeout(()=>ptScrollTop(go),60)},220)}});
   $('#ixResults').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList&&e.target.classList.contains('ix-edwhy-in')){e.preventDefault();const b=e.target.closest('.ix-link').querySelector('[data-etok]');if(b)b.click()}});
  $('#ixResults').addEventListener('click',e=>{const box=e.target.closest('.ix-link');if(!box)return;
   if(e.target.closest('[data-lclose]')){box.remove();return}
   if(e.target.closest('[data-lgo]')){const id=box.dataset.ev;if(window.ptIxShowTab)ptIxShowTab(3);/* 2026-11-17: 탭만 바뀌고 화면은 그대로 있던 문제 → 연결한 첫 카드(없으면 ③ 탭 위)로 이동 */setTimeout(()=>{const i=(S.cards||[]).findIndex(c=>(c.evid||[]).includes(id));const card=i>=0?document.querySelector(`#ptIx .ix-pane[data-pane="3"] details.ix-card[data-ci="${i}"]`):null;const go=card||document.querySelector('#ptIx .ix-tabs')||document.getElementById('ptIx');if(card){card.open=true;card.classList.remove('ix-ev-flash');void card.offsetWidth;card.classList.add('ix-ev-flash')}setTimeout(()=>ptScrollTop(go),60)},220);return}
-  const b=e.target.closest('[data-lc]');if(!b)return;const c=(S.cards||[])[+b.dataset.lc];if(!c)return;c.evid=c.evid||[];const id=box.dataset.ev;const q=c.evid.indexOf(id);if(q>=0)c.evid.splice(q,1);else c.evid.push(id);c.updated=new Date().toLocaleString('ko-KR');save();status();drawLinkPanel(box)});
+  /* 2026-11-23: 중재 연결 — 이미 연결된 칩은 누르면 해제, 새로 연결할 때는 이유를 적어야 연결 */
+  if(e.target.closest('[data-lcx]')){box._lpend='';drawLinkPanel(box);return}
+  if(e.target.closest('[data-lcok]')){const c=(S.cards||[])[+box._lpend];const inp=box.querySelector('.ix-lcwhy-in');const why=(inp&&inp.value||'').trim();if(!c){box._lpend='';drawLinkPanel(box);return}if(!why){const m=box.querySelector('.ix-lcwhy-msg');if(m)m.textContent='연결 이유를 적어야 연결돼요';if(inp)inp.focus();return}const id=box.dataset.ev;c.evid=c.evid||[];if(!c.evid.includes(id))c.evid.push(id);c.evwhy=c.evwhy||{};c.evwhy[id]=why;c.evauto=c.evauto||{};c.evauto[id]=why===String(inp.dataset.draft||'').trim();c.updated=new Date().toLocaleString('ko-KR');box._lpend='';save();status();drawLinkPanel(box);return}
+  const b=e.target.closest('[data-lc]');if(!b)return;const c=(S.cards||[])[+b.dataset.lc];if(!c)return;c.evid=c.evid||[];const id=box.dataset.ev;const q=c.evid.indexOf(id);if(q>=0){c.evid.splice(q,1);if(c.evwhy)delete c.evwhy[id];if(c.evauto)delete c.evauto[id];c.updated=new Date().toLocaleString('ko-KR');box._lpend='';save();status();drawLinkPanel(box);return}
+  if(ixIsPlaceholder(c))return;box._lpend=String(+b.dataset.lc);drawLinkPanel(box);const inp=box.querySelector('.ix-lcwhy-in');if(inp)inp.focus()});
+  /* 2026-11-23: 초안을 고치면 표시가 '학생 확인'으로 바뀜 */
+  $('#ixResults').addEventListener('input',e=>{const ta=e.target;if(!ta.classList||!(ta.classList.contains('ix-lcwhy-in')||ta.classList.contains('ix-edwhy-in')))return;const tg=ta.closest('.ix-whybox')?.querySelector('[data-dtag]');if(!tg)return;const auto=ta.value.trim()===String(ta.dataset.draft||'').trim();tg.textContent=auto?'자동 초안 · 미확인':'학생 확인';tg.className='ix-wtag '+(auto?'auto':'ok')});
+  $('#ixResults').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList&&e.target.classList.contains('ix-lcwhy-in')){e.preventDefault();const b=e.target.closest('.ix-link').querySelector('[data-lcok]');if(b)b.click()}});
  $('#ixResults').addEventListener('click',e=>{const p=e.target.closest('[data-pedro]');if(p){copy(RESULTS[+p.dataset.pedro].title)}
-  const a=e.target.closest('[data-add]');if(a){const x=RESULTS[+a.dataset.add];const j0=S.ev.findIndex(z=>z.id===x.id);if(j0>=0){const ff=S.ev[j0].f||{};if(Object.values(ff).some(v=>String(v||'').trim())&&!confirm('이 논문에 적어 둔 내용이 있어요. 근거 목록에서 뺄까요?'))return;S.ev.splice(j0,1);(S.cards||[]).forEach(c=>{const q=(c.evid||[]).indexOf(x.id);if(q>=0)c.evid.splice(q,1)});save();renderEvidence();status();a.textContent='근거 목록에 추가';a.removeAttribute('title');const lk=a.closest('.ix-paper')?.querySelector('.ix-link');if(lk)lk.remove();return}a.title='한 번 더 누르면 근거 목록에서 빠집니다';if(!S.ev.some(z=>z.id===x.id)){S.ev.push({id:x.id,title:x.title,titleKo:(()=>{const k=a.closest('.ix-paper')?.querySelector('.ix-ptitle-ko');return k&&k.classList.contains('done')&&!k.classList.contains('wait')&&!k.querySelector('a')&&k.textContent!=='번역 결과 없음'?k.textContent:''})(),authors:x.authors,year:x.year,journal:x.journal,design:x.design,pmid:x.pmid,pmcid:x.pmcid||'',doi:x.doi,src:x.src.join(', '),when:x.when,query:x.query,prob:(probs()[S.t2.sel]||{}).title||'',f:{}});save();renderEvidence();status()}a.textContent='근거 목록에 있음 ✓';const k=S.ev.findIndex(z=>z.id===x.id),el=document.querySelectorAll('#ixEvidence .ix-ev')[k];/* 2026-11-17: 근거 목록으로 내려가는 대신, 논문 바로 아래에 '어느 중재의 근거로?' 상자를 띄움 */ixLinkPanel(a,x);if(el){el.classList.remove('ix-ev-flash');void el.offsetWidth;el.classList.add('ix-ev-flash')}}});
+  const a=e.target.closest('[data-add]');if(a){const x=RESULTS[+a.dataset.add];const j0=S.ev.findIndex(z=>z.id===x.id);if(j0>=0){const ff=S.ev[j0].f||{};if(Object.values(ff).some(v=>String(v||'').trim())&&!confirm('이 논문에 적어 둔 내용이 있어요. 근거 목록에서 뺄까요?'))return;S.ev.splice(j0,1);(S.cards||[]).forEach(c=>{const q=(c.evid||[]).indexOf(x.id);if(q>=0)c.evid.splice(q,1)});/* 2026-11-23: ④ 교육 연결에서도 뺌 */{const el=(S.edu||{}).evlinks;if(el)Object.keys(el).forEach(k=>{if(Array.isArray(el[k]))el[k]=el[k].filter(z=>z.id!==x.id)})}save();renderEvidence();status();a.textContent='근거 목록에 추가';a.removeAttribute('title');const lk=a.closest('.ix-paper')?.querySelector('.ix-link');if(lk)lk.remove();return}a.title='한 번 더 누르면 근거 목록에서 빠집니다';if(!S.ev.some(z=>z.id===x.id)){S.ev.push({id:x.id,title:x.title,titleKo:(()=>{const k=a.closest('.ix-paper')?.querySelector('.ix-ptitle-ko');return k&&k.classList.contains('done')&&!k.classList.contains('wait')&&!k.querySelector('a')&&k.textContent!=='번역 결과 없음'?k.textContent:''})(),authors:x.authors,year:x.year,journal:x.journal,design:x.design,pmid:x.pmid,pmcid:x.pmcid||'',doi:x.doi,src:x.src.join(', '),when:x.when,query:x.query,prob:(probs()[S.t2.sel]||{}).title||'',abs:(Array.isArray(x.abs)?x.abs:[]).map(z=>({label:String(z&&z.label||''),text:String(z&&z.text||'')})),f:{}});/* 2026-11-23: 초록도 저장 — ③ 자동 설계가 중재·용량·결과를 읽음 */save();renderEvidence();status()}a.textContent='근거 목록에 있음 ✓';const k=S.ev.findIndex(z=>z.id===x.id),el=document.querySelectorAll('#ixEvidence .ix-ev')[k];/* 2026-11-17: 근거 목록으로 내려가는 대신, 논문 바로 아래에 '어느 중재의 근거로?' 상자를 띄움 */ixLinkPanel(a,x);if(el){el.classList.remove('ix-ev-flash');void el.offsetWidth;el.classList.add('ix-ev-flash')}}});
 
  /* ---------- KCI ---------- */
  function renderKci(){const k=$('#ixKci');if(k.dataset.ok)return;k.dataset.ok=1;
@@ -6129,7 +6224,7 @@ window.ptScrollTop=function(el){if(!el)return;const bn=document.querySelector('.
   box.innerHTML=S.ev.map((x,i)=>`<div class="ix-ev${EVOPEN.has(x.id)?' open':''}">${/[가-힣]/.test(x.title||'')?'':x.titleKo?`<div class="ix-ptitle-ko ko done">${esc(x.titleKo)}</div>`:`<div class="ix-ptitle-ko ko wait" data-tr="${esc(x.title)}" data-evi="${i}"></div>`}<div class="ix-ptitle">${esc(x.title)}</div><div class="ix-pmeta">${esc(x.authors||'')}${x.year?' · '+esc(x.year):''}${x.journal?' · '+esc(x.journal):''} · 출처 ${esc(x.src)} · 검색일 ${esc(x.when)}${x.prob?' · 관련 문제: '+esc(x.prob):''}</div>${x.query?`<div class="ix-pmeta2">검색어 <code>${esc(x.query)}</code></div>`:''}<div class="ix-pbtns">${x.pmid?`<a href="https://pubmed.ncbi.nlm.nih.gov/${x.pmid}/" target="_blank" rel="noopener">PMID ${x.pmid} ↗</a>`:''}${x.pmcid?`<a href="https://pmc.ncbi.nlm.nih.gov/articles/${esc(x.pmcid)}/" target="_blank" rel="noopener">PMCID ${esc(x.pmcid)} ↗</a>`:''}${x.doi?`<a href="https://doi.org/${esc(x.doi)}" target="_blank" rel="noopener">DOI ↗</a>`:''}${x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener">KCI ↗</a>`:''}<button type="button" class="ix-btn ghost sm" data-del="${i}">목록에서 빼기</button><button type="button" class="ix-btn sm ix-ev-tg" data-tg="${i}" aria-expanded="${EVOPEN.has(x.id)}">${evLbl(x,EVOPEN.has(x.id))}</button></div><div class="ix-ev-grid">${EVF.map(([k,l])=>`<label${k==='grade'?' class="full"':''}>${l}${k==='pedro'?`<input type="number" min="0" max="10" data-ev="${i}" data-f="${k}" value="${esc(x.f[k]||'')}" placeholder="보고되지 않음/확인 필요">`:`<textarea data-ev="${i}" data-f="${k}" rows="1" placeholder="보고되지 않음/확인 필요">${esc(x.f[k]||'')}</textarea>`}</label>`).join('')}<label class="full">확인 여부<select data-ev="${i}" data-f="chk"><option value="">선택</option>${['초록만 확인','원문까지 확인'].map(o=>`<option ${x.f.chk===o?'selected':''}>${o}</option>`).join('')}</select></label></div></div>`).join('')}
  $('#ixEvidence').addEventListener('input',e=>{const i=e.target.dataset.ev;if(i==null)return;S.ev[+i].f[e.target.dataset.f]=e.target.value;save();const tb=e.target.closest('.ix-ev')?.querySelector('[data-tg]');if(tb)tb.textContent=evLbl(S.ev[+i],true)});
  $('#ixEvidence').addEventListener('change',e=>{const i=e.target.dataset.ev;if(i==null)return;S.ev[+i].f[e.target.dataset.f]=e.target.value;save()});
- $('#ixEvidence').addEventListener('click',e=>{const tg=e.target.closest('[data-tg]');if(tg){const x=S.ev[+tg.dataset.tg],card=tg.closest('.ix-ev'),op=!card.classList.contains('open');card.classList.toggle('open',op);op?EVOPEN.add(x.id):EVOPEN.delete(x.id);tg.textContent=evLbl(x,op);tg.setAttribute('aria-expanded',op);return}const d=e.target.closest('[data-del]');if(d&&confirm('이 논문을 근거 목록에서 뺄까요?')){S.ev.splice(+d.dataset.del,1);save();renderEvidence();status();drawResults()}});
+ $('#ixEvidence').addEventListener('click',e=>{const tg=e.target.closest('[data-tg]');if(tg){const x=S.ev[+tg.dataset.tg],card=tg.closest('.ix-ev'),op=!card.classList.contains('open');card.classList.toggle('open',op);op?EVOPEN.add(x.id):EVOPEN.delete(x.id);tg.textContent=evLbl(x,op);tg.setAttribute('aria-expanded',op);return}const d=e.target.closest('[data-del]');if(d&&confirm('이 논문을 근거 목록에서 뺄까요?')){const gone=(S.ev[+d.dataset.del]||{}).id;S.ev.splice(+d.dataset.del,1);/* 2026-11-23: 뺀 논문은 ③ 카드·④ 교육 연결에서도 지워 근거 개수가 부풀지 않게 함 */if(gone!=null){(S.cards||[]).forEach(c=>{if(Array.isArray(c.evid))c.evid=c.evid.filter(x=>x!==gone)});const el=(S.edu||{}).evlinks;if(el)Object.keys(el).forEach(k=>{if(Array.isArray(el[k]))el[k]=el[k].filter(z=>z.id!==gone)})}save();renderEvidence();status();drawResults()}});
 
  /* ---------- 다른 화면과 연결 ---------- */
  // 자동 평가를 다시 하거나 앞 단계 값이 바뀌면: 고치지 않은 칸은 새 값으로, 확인 완료 뒤 바뀌었으면 '재검토 필요'
@@ -6253,6 +6348,15 @@ html body main:not(#z1):not(#z2):not(#z3) #ptIx .ix-btn.danger{background:#fff!i
   '환경·인체공학적 조정':[['what','조정 내용'],['env','대상 환경'],['check','확인 시점'],['period','기간']]};
  const FIELDS=[['purpose','목적'],['why','선정 이유'],['diff','연구 대상과 이 환자의 차이'],['pos','시작 자세·적용 부위'],['method','시행 방법'],['assist','보조·감독 수준'],['equip','장비'],['contra','금기·주의사항'],['prog','진행·감량 기준'],['stop','중단·재의뢰 기준'],['reeval','재평가 항목과 시점']];
  const guessCls=t=>/도수|가동술|교정|수기|Maitland/.test(t)?'수기치료':/신경가동|신경 활주|신경가동성/.test(t)?'신경가동술':/온열|전기|TENS|핫팩|Hot pack|물리적 인자/i.test(t)?'물리적 인자':/작업환경|인체공학|모니터|책상/.test(t)?'환경·인체공학적 조정':/교육|설명|페이싱|복귀 계획/.test(t)&&!/운동|훈련/.test(t)?'환자 교육':/과제|기능 훈련|일상|보행|이동/.test(t)?'기능·과제 훈련':'운동치료';
+ /* 2026-11-23: 근거 표시 도우미 — 논문 짧은 이름, 카드에 연결된(지워지지 않은) 논문, 선정 이유 출처 상태, 용량별 출처 논문 고르기 */
+ const ixEvS=(S,id)=>{const e=(S.ev||[]).find(x=>x.id===id);if(!e)return '';const au=String(e.authors||'').trim(),a=au.split(/[,;]/)[0].trim();return (a?a+(/[,;]/.test(au)?' 외':''):String(e.titleKo||e.title||'').slice(0,30))+(e.year?' ('+e.year+')':'')};
+ const cardPapers=(S,c)=>(c.evid||[]).filter(id=>(S.ev||[]).some(e=>e.id===id));
+ function whyStatus(S,c){const P=cardPapers(S,c);if(P.length)return `<div class="ix-whysrc ok">✔ 선정 이유의 출처${P.map(id=>{const w=(c.evwhy||{})[id];return `<br>· ${esc(ixEvS(S,id))} — ${w?esc(w)+((c.evauto||{})[id]?' <span class="ix-wtag auto">자동 초안 · 미확인</span>':' <span class="ix-wtag ok">학생 확인</span>'):'<span style="color:#8a5a00">연결 이유 미작성</span>'}`}).join('')}</div>`;
+  const claim=/RCT|메타분석|체계적 고찰|진료지침|지침|권고|연구|근거/.test(c.why||'');
+  return `<div class="ix-whysrc need">⚠ 출처 확인 필요 — ${claim?'선정 이유에 연구·지침 근거가 있다고 적혀 있지만 ':''}연결된 논문이 없습니다. 위 '연결된 근거 논문'에서 고르거나 ②에서 찾아 추가하세요.</div>`}
+ function doseSrc(S,c,i,k){const P=cardPapers(S,c),d=c.dose[k]||{},cur=d.src||'',lit=String(d.lit||'').trim();
+  if(!P.length)return `<span class="ix-mini">${lit?'<b style="color:#8a5a00">⚠ 연결된 논문 없음</b>':'—'}</span>`;
+  return `<select data-b="cards.${i}.dose.${k}.src" class="ix-dsrc${lit&&!cur?' ix-need':''}"><option value="">${lit?'⚠ 출처 논문 고르기':'— 선택 —'}</option>${P.map(id=>`<option value="${esc(id)}" ${cur===id?'selected':''}>${esc(ixEvS(S,id))}</option>`).join('')}</select>`}
  function newCard(o={}){return Object.assign({id:uid(),name:'',cls:'운동치료',probs:[],goals:[],evid:[],dose:{},hash:ptIxSourceHash(),updated:new Date().toLocaleString('ko-KR')},o)}
  function importPlan(q){/* 2026-11-18: 4-3 카드가 접혀 있어도 글자를 읽도록 잠깐 펼쳤다가 되돌림 */const _ivR=window.ptIvUnfoldTemp?ptIvUnfoldTemp():null;try{return importPlan0(q)}finally{if(_ivR)_ivR()}}
  /* 2026-11-18: q=true 이면 자동 불러오기(알림창 없이 ③ 화면 위쪽에 안내 한 줄) */
@@ -6327,16 +6431,103 @@ html body main:not(#z1):not(#z2):not(#z3) #ptIx .ix-btn.danger{background:#fff!i
  function fillCardDetail(c,neck){const k=cardKind(c.fromPlan);const d=cardDetail(k,neck);if(!d)return 0;let n=0;
   ['pos','assist','equip','contra','why','diff','prog','stop'].forEach(f=>{if(d[f]&&!String(c[f]||'').trim()){c[f]=d[f];n++}});
   c.dose=c.dose||{};const ok=(DOSE[c.cls]||[]).map(x=>x[0]);Object.entries(d.dose||{}).forEach(([f,v])=>{if(!ok.includes(f))return;const cur=c.dose[f]||{};if(!String(cur.stu||'').trim()){c.dose[f]={lit:cur.lit||'',stu:v};n++}});return n}
- function cardBrief(c){const d=(DOSE[c.cls]||[]).map(([k,l])=>{const x=(c.dose[k]||{}).stu;return x?l+' '+x:''}).filter(Boolean).join(' · ');return '목표: '+(c.goals.join(' / ')||'미연결')+'\n적용 용량: '+(d||'미입력')}
+ function cardBrief(c){const dr=(DOSE[c.cls]||[]).some(([k])=>(c.dose[k]||{}).stuDraft);const d=(DOSE[c.cls]||[]).map(([k,l])=>{const x=(c.dose[k]||{}).stu;return x?l+' '+x:''}).filter(Boolean).join(' · ')+(dr?' (논문 용량 초안 · 조정 필요)':'');return '목표: '+(c.goals.join(' / ')||'미연결')+'\n적용 용량: '+(d||'미입력')}
  function cardSectionProgress(c,group){const filled=x=>x!=null&&String(x).trim()!=='';let values=[];if(group==='evidence')values=[(c.evid||[]).length>0,filled(c.why),filled(c.diff)];/* 2026-11-17: 용량 칸은 ②의 나란히 표로 옮겨서 이 숫자에서 뺌 */else if(group==='adjust')values=[filled(c.prog),filled(c.stop)];else values=[filled(c.reeval)];const n=values.filter(Boolean).length;return (n===0?'미작성':n===values.length?'입력됨':'작성 중')+' ('+n+'/'+values.length+')'}
  function refreshCardSectionProgress(i,c){ix.querySelectorAll('[data-ix-progress][data-ix-card="'+i+'"]').forEach(el=>{el.textContent=cardSectionProgress(c,el.dataset.ixProgress)})}
+ /* ---------- 2026-11-23: 근거 목록(②)의 논문으로 ③ 중재 프로그램 자동 설계 (교수님 요청) ----------
+    논문마다 중재 종류를 정하고(②에 적은 '중재군' → 제목 → 초록 순), 같은 중재끼리 카드 하나로 묶는다.
+    채우는 칸: 중재명·분류·연결 문제·목표·목적·선정 이유·논문 용량(출처 논문)·연구 대상과의 차이·재평가 항목. 칸마다 출처 논문을 붙임.
+    학생 제안 용량·시행 방법은 비워 둔다(학생 판단). 기존 카드는 덮어쓰지 않고 빈칸만 채운다. 근거가 없는 문제는 카드를 만들지 않음 */
+ const IXT=[
+  ['dnf','심부목굽힘근·운동조절 훈련','운동치료',['motorcontrol','pain'],/deep (cervical )?(neck )?flexor|craniocervical flexion|\bCCFT\b|cranio-cervical|motor control (training|exercise)|심부목굽힘/i],
+  ['prop','감각운동·위치감각 훈련','운동치료',['motorcontrol','balance'],/propriocept|joint position (sense|error)|sensorimotor|eye[- ]head|oculomotor|위치감각/i],
+  ['scap','어깨뼈 안정화 운동','운동치료',['strength','mobility'],/scapul|serratus|lower trapezius|어깨뼈/i],
+  ['manual','도수치료(관절가동술·교정)','수기치료',['mobility','pain'],/manipulat|mobili[sz]ation|manual therap|thrust|도수|가동술/i],
+  ['neural','신경가동술','신경가동술',['neuro'],/neural mobili|neurodynamic|nerve glid|신경가동/i],
+  ['edu','통증 교육·자가관리','환자 교육',['pain','participation'],/pain neuroscience|neuroscience education|patient education|educational (program|intervention|session)|education (program|intervention|session)|reassurance|self[- ]management|cognitive functional|통증 교육|환자 교육|교육 프로그램|자가관리/i],
+  ['ergo','자세·작업환경 조정','환경·인체공학적 조정',['mobility','activity'],/ergonom|workstation|work[- ]?place|posture correct|postural (correction|education)|작업환경|인체공학/i],
+  ['balance','균형 훈련','기능·과제 훈련',['balance'],/balance|postural control|vestibular|균형/i],
+  ['gait','보행 훈련','기능·과제 훈련',['gait'],/gait|walking|treadmill|보행/i],
+  ['task','기능·과제 훈련','기능·과제 훈련',['activity','participation'],/task[- ]specific|functional training|activities of daily|일상 과제|과제 훈련/i],
+  ['stretch','스트레칭','운동치료',['mobility'],/stretch|스트레칭/i],
+  ['strength','근력·저항 운동','운동치료',['strength'],/strength|resistance (training|exercise)|resistive|근력|저항 운동/i],
+  ['aerobic','유산소 운동','운동치료',['activity','participation'],/aerobic|endurance training|cardio|유산소/i],
+  ['agent','물리적 인자','물리적 인자',['pain'],/\bTENS\b|electrical stimulation|ultrasound therap|laser|heat therap|dry needl|전기자극|초음파|온열/i],
+  ['exercise','치료적 운동','운동치료',['pain','strength','mobility'],/exercise|training|운동/i]];
+ const ixAbsText=e=>{const a=e.abs;if(Array.isArray(a))return a.map(x=>String(x&&x.text||'')).join(' ');return String(a||'')};
+ const ixAbsPart=(e,re)=>{const a=e.abs;if(!Array.isArray(a))return '';return a.filter(x=>re.test(String(x&&x.label||''))).map(x=>String(x.text||'')).join(' ')};
+ /* 결론 구간이 없으면 초록 마지막 1~2문장(대개 결론) */
+ const ixConcl=e=>{const c=ixAbsPart(e,/conclu|interpret/i);if(c.trim())return c;const ss=ixAbsText(e).split(/(?<=[.!?])\s+/).filter(x=>x.trim());return ss.slice(-2).join(' ')};
+ const ixClip=(t,n)=>{t=String(t||'').replace(/\s+/g,' ').trim();return t.length>n?t.slice(0,n)+'…':t};
+ const ixWho=e=>{const au=String(e.authors||'').trim(),a=au.split(/[,;]/)[0].trim();return (a?a+(/[,;]/.test(au)?' 외':''):'(저자 미상)')+(e.year?' ('+e.year+')':'')};
+ /* 중재 연구인지 먼저 확인 — 유병률·관련요인·신뢰도·진단 연구 등은 카드를 만들지 않음 ('중재군' 칸을 적었으면 중재 연구로 봄) */
+ function ixIsIntervention(e){const f=e.f||{};if(String(f.ig||'').trim())return true;const t=String(e.title||'')+' '+String(e.titleKo||'');if(/guideline|지침|consensus/i.test(t))return true;/* 진료지침은 중재 근거 — 중재가 여러 개라 종류를 못 정하면 '중재 종류를 알 수 없는 논문'으로 */
+  if(/prevalence|cross[- ]sectional|survey|reliabilit|validit|accuracy|diagnos|ChatGPT|large language|associat|risk factor|correlat|유병률|신뢰도|타당도|관련 요인|진단/i.test(t))return false;
+  return /effect|efficacy|randomi[sz]ed|trial|versus|\bvs\.?\b|program|training|exercise|therap|treatment|intervention|manipulat|mobili[sz]ation|education|효과|중재|운동|치료|훈련|교육/i.test(t)}
+ function ixTypeOf(e){const f=e.f||{};const srcs=[String(f.ig||''),String(e.title||'')+' '+String(e.titleKo||''),ixAbsPart(e,/method|intervention/i)];for(const s of srcs){if(!s.trim())continue;const m=IXT.find(t=>t[4].test(s));if(m)return m}return null}
+ /* 논문 용량: ②에 적은 '보고된 용량' → 초록(방법·중재 구간 우선)에서 숫자 표현을 찾음. 찾은 값만 채우고 못 찾으면 비워 둠 */
+ function ixDoseOf(e){const f=e.f||{};const t=(String(f.dose||'')+' '+(ixAbsPart(e,/method|intervention/i)||ixAbsText(e))).replace(/\s+/g,' ');const d={};let m;
+  if(m=t.match(/(\d+(?:\s*[-–]\s*\d+)?)\s*(?:times|sessions?|days?)\s*(?:per|a|\/|each)\s*week/i))d.freq='주 '+m[1].replace(/\s/g,'')+'회';else if(m=t.match(/주\s*(\d+(?:\s*[-–~]\s*\d+)?)\s*회/))d.freq='주 '+m[1].replace(/\s/g,'')+'회';else if(/\bdaily\b|every day|매일/i.test(t))d.freq='매일';
+  if(m=t.match(/(?:for|over|during)\s+(\d+)\s*(?:-\s*)?weeks?/i)||t.match(/(\d+)[- ]week (?:program|programme|intervention|training)/i)||t.match(/(\d+)\s*주\s*(?:간|동안)/))d.period=m[1]+'주';
+  if(m=t.match(/(\d+(?:\s*[-–]\s*\d+)?)\s*(?:min|minutes)\b(?:\s*(?:per|each|a)\s*session)?/i))d.time='회당 '+m[1].replace(/\s/g,'')+'분';
+  if(m=t.match(/(\d+)\s*sets?\s*(?:of|x|×)\s*(\d+(?:\s*[-–]\s*\d+)?)\s*(?:rep|repetition)/i)){d.sets=m[1]+'세트';d.reps=m[2].replace(/\s/g,'')+'회'}else{if(m=t.match(/(\d+(?:\s*[-–]\s*\d+)?)\s*(?:rep|repetitions)\b/i))d.reps=m[1].replace(/\s/g,'')+'회';if(m=t.match(/(\d+)\s*sets?\b/i))d.sets=m[1]+'세트'}
+  if(m=t.match(/(?:hold|held|holds?)\s*(?:for\s*)?(\d+)\s*(?:s|sec|seconds)\b/i))d.hold=m[1]+'초';
+  /* 한국어로 적은 용량(②의 '보고된 용량' 칸): 6주 · 10회 · 3세트 · 10초 유지 · 30분 */
+  if(!d.period&&(m=t.match(/(\d+)\s*주(?:\s*간|\s*동안)?(?![^\d]{0,2}\d+\s*회)/))&&!/주\s*$/.test(t.slice(0,m.index+1)))d.period=m[1]+'주';
+  if(!d.reps&&(m=t.match(/(?<!주\s{0,2})(?<!\d)(\d+(?:\s*[-–~]\s*\d+)?)\s*회(?!\s*\/)/)))d.reps=m[1].replace(/\s/g,'')+'회';
+  if(!d.sets&&(m=t.match(/(\d+)\s*세트/)))d.sets=m[1]+'세트';
+  if(!d.hold&&(m=t.match(/(\d+)\s*초\s*(?:유지|버티기|hold)/)))d.hold=m[1]+'초';
+  if(!d.time&&(m=t.match(/(\d+(?:\s*[-–~]\s*\d+)?)\s*분/)))d.time='회당 '+m[1].replace(/\s/g,'')+'분';
+  return {d,fromNote:!!String(f.dose||'').trim()}}
+ function ixOutcomes(e){const f=e.f||{};const t=String(f.out||'')+' '+ixAbsText(e);const L=[[/\bNDI\b|neck disability/i,'NDI'],[/\bNPRS\b|\bNRS\b|\bVAS\b|pain intensity|통증 강도/i,'통증 NRS'],[/range of motion|\bROM\b|가동범위/i,'ROM'],[/\bCCFT\b|craniocervical flexion/i,'CCFT'],[/\bPSFS\b|patient[- ]specific functional/i,'PSFS'],[/endurance/i,'근지구력(DNF 등)'],[/strength|\bHHD\b|dynamomet/i,'근력(HHD)'],[/joint position error|\bJPE\b/i,'위치감각 오차'],[/craniovertebral|\bCVA\b|forward head/i,'CVA'],[/balance|\bBBS\b|berg/i,'균형(BBS 등)'],[/\bTUG\b|timed up/i,'TUG'],[/gait speed|walking speed|10MWT/i,'보행속도'],[/6MWT|six[- ]minute/i,'6분 보행'],[/fear|kinesiophobia|TSK/i,'운동 공포(TSK)']];return [...new Set(L.filter(([re])=>re.test(t)).map(x=>x[1]))]}
+ function ixPopDiff(e){const f=e.f||{};const tx=(String(e.title||'')+' '+ixAbsText(e)+' '+String(f.pop||'')).toLowerCase();const age=parseInt(v('age'),10),dx=v('ref_medical_dx');const out=[];
+  if(/older adult|elderly|geriatric|aged (6[5-9]|[7-9]\d)|노인|고령/.test(tx)&&!(age>=60))out.push('노인 대상');
+  if(/\bchild|children|pediatric|paediatric|adolescen|아동|청소년/.test(tx)&&!(age<19))out.push('아동·청소년 대상');
+  if(/stroke|hemipleg|뇌졸중/.test(tx)&&!/뇌졸중|stroke|편마비/i.test(dx))out.push('뇌졸중 환자 대상');
+  if(/spinal cord injur|척수손상/.test(tx)&&!/척수|SCI|AIS/i.test(dx))out.push('척수손상 환자 대상');
+  if(/whiplash|채찍/.test(tx)&&!/whiplash|채찍|교통사고/i.test(dx))out.push('편타손상(whiplash) 대상');
+  return out}
+ const ixGoalCat={pain:/통증/,mobility:/가동|정렬/,strength:/근력|근수행/,motorcontrol:/운동조절|신경근/,neuro:/신경/,balance:/균형|자세조절/,gait:/보행|이동/,activity:/일상|활동|자기관리/,participation:/참여|학업|직업|역할|여가/};
+ function ixAutoDesign(){const S=St();const ev=S.ev||[];if(!ev.length){alert('근거 목록에 논문이 없습니다. ②에서 논문을 찾아 [근거 목록에 추가]를 먼저 눌러 주세요.');return}
+  const P=probs(),G=[...goalTexts('stg'),...goalTexts('ltg')],age=parseInt(v('age'),10),dx=v('ref_medical_dx');const groups={},none=[];
+  const notIv=[];ev.forEach(e=>{if(!ixIsIntervention(e)){notIv.push(e);return}const t=ixTypeOf(e);if(!t){none.push(e);return}(groups[t[0]]=groups[t[0]]||{t,papers:[]}).papers.push(e)});
+  let made=0,filled=0;const covered=new Set();
+  Object.values(groups).forEach(({t,papers})=>{const [key,name,cls,cats]=t;
+   const pr=P.filter(p=>cats.includes(p.cat)||papers.some(e=>e.prob&&e.prob===p.title));pr.forEach(p=>covered.add(p.title));
+   const gl=G.filter(g=>pr.some(p=>(ixGoalCat[p.cat]||/$^/).test(g.label+' '+g.text))).map(g=>g.label);
+   const ids=papers.map(e=>e.id);
+   const why=papers.map(e=>{const f=e.f||{};const res=String(f.out||'').trim()?ixClip(f.out,90):(ixClip(ixConcl(e),140)||'(결과 미정리 — ②에서 이 논문의 결과 칸을 적으면 채워짐)');return `· ${ixWho(e)}${String(f.pop||'').trim()?' — 대상: '+ixClip(f.pop,40):''} — ${res}`}).join('\n')+`\n→ 이 환자의 ${pr.map(p=>p.title).join(', ')||'문제'} 개선 근거`;
+   const dose={};const src={};papers.forEach(e=>{const {d}=ixDoseOf(e);Object.entries(d).forEach(([k,val])=>{if(!dose[k]){dose[k]=val;src[k]=e.id}})});
+   const okKeys=(DOSE[cls]||[]).map(x=>x[0]);
+   const outs=[...new Set(papers.flatMap(ixOutcomes))];
+   const diffs=papers.map(e=>{const df=ixPopDiff(e);const pop=String((e.f||{}).pop||'').trim();return (df.length||pop)?`· ${ixWho(e)}: ${pop?'대상 '+ixClip(pop,50):''}${df.length?(pop?' · ':'')+'⚠ '+df.join(', '):''}`:''}).filter(Boolean);
+   const diff=(diffs.length?diffs.join('\n')+'\n':'')+`· 이 환자: ${isNaN(age)?'나이 미입력':age+'세'}${dx?', '+dx:''} — 논문 대상과 나이·질환·중증도가 다르면 용량과 진행 속도를 조정`;
+   const reeval=(outs.length?'논문 결과지표: '+outs.join(', ')+'\n':'')+'시점: 4주(단기목표) · 8주(장기목표) 재평가 — 4-2 일정';
+   const purpose=pr.length?pr.map(p=>p.title).join(', ')+' 개선':'';
+   /* 2026-11-23: 중복 방지 — 4-3에서 불러온 카드 이름이 같은 중재 종류(예: '통증 교육·부하 관리' → 통증 교육)면 그 카드에 합침 (범용 '치료적 운동'은 이름으로 합치지 않음) */
+   let c=S.cards.find(x=>x.autoKey===key)||(key!=='exercise'?S.cards.find(x=>{if(/확정 후 중재 선택|중재 미정|평가 지표 확정/.test(x.name||''))return false;const m=IXT.find(tt=>tt[0]!=='exercise'&&tt[4].test(String(x.name||'')));return !!m&&m[0]===key}):null)||S.cards.find(x=>x.cls===cls&&String(x.name||'').replace(/\s/g,'').includes(name.replace(/\s/g,'').slice(0,4)));
+   const fresh=!c;if(fresh){c=newCard({name,cls,auto:true,autoKey:key,autoOk:false});S.cards.push(c);made++}else{c.autoKey=c.autoKey||key;filled++}
+   const setIf=(k,val)=>{if(val&&!String(c[k]||'').trim())c[k]=val};
+   setIf('purpose',purpose);setIf('why',why);setIf('diff',diff);setIf('reeval',reeval);
+   c.probs=[...new Set([...(c.probs||[]),...pr.map(p=>p.title)])];c.goals=[...new Set([...(c.goals||[]),...gl])];
+   c.evid=[...new Set([...(c.evid||[]),...ids])];c.evwhy=c.evwhy||{};c.evauto=c.evauto||{};papers.forEach(e=>{if(!c.evwhy[e.id]){c.evwhy[e.id]=`${ixWho(e)}: ${ixClip(String((e.f||{}).out||'')||ixConcl(e)||e.title,110)} → ${name}의 근거`;c.evauto[e.id]=true}});
+   c.dose=c.dose||{};Object.entries(dose).forEach(([k,val])=>{if(!okKeys.includes(k))return;const cur=c.dose[k]||{};if(!String(cur.lit||'').trim())c.dose[k]=Object.assign({},cur,{lit:val,src:src[k]})});
+   /* 2026-11-23: 논문 용량을 '학생 제안 용량'에 초안으로 복사(비어 있는 칸만) — '초안 · 조정 필요'로 표시, 학생이 고치면 표시가 사라짐 */
+   Object.keys(c.dose).forEach(k=>{const d=c.dose[k]||{};if(String(d.lit||'').trim()&&!String(d.stu||'').trim()){d.stu=d.lit;d.stuDraft=true;d.stuDraftVal=d.lit}});
+   c.autoAt=new Date().toLocaleString('ko-KR');c.updated=c.autoAt;if(fresh)c._open=false});
+  S.t3gap={at:new Date().toLocaleString('ko-KR'),probs:P.filter(p=>!covered.has(p.title)&&p.cat!=='manual').map(p=>p.title),none:none.map(e=>ixWho(e)+' '+ixClip(e.titleKo||e.title,40)),notIv:notIv.map(e=>ixWho(e)+' '+ixClip(e.titleKo||e.title,40))};
+  save();renderT3();ptIxStatus();
+  alert(`근거 목록 ${ev.length}편으로 자동 설계했습니다.\n· 새 카드 ${made}개, 기존 카드 빈칸 채움 ${filled}개\n· 근거가 없는 문제 ${S.t3gap.probs.length}개${notIv.length?`\n· 중재 연구가 아니라서 카드에 쓰지 않은 논문 ${notIv.length}편 (유병률·관련요인·신뢰도 연구 등)`:''}${none.length?`\n· 중재 종류를 알 수 없는 논문 ${none.length}편 (②에서 '중재군' 칸을 적으면 다시 설계할 때 반영)`:''}\n\n모든 자동 설계 카드는 '자동 설계 · 미확인'입니다. 학생 제안 용량과 시행 방법을 이 환자에 맞게 채운 뒤 [검토 완료]를 누르세요.`)}
  function renderT3(){const S=St();/* 2026-11-17: 페이지를 처음 열면 중재 카드와 ④⑤⑥ 칸을 모두 접힌 상태로 시작 */if(!renderT3._init){renderT3._init=1;S.cards.forEach(c=>{c._open=false;c._sec={}})}/* 2026-11-17: 4-3에서 불러온 카드인데 목표가 비어 있으면, 화면을 열 때 '관련 문제 번호'가 같은 4-2 목표를 한 번 자동 연결 (직접 체크를 푼 카드는 다시 채우지 않음) */{let ch=0;S.cards.forEach(c=>{if(!c.fromPlan||c._gAuto||(c.goals||[]).length)return;const num=(String(c.fromPlan).match(/문제\s*(\d+)/)||[])[1];if(!num)return;const g=autoGoalsFor(num);if(g.length){c.goals=g;c._gAuto=1;ch=1}});if(ch)save()}
    /* 2026-11-18: 중재 카드가 하나도 없고 4-3 계획이 있으면 [4-3 중재 불러오기]를 자동으로 실행. 같은 앞 단계 내용으로는 한 번만(카드를 모두 지워도 다시 채우지 않음), 앞 단계가 바뀌면 다시 자동 */
    if(!S.cards.length&&document.querySelector('#ptPlanInterventions .pt-iv-card')){const h=ptIxSourceHash();if(S._autoImp!==h){S._autoImp=h;importPlan(true);return}}
    const P=pane(3);const cur=ptIxSourceHash();const goals=[...goalTexts('stg'),...goalTexts('ltg')];
   P.innerHTML=`<p class="ix-help">기본 치료 내용을 먼저 작성하고, 아래 <b>근거·조절 기준·재평가</b> 제목을 눌러 상세 항목을 확인하세요. 모든 입력 항목은 유지되며, 작성 현황은 검토 완료나 적절성 판정을 뜻하지 않습니다.</p>${autoImpMsg&&S.cards.length?`<div class="ix-autoimp" style="margin:0 0 10px;padding:8px 12px;border:1px solid #d3dbe8;border-left:4px solid #2c4f8a;background:#f4f6fa;color:#12274a;font-size:13.5px">${esc(autoImpMsg)}</div>`:''}
+  <div class="ix-autobar"><button type="button" class="ix-btn" data-a="autoDesign">📚 근거 목록으로 프로그램 자동 설계</button><span class="ix-mini">② 근거 목록 <b>${(S.ev||[]).length}</b>편의 중재·용량·결과로 카드를 만들고 칸마다 출처 논문을 붙여요. 학생 제안 용량·시행 방법은 직접 채우세요. 기존 카드는 빈칸만 채워요.</span></div>
+  ${S.t3gap&&(S.t3gap.probs.length||S.t3gap.none.length||(S.t3gap.notIv||[]).length)?`<div class="ix-gapbox">${(S.t3gap.notIv||[]).length?`<div><b>중재 연구가 아니라서 카드에 쓰지 않은 논문</b> — 유병률·관련요인·신뢰도·진단 연구 등이에요. 중재 근거로 쓰려면 ②에서 '중재군' 칸을 적으세요: ${S.t3gap.notIv.map(esc).join(' · ')}</div>`:''}${S.t3gap.probs.length?`<div><b>근거가 없는 문제</b> — 카드를 만들지 않았어요. ②에서 근거를 찾아 추가한 뒤 다시 설계하세요: ${S.t3gap.probs.map(esc).join(' · ')}</div>`:''}${S.t3gap.none.length?`<div><b>중재 종류를 알 수 없는 논문</b> — ②에서 이 논문의 '중재군' 칸을 적으면 반영돼요: ${S.t3gap.none.map(esc).join(' · ')}</div>`:''}<div class="ix-mini">마지막 자동 설계 ${esc(S.t3gap.at)}</div></div>`:''}
   <div class="ix-bar"><button type="button" class="ix-btn" data-a="addCard">+ 새 중재 추가</button><button type="button" class="ix-btn ghost" data-a="importPlan">④ 치료 계획(4-3)의 중재 불러오기</button><button type="button" class="ix-btn ghost" data-a="printPlan">중재 계획표 인쇄</button></div>`+
-  (S.cards.length?S.cards.map((c,i)=>{const stale=c.hash&&c.hash!==cur;return `<details class="ix-card" ${c._open?'open':''} data-ci="${i}"><summary><span class="ix-cnum" title="${i+1}번 중재">${i+1}</span><span class="ix-tag">${esc(c.cls)}</span><span class="ix-cname">${esc(c.name||'(중재명 미입력)')}</span>${c.evid.length?`<span class="ix-tag src">근거 ${c.evid.length}편</span>`:'<span class="ix-tag fb">근거 미연결</span>'}${stale?'<span class="ix-badge warn">재검토 필요 — 환자 정보가 바뀜</span>':''}<span class="ix-mini" data-card-summary="${i}" style="flex-basis:100%;line-height:1.7;white-space:pre-line">${esc(cardBrief(c))}</span>${cardEvRow(c,i,S)}</summary><div class="ix-cbody">
+  (S.cards.length?S.cards.map((c,i)=>{const stale=c.hash&&c.hash!==cur;return `<details class="ix-card" ${c._open?'open':''} data-ci="${i}"><summary><span class="ix-cnum" title="${i+1}번 중재">${i+1}</span><span class="ix-tag">${esc(c.cls)}</span><span class="ix-cname">${esc(c.name||'(중재명 미입력)')}</span>${c.evid.length?`<span class="ix-tag src">근거 ${c.evid.length}편</span>`:'<span class="ix-tag fb">근거 미연결</span>'}${stale?'<span class="ix-badge warn">재검토 필요 — 환자 정보가 바뀜</span>':''}${c.autoKey?(c.autoOk?'<span class="ix-wtag ok">자동 설계 · 학생 확인</span>':'<span class="ix-wtag auto">자동 설계 · 미확인</span>'):''}<span class="ix-mini" data-card-summary="${i}" style="flex-basis:100%;line-height:1.7;white-space:pre-line">${esc(cardBrief(c))}</span>${cardEvRow(c,i,S)}</summary><div class="ix-cbody">
+   ${c.autoKey&&!c.autoOk?`<div class="ix-autonote">📚 이 카드는 ② 근거 목록의 논문으로 자동 설계했어요(${esc(c.autoAt||'')}). 칸 끝의 출처를 확인하고, <b>학생 제안 용량</b>과 <b>시행 방법</b>을 이 환자에 맞게 채운 뒤 <button type="button" class="ix-btn sm" data-a="autoOk" data-i="${i}">검토 완료</button>을 누르세요.</div>`:''}
    ${stale?`<div class="ix-warn">이 카드를 만든 뒤 앞 단계(환자 정보·문제·목표)가 바뀌었습니다. 내용을 확인한 뒤 <button type="button" class="ix-btn sm" data-a="reviewed" data-i="${i}">검토 완료</button>을 누르세요.</div>`:''}
    <div class="ix-sec">① 어떤 문제를 치료하나요?</div>
    <div class="ix-grid2"><label class="ix-f">중재명${inp(`cards.${i}.name`,'예: 심부목굽힘근 운동')}</label><label class="ix-f">분류<select data-b="cards.${i}.cls" data-re="1">${CLS.map(o=>`<option ${c.cls===o?'selected':''}>${o}</option>`).join('')}</select></label></div>
@@ -6345,115 +6536,288 @@ html body main:not(#z1):not(#z2):not(#z3) #ptIx .ix-btn.danger{background:#fff!i
    <div class="ix-grid2">${FIELDS.filter(([k])=>["purpose"].includes(k)).map(([k,l])=>`<label class="ix-f ${/method|reeval/.test(k)?'full':''}">${l}${ta(`cards.${i}.${k}`)}</label>`).join('')}</div>
    <div class="ix-sec">② 어떻게 시행하나요?</div>
    <div class="ix-grid2">${FIELDS.filter(([k])=>["pos", "method", "assist", "equip"].includes(k)).map(([k,l])=>`<label class="ix-f ${/method|reeval/.test(k)?'full':''}">${l}${ta(`cards.${i}.${k}`)}</label>`).join('')}</div>
-   <div class="ix-sec">용량 — ${esc(c.cls)} <span class="ix-mini">논문 용량과 내 제안을 나란히 비교 · 빈칸은 '${NR}'</span></div><div class="ix-tw"><table class="ix-tbl ix-dose2"><thead><tr><th style="width:22%">항목</th><th>논문에서 확인한 용량</th><th>학생이 제안한 용량</th></tr></thead><tbody>${(DOSE[c.cls]||[]).map(([k,l])=>`<tr><th>${l}</th><td>${inp(`cards.${i}.dose.${k}.lit`)}</td><td>${inp(`cards.${i}.dose.${k}.stu`)}</td></tr>`).join('')}</tbody></table></div>
+   <div class="ix-sec">용량 — ${esc(c.cls)} <span class="ix-mini">논문 용량과 내 제안을 나란히 비교 · 빈칸은 '${NR}'</span></div><div class="ix-tw"><table class="ix-tbl ix-dose2"><thead><tr><th style="width:18%">항목</th><th>논문에서 확인한 용량</th><th style="width:20%">그 용량의 출처 논문</th><th>학생이 제안한 용량</th></tr></thead><tbody>${(DOSE[c.cls]||[]).map(([k,l])=>`<tr><th>${l}</th><td>${inp(`cards.${i}.dose.${k}.lit`)}</td><td>${doseSrc(S,c,i,k)}</td><td>${inp(`cards.${i}.dose.${k}.stu`)}${(c.dose[k]||{}).stuDraft?'<span class="ix-wtag auto ix-stud" title="논문 용량을 그대로 복사한 초안이에요. 이 환자에 맞게 고치면 표시가 사라져요.">초안 · 조정 필요</span>':''}</td></tr>`).join('')}</tbody></table></div><div class="ix-mini" style="margin-top:4px">논문 용량을 적었다면 <b>어느 논문에서 나온 숫자인지</b> 고르세요. 고를 수 있는 논문은 이 카드에 연결된 논문입니다(아래 ④ 근거·선정 이유).</div>
    <div class="ix-sec">③ 금기·주의사항</div>
    <div class="ix-grid2">${FIELDS.filter(([k])=>["contra"].includes(k)).map(([k,l])=>`<label class="ix-f ${/method|reeval/.test(k)?'full':''}">${l}${ta(`cards.${i}.${k}`)}</label>`).join('')}</div>
    <details data-sec="evidence" ${(c._sec||{}).evidence?'open':''} style="margin-top:16px"><summary class="ix-sec" style="cursor:pointer;margin:0">④ 근거·선정 이유 <span class="ix-tag" data-ix-progress="evidence" data-ix-card="${i}">${esc(cardSectionProgress(c,'evidence'))}</span></summary>
    <!-- 2026-11-18: 연결된 논문만 보이고, 나머지는 접힌 \"다른 논문에서 고르기\" 안에 -->
    <div class="ix-sec">연결된 근거 논문 (② 근거 목록)</div>${(()=>{const row=e=>`<label><input type="checkbox" data-arr="cards.${i}.evid" data-re="1" value="${esc(e.id)}" ${c.evid.includes(e.id)?'checked':''}>${esc((e.title||'').slice(0,90))}${e.year?' ('+esc(e.year)+')':''}</label>`;if(!S.ev.length)return '<div class="ix-checks"><span class="ix-mini">근거 목록이 비어 있습니다 — ② 중재 근거 검색에서 추가하세요.</span></div>';const on=S.ev.filter(e=>c.evid.includes(e.id)),off=S.ev.filter(e=>!c.evid.includes(e.id));return `<div class="ix-checks">${on.map(row).join('')||'<span class="ix-mini">아직 연결한 논문이 없어요. 아래에서 고르거나 ② 검색 결과에서 [근거 목록에 추가] 후 연결하세요.</span>'}</div>`+(off.length?`<details class="ix-evmore" data-evmore="1" ${c._evMore?'open':''}><summary>+ 근거 목록의 다른 논문에서 고르기 (${off.length}편)</summary><div class="ix-checks">${off.map(row).join('')}</div></details>`:'')})()}
    <div class="ix-grid2">${FIELDS.filter(([k])=>["why", "diff"].includes(k)).map(([k,l])=>`<label class="ix-f ${/method|reeval/.test(k)?'full':''}">${l}${ta(`cards.${i}.${k}`)}</label>`).join('')}</div>
+   ${whyStatus(S,c)}
    </details>
    <details data-sec="adjust" ${(c._sec||{}).adjust?'open':''} style="margin-top:16px"><summary class="ix-sec" style="cursor:pointer;margin:0;line-height:1.8">⑤ 진행·감량 및 중단·재의뢰 기준 <span class="ix-tag" data-ix-progress="adjust" data-ix-card="${i}">${esc(cardSectionProgress(c,'adjust'))}</span></summary><div class="ix-grid2">${FIELDS.filter(([k])=>["prog", "stop"].includes(k)).map(([k,l])=>`<label class="ix-f ${/method|reeval/.test(k)?'full':''}">${l}${ta(`cards.${i}.${k}`)}</label>`).join('')}</div></details>
    <details data-sec="reeval" ${(c._sec||{}).reeval?'open':''} style="margin-top:16px"><summary class="ix-sec" style="cursor:pointer;margin:0;line-height:1.8">⑥ 재평가 항목과 시점 <span class="ix-tag" data-ix-progress="reeval" data-ix-card="${i}">${esc(cardSectionProgress(c,'reeval'))}</span></summary><div class="ix-grid2">${FIELDS.filter(([k])=>["reeval"].includes(k)).map(([k,l])=>`<label class="ix-f ${/method|reeval/.test(k)?'full':''}">${l}${ta(`cards.${i}.${k}`)}</label>`).join('')}</div></details>
-   <div class="ix-bar" style="margin-top:10px"><span class="ix-mini">마지막 수정 ${esc(c.updated||'')}</span><span class="ix-sp" style="flex:1"></span><button type="button" class="ix-btn danger sm" data-a="delCard" data-i="${i}">이 중재 삭제</button></div></div></details>`}).join(''):'<div class="ix-empty">아직 중재가 없습니다. [④ 치료 계획(4-3)의 중재 불러오기]로 시작하면 편합니다.</div>')}
+   <div class="ix-bar" style="margin-top:10px"><span class="ix-mini">마지막 수정 ${esc(c.updated||'')}</span><span class="ix-sp" style="flex:1"></span>${S.cards.length>1?`<select class="ix-mergesel" data-mergesel="${i}" title="같은 중재가 두 카드로 나뉘어 있으면 하나로 합쳐요"><option value="">다른 카드와 합치기…</option>${S.cards.map((x,xi)=>xi===i?'':`<option value="${xi}">${xi+1}. ${esc(String(x.name||'(중재명 미입력)').slice(0,30))}</option>`).join('')}</select><button type="button" class="ix-btn ghost sm" data-a="mergeCard" data-i="${i}">합치기</button>`:''}<button type="button" class="ix-btn danger sm" data-a="delCard" data-i="${i}">이 중재 삭제</button></div></div></details>`}).join(''):'<div class="ix-empty">아직 중재가 없습니다. [④ 치료 계획(4-3)의 중재 불러오기]로 시작하면 편합니다.</div>')}
  function printPlan(){const S=St();if(!S.cards.length){alert('인쇄할 중재가 없습니다.');return}const ev=id=>S.ev.find(e=>e.id===id);
-  printDoc('중재 계획표',`<h1>중재 계획표</h1><div class="sub">${esc(v('ref_medical_dx'))} · 작성 ${new Date().toLocaleDateString('ko-KR')} · 교육용 가상 사례</div>`+S.cards.map((c,i)=>`<h2>${i+1}. ${esc(c.name||'(중재명)')} <span class="sub">[${esc(c.cls)}]</span></h2><table><tr><th style="width:22%">연결 문제</th><td>${esc(c.probs.join(', ')||NR)}</td></tr><tr><th>연결 목표</th><td>${esc(c.goals.join(', ')||NR)}</td></tr><tr><th>근거 논문</th><td>${c.evid.map(id=>{const e=ev(id);return e?esc(`${e.title} (${e.year||''}) ${[e.pmid?'PMID '+e.pmid:'',e.pmcid?'PMCID '+e.pmcid:''].filter(Boolean).join(' · ')}`):''}).join('<br>')||NR}</td></tr>${FIELDS.map(([k,l])=>`<tr><th>${l}</th><td>${esc(c[k]||NR).replace(/\n/g,'<br>')}</td></tr>`).join('')}</table><table><tr><th style="width:22%">용량</th><th>논문에서 확인한 용량</th><th>학생이 제안한 용량</th></tr>${(DOSE[c.cls]||[]).map(([k,l])=>`<tr><th>${l}</th><td>${esc((c.dose[k]||{}).lit||NR)}</td><td>${esc((c.dose[k]||{}).stu||NR)}</td></tr>`).join('')}</table>`).join(''))}
+  printDoc('중재 계획표',`<h1>중재 계획표</h1><div class="sub">${esc(v('ref_medical_dx'))} · 작성 ${new Date().toLocaleDateString('ko-KR')} · 교육용 가상 사례</div>`+S.cards.map((c,i)=>`<h2>${i+1}. ${esc(c.name||'(중재명)')} <span class="sub">[${esc(c.cls)}]</span></h2><table><tr><th style="width:22%">연결 문제</th><td>${esc(c.probs.join(', ')||NR)}</td></tr><tr><th>연결 목표</th><td>${esc(c.goals.join(', ')||NR)}</td></tr><tr><th>근거 논문</th><td>${c.evid.map(id=>{const e=ev(id);return e?esc(`${e.title} (${e.year||''}) ${[e.pmid?'PMID '+e.pmid:'',e.pmcid?'PMCID '+e.pmcid:''].filter(Boolean).join(' · ')}`):''}).join('<br>')||NR}</td></tr>${FIELDS.map(([k,l])=>`<tr><th>${l}</th><td>${esc(c[k]||NR).replace(/\n/g,'<br>')}</td></tr>`).join('')}</table><table><tr><th style="width:22%">용량</th><th>논문에서 확인한 용량</th><th>학생이 제안한 용량</th></tr>${(DOSE[c.cls]||[]).map(([k,l])=>`<tr><th>${l}</th><td>${esc((c.dose[k]||{}).lit||NR)}${(c.dose[k]||{}).src&&ixEvS(S,(c.dose[k]||{}).src)?' <span class="sub">[출처: '+esc(ixEvS(S,(c.dose[k]||{}).src))+']</span>':''}</td><td>${esc((c.dose[k]||{}).stu||NR)}</td></tr>`).join('')}</table>`).join(''))}
 
  /* ---------------- 탭④ 환자 교육·가정운동 ---------------- */
  function eduDraft(){const S=St();const e=S.edu;const ex=k=>{const el=document.querySelector(`#ptPlanExtra [data-k="${k}"]`);return el?el.innerText.trim():''};
   if(e.explain==null)e.explain=`${v('ref_medical_dx')||'현재 상태'}에 대해: ${(probs()[0]||{}).title?'주된 문제는 '+probs().slice(0,3).map(p=>p.title).join(', ')+'입니다. ':''}물리치료로 4주에 통증·움직임 같은 몸의 기능을, 8주에 일상·학업·업무 같은 활동을 회복하는 것을 목표로 합니다. 회복은 한 번에 좋아지기보다 오르내리며 좋아지는 경우가 많습니다.`;
-  if(e.daily==null)e.daily=(ex('edu.what').split('\n').filter(x=>/자세|활동량|작업환경|휴식/.test(x)).join('\n'))||'오래 같은 자세를 유지하지 않기(45~50분마다 2~3분 쉬기), 통증이 심해지는 활동은 양을 줄여 나누어 하기';
+  /* 2026-11-23: '전방머리자세'의 '자세' 때문에 '현재 상태… 쉬운 말로 설명' 줄이 일상·업무 조절에 잘못 들어가던 문제 — 그 줄은 빼고, 이미 들어간 것도 정리 */if(e.daily!=null&&/^현재 상태와 물리치료 목표를 쉬운 말로 설명.*$/m.test(e.daily))e.daily=e.daily.split('\n').filter(x=>!/^현재 상태와 물리치료 목표를 쉬운 말로 설명/.test(x)).join('\n');
+  if(e.daily==null)e.daily=(ex('edu.what').split('\n').filter(x=>/자세|활동량|작업환경|휴식/.test(x)&&!/쉬운 말로 설명/.test(x)).join('\n'))||'오래 같은 자세를 유지하지 않기(45~50분마다 2~3분 쉬기), 통증이 심해지는 활동은 양을 줄여 나누어 하기';
   if(e.caution==null)e.caution='운동 중 통증이 평소보다 2점 이상 심해지거나, 저림·힘 빠짐·어지럼·가슴 통증이 생기면 운동을 멈추고 연락하기';
   if(e.worse==null)e.worse='증상이 심해지면 활동량을 줄이고 편한 자세로 쉬기 → 다음날까지 계속되면 치료사에게 알리기 → 새로운 저림·힘 빠짐·밤에 심해지는 통증은 바로 진료 받기';}
- function importEx(){const S=St();const ex=S.cards.filter(c=>c.cls==='운동치료');if(!ex.length){alert('③에 운동치료 중재가 없습니다.');return}let n=0;
-  ex.forEach(c=>{if(S.edu.rows.some(r=>r.from===c.id))return;const d=k=>(c.dose[k]||{}).stu||(c.dose[k]||{}).lit||'';S.edu.rows.push({from:c.id,name:c.name,method:(c.method||'').split('\n').slice(0,2).join(' ').slice(0,160),reps:[d('reps')&&d('reps')+'회',d('sets')&&d('sets')+'세트',d('hold')&&d('hold')+' 유지'].filter(Boolean).join(' × ')||d('inten'),freq:d('freq')});n++});
+ function importEx(){const S=St();const ex=S.cards.filter(c=>c.cls==='운동치료'&&!/확정 후 중재 선택|중재 미정|평가 지표 확정/.test(c.name||''));/* 2026-11-23: 아직 중재가 정해지지 않은 자리표시 카드는 가정운동으로 가져오지 않음 */if(!ex.length){alert('③에 운동치료 중재가 없습니다.');return}let n=0;
+  ex.forEach(c=>{if(S.edu.rows.some(r=>r.from===c.id))return;const d=k=>(c.dose[k]||{}).stu||(c.dose[k]||{}).lit||'';S.edu.rows.push({from:c.id,name:c.name,method:(c.method||'').split('\n').slice(0,2).join(' ').slice(0,160),reps:[d('reps')&&(/회\s*$/.test(d('reps'))?d('reps'):d('reps')+'회'),d('sets')&&(/세트\s*$/.test(d('sets'))?d('sets'):d('sets')+'세트'),d('hold')&&(/유지\s*$/.test(d('hold'))?d('hold'):d('hold')+' 유지')].filter(Boolean).join(' × ')||d('inten'),freq:d('freq')});n++});
   save();renderT4();alert(n?`운동 ${n}개를 가져왔습니다.`:'이미 모두 가져온 운동입니다.')}
  /* 2026-11-23: ④ 교육 내용 근거 표시 + 가정운동은 ③ 카드의 근거·용량 출처를 이어받아 표시 */
  const EDT=[['explain','질환·회복 과정 설명'],['daily','일상·업무 조절'],['caution','주의사항·중단 기준'],['worse','증상 악화 시 대처']];
  const edOpen={};
  /* 근거가 연결된 항목: 노란 줄(항목 이름 + '근거 N편 ▾' + 오른쪽 '교육 내용') → 아래 논문 상자(저자·연도·제목·PMID + 연결 이유). '근거 N편'을 누르면 상자 접기 */
  function edTopic(S,k,l){const L=((S.edu.evlinks||{})[k]||[]).filter(z=>(S.ev||[]).some(p=>p.id===z.id));const op=edOpen[k]!==false;
-  const head=`<div class="ix-edhead${L.length?' on':''}" data-edtopic="${k}"><b>${esc(l)}</b>${L.length?`<button type="button" class="ix-edev" data-edtg="${k}">근거 ${L.length}편 ${op?'▾':'▸'}</button>`:''}<span style="flex:1"></span><span class="ix-mini">교육 내용</span></div>`;
-  const papers=L.length&&op?L.map(z=>{const p=S.ev.find(x=>x.id===z.id)||{};return `<div class="ix-edpaper">📄 ${esc(p.authors||'')}${p.year?' ('+esc(p.year)+')':''} ${esc(p.titleKo||p.title||'')}${p.pmid?' · PMID '+esc(p.pmid):''}<div class="ix-edwhy-r">연결 이유: ${esc(z.why||'')}</div></div>`}).join(''):'';
+  /* 2026-11-23: 제목 줄 색으로 근거 상태(초록=근거 있음 · 노랑=근거 없음), 반복되던 '교육 내용' 글자 없앰 */
+  const head=`<div class="ix-edhead ${L.length?'on ok':'no'}" data-edtopic="${k}"><b>${esc(l)}</b>${L.length?`<button type="button" class="ix-edev" data-edtg="${k}">근거 ${L.length}편 ${op?'▾':'▸'}</button>`:'<span class="ix-edno">근거 없음</span>'}</div>`;
+  const papers=L.length&&op?L.map(z=>{const p=S.ev.find(x=>x.id===z.id)||{};return `<div class="ix-edpaper">📄 ${esc(p.authors||'')}${p.year?' ('+esc(p.year)+')':''} ${esc(p.titleKo||p.title||'')}${p.pmid?' · PMID '+esc(p.pmid):''}<div class="ix-edwhy-r">연결 이유: ${esc(z.why||'')} ${z.auto?'<span class="ix-wtag auto">자동 초안 · 미확인</span>':'<span class="ix-wtag ok">학생 확인</span>'}</div></div>`}).join(''):'';
   return `<div class="ix-edtopic">${head}${papers}${ta('edu.'+k,'',3)}</div>`}
  function rowCard(S,r){return r&&r.from?(S.cards||[]).find(c=>c.id===r.from):null}
  function rowEv(S,r){const c=rowCard(S,r);if(!c)return `<span class="ix-inh">${r.from?'근거: ③ 카드 없음':'직접 추가 · 근거 없음'}</span>`;const i=S.cards.indexOf(c)+1;const n=(c.evid||[]).filter(id=>(S.ev||[]).some(p=>p.id===id)).length;return `<span class="ix-inh${n?' has':''}">근거: ③ ${i}번 카드 · ${n?n+'편':'연결 없음'}</span>`}
- function rowSrc(S,r,keys){const c=rowCard(S,r);if(!c||!c.dose)return '';const d=keys.map(k=>c.dose[k]||{});const stu=d.some(x=>String(x.stu||'').trim());const lit=d.some(x=>String(x.lit||'').trim());if(!stu&&!lit)return '';return stu?'<span class="ix-src stu">학생 제안</span>':'<span class="ix-src lit">논문</span>'}
+ function rowSrc(S,r,keys){const c=rowCard(S,r);if(!c||!c.dose)return '';const d=keys.map(k=>c.dose[k]||{});const stu=d.some(x=>String(x.stu||'').trim()&&!x.stuDraft);/* 2026-11-23: 논문 용량을 복사한 초안은 '학생 제안'이 아니라 '논문' */const lit=d.some(x=>String(x.lit||'').trim());if(!stu&&!lit)return '';return stu?'<span class="ix-src stu">학생 제안</span>':'<span class="ix-src lit">논문</span>'}
  window.ptIxEduRefresh=function(){try{if(pane(4))renderT4()}catch(e){}};
  ix.addEventListener('click',e=>{const t=e.target.closest('[data-edtg]');if(!t)return;e.preventDefault();const k=t.dataset.edtg;edOpen[k]=edOpen[k]===false;renderT4()});
+ /* ---------- 2026-11-23: ④ 환자 교육·가정운동 자동 설계 — ② 근거 목록과 ③ 중재 프로그램으로 구성 ----------
+    교육 4주제: 논문 종류에 따라 근거 연결(통증 교육 → 질환·회복 설명, 작업환경·과제·유산소 → 일상·업무 조절, 진료지침 → 주의사항·악화 대처)
+      + ③ 카드의 중재 이름·중단 기준을 설명 문장에 덧붙임(학생이 쓴 문장은 지우지 않음, 같은 줄은 다시 넣지 않음)
+    가정운동: ③의 운동치료·기능 과제 카드(중재 미정 카드 제외)의 용량(학생 제안 → 없으면 논문)으로 표를 만듦. 연결 이유는 모두 '자동 초안 · 미확인' */
+ function ixEduAutoDesign(){const S=St();eduDraft();const e=S.edu;e.rows=e.rows||[];e.evlinks=e.evlinks||{};const EV=S.ev||[],cards=S.cards||[];
+  if(!EV.length&&!cards.length){alert('② 근거 목록과 ③ 중재 프로그램이 비어 있습니다. ②에서 논문을 추가하고 ③에서 프로그램을 먼저 설계하세요.');return}
+  let nLink=0,nRow=0,nText=0;const isPh=c=>/확정 후 중재 선택|중재 미정|평가 지표 확정/.test(String(c.name||''));
+  const link=(k,p,why)=>{const L=e.evlinks[k]=e.evlinks[k]||[];if(L.some(z=>z.id===p.id))return;L.push({id:p.id,why,auto:true});nLink++};
+  const res=p=>ixClip(String((p.f||{}).out||'')||ixConcl(p)||p.title,110);
+  const isGL=p=>/guideline|지침|consensus|red flag|레드플래그/i.test(String(p.title||'')+' '+String(p.titleKo||''));
+  const idsOf=cls=>new Set(cards.filter(c=>c.cls===cls).flatMap(c=>cardPapers(S,c)));const eduIds=idsOf('환자 교육'),ergoIds=idsOf('환경·인체공학적 조정');
+  EV.forEach(p=>{const t=(ixTypeOf(p)||[''])[0];
+   if(t==='edu'||eduIds.has(p.id))link('explain',p,`${ixWho(p)}: ${res(p)} → 질환·회복 과정 설명의 근거`);
+   if(t==='ergo'||t==='task'||t==='aerobic'||ergoIds.has(p.id))link('daily',p,`${ixWho(p)}: ${res(p)} → 일상·업무 조절의 근거`);
+   if(isGL(p)){link('caution',p,`${ixWho(p)}: 진료지침의 위험징후·운동 중단 기준 → 주의사항·중단 기준의 근거 (⚠ 지침에서 해당 기준을 직접 확인)`);link('worse',p,`${ixWho(p)}: 진료지침의 증상 관리 권고 → 증상 악화 시 대처의 근거 (⚠ 지침에서 해당 내용을 직접 확인)`)}});
+  const addLine=(k,line)=>{const cur=String(e[k]||'');if(!line||cur.includes(line))return;e[k]=cur.trim()?cur.trim()+'\n'+line:line;nText++};
+  const names=cards.filter(c=>!isPh(c)&&c.name).map(c=>c.name);if(names.length)addLine('explain',`앞으로 이렇게 치료해요: ${names.slice(0,5).join(', ')}${names.length>5?' 등':''}`);
+  const ergo=cards.filter(c=>c.cls==='환경·인체공학적 조정'&&!isPh(c)).map(c=>c.name);if(ergo.length)addLine('daily',`생활 속 조정: ${ergo.join(', ')}`);
+  const stops=[...new Set(cards.map(c=>String(c.stop||'').split('\n')[0].replace(/\s+/g,' ').trim()).filter(Boolean))].slice(0,3);if(stops.length)addLine('caution','운동별 중단 기준(③): '+stops.join(' / '));
+  const lows=[...new Set(cards.map(c=>{const m=String(c.prog||'').match(/감량[^.\n]*/);return m?m[0].trim():''}).filter(Boolean))].slice(0,2);if(lows.length)addLine('worse','강도 낮추는 기준(③): '+lows.join(' / '));
+  ['explain','daily','caution','worse'].forEach(k=>{const L=(e.evlinks[k]||[]).filter(z=>EV.some(p=>p.id===z.id));if(L.length)addLine(k,'📚 근거: '+L.map(z=>ixWho(EV.find(p=>p.id===z.id))).join(', '))});
+  const unit=(x,u)=>x?(new RegExp(u+'\\s*$').test(x)?x:x+u):'';
+  cards.filter(c=>(c.cls==='운동치료'||c.cls==='기능·과제 훈련')&&!isPh(c)).forEach(c=>{if(e.rows.some(r=>r.from===c.id))return;const d=k=>{const o=(c.dose||{})[k]||{};return String(o.stu||o.lit||'').trim()};
+   e.rows.push({from:c.id,name:c.name,method:(c.method||'').split('\n').slice(0,2).join(' ').slice(0,160)||'치료 시간에 치료사가 보여 준 방법대로 (③ 카드의 시행 방법을 채우면 고쳐 쓰세요)',reps:[unit(d('reps'),'회'),unit(d('sets'),'세트'),d('hold')&&(/유지\s*$/.test(d('hold'))?d('hold'):d('hold')+' 유지')].filter(Boolean).join(' × ')||d('inten')||d('trials'),freq:[d('freq'),d('period')].filter(Boolean).join(' · '),auto:true});nRow++});
+  e.autoAt=new Date().toLocaleString('ko-KR');save();renderT4();ptIxStatus();
+  const miss=['explain','daily','caution','worse'].filter(k=>!(e.evlinks[k]||[]).some(z=>EV.some(p=>p.id===z.id))).map(k=>({explain:'질환·회복 과정 설명',daily:'일상·업무 조절',caution:'주의사항·중단 기준',worse:'증상 악화 시 대처'})[k]);
+  alert(`②·③으로 교육·가정운동을 자동 설계했습니다.\n· 가정운동 ${nRow}개 추가 (③ 운동·과제 카드)\n· 교육 근거 연결 ${nLink}건 · 설명 문장 ${nText}줄 추가\n${miss.length?`· 근거 논문이 없는 교육 주제: ${miss.join(', ')} — ②에서 찾아 연결하세요\n`:''}\n연결 이유는 모두 '자동 초안 · 미확인'입니다. 환자에게 맞는 말로 고쳐 쓰세요.`)}
  function renderT4(){const S=St();eduDraft();const e=S.edu;const P=pane(4);
   P.innerHTML=`<p class="ix-help">환자와 보호자에게 설명할 내용과 가정운동을 정리합니다. 4-5(환자 및 보호자 교육)의 내용을 바탕으로 초안을 만들었으니 고쳐서 쓰세요.</p>
-  <div class="ix-bar"><button type="button" class="ix-btn ghost" data-a="printHand">가정운동 안내문 인쇄 (환자용)</button></div>
-  <div class="ix-sec">교육 내용</div><div class="ix-grid2">${EDT.map(([k,l])=>edTopic(S,k,l)).join('')}</div>
-  <div class="ix-sec">가정운동 표</div><div class="ix-bar"><button type="button" class="ix-btn sm" data-a="addRow">+ 운동 추가</button><button type="button" class="ix-btn ghost sm" data-a="importEx">③의 운동 중재에서 가져오기</button></div>
+  <div class="ix-autobar"><button type="button" class="ix-btn" data-a="eduAuto">📚 ②·③으로 교육·가정운동 자동 설계</button><span class="ix-mini">② 근거 목록의 논문을 교육 주제에 연결하고, ③ 운동·과제 카드로 가정운동 표를 만들어요. 학생이 쓴 문장은 지우지 않고 덧붙여요.${e.autoAt?` · 마지막 자동 설계 ${esc(e.autoAt)}`:''}</span></div>
+  ${(()=>{const n=EDT.filter(([k])=>((e.evlinks||{})[k]||[]).some(z=>(S.ev||[]).some(p=>p.id===z.id))).length;return `<div class="ix-t4card"><div class="ix-t4h"><h3>① 교육 내용</h3><span class="ix-sp" style="flex:1"></span><span class="ix-t4cnt${n<EDT.length?' warn':''}">근거 있는 주제 ${n} / ${EDT.length}</span></div><div class="ix-t4b"><div class="ix-grid2">${EDT.map(([k,l])=>edTopic(S,k,l)).join('')}</div></div></div>`})()}
+  <div class="ix-t4card"><div class="ix-t4h"><h3>② 가정운동</h3><span class="ix-sp" style="flex:1"></span><button type="button" class="ix-btn sm" data-a="addRow">+ 운동 추가</button><button type="button" class="ix-btn ghost sm" data-a="importEx">③에서 가져오기</button></div><div class="ix-t4b">
   <div class="ix-tw"><table class="ix-tbl"><thead><tr><th style="width:22%">운동명</th><th>방법</th><th style="width:16%">횟수</th><th style="width:16%">빈도</th><th style="width:60px"></th></tr></thead><tbody>${e.rows.map((r,i)=>`<tr><td>${inp(`edu.rows.${i}.name`,'운동명')}${rowEv(S,r)}</td><td>${ta(`edu.rows.${i}.method`,'방법',2)}</td><td>${inp(`edu.rows.${i}.reps`,'예: 10회 × 2세트')}${rowSrc(S,r,['reps','sets','hold','inten'])}</td><td>${inp(`edu.rows.${i}.freq`,'예: 하루 2번')}${rowSrc(S,r,['freq'])}</td><td><button type="button" class="ix-btn danger sm" data-a="delRow" data-i="${i}">삭제</button></td></tr>`).join('')||'<tr><td colspan="5" class="ix-mini">아직 운동이 없습니다.</td></tr>'}</tbody></table></div>
-  <p class="ix-mini" style="margin:6px 0 0">가정운동의 근거와 '논문 / 학생 제안' 표시는 ③ 카드에서 자동으로 이어받습니다. ③을 고치면 여기도 같이 바뀝니다.</p>
-  <div class="ix-sec">교육 확인</div><div class="ix-grid2"><label class="ix-f">환자의 이해 여부${sel('edu.understand',['이해함','부분적으로 이해함','이해하지 못함'])}</label><label class="ix-f">재시범 수행 (환자가 직접 해 보기)${sel('edu.redemo',['정확하게 수행','부분적으로 수행','수행하지 못함'])}</label><label class="ix-f">가정운동 수행 정도${sel('edu.adherence',['계획대로 수행(80% 이상)','일부 수행(50~80%)','거의 하지 않음(50% 미만)','아직 확인 전'])}</label><label class="ix-f">수행을 어렵게 하는 요인${ta('edu.barriers','예: 시간 부족, 통증 걱정, 방법을 잊음',2)}</label></div>`}
+  <p class="ix-mini" style="margin:6px 0 0">가정운동의 근거와 '논문 / 학생 제안' 표시는 ③ 카드에서 자동으로 이어받습니다. ③을 고치면 여기도 같이 바뀝니다.</p></div></div>
+  <div class="ix-t4card"><div class="ix-t4h"><h3>③ 교육 확인</h3></div><div class="ix-t4b"><div class="ix-grid2"><label class="ix-f">환자의 이해 여부${sel('edu.understand',['이해함','부분적으로 이해함','이해하지 못함'])}</label><label class="ix-f">재시범 수행 (환자가 직접 해 보기)${sel('edu.redemo',['정확하게 수행','부분적으로 수행','수행하지 못함'])}</label><label class="ix-f">가정운동 수행 정도${sel('edu.adherence',['계획대로 수행(80% 이상)','일부 수행(50~80%)','거의 하지 않음(50% 미만)','아직 확인 전'])}</label><label class="ix-f">수행을 어렵게 하는 요인${ta('edu.barriers','예: 시간 부족, 통증 걱정, 방법을 잊음',2)}</label></div></div></div>
+  <div class="ix-t4foot"><button type="button" class="ix-btn ghost" data-a="printHand">가정운동 안내문 인쇄 (환자용)</button></div>`}
  function printHand(){const S=St();const e=S.edu;printDoc('가정운동 안내문',`<h1>가정운동 안내문</h1><div class="sub">${esc(v('name')||'')} 님 · ${new Date().toLocaleDateString('ko-KR')} · 담당 물리치료사가 직접 보여 드린 방법대로 하세요</div><h2>내 몸 상태와 회복</h2><p>${esc(e.explain||'').replace(/\n/g,'<br>')}</p><h2>매일 할 운동</h2><table class="big"><tr><th>운동</th><th>하는 방법</th><th>횟수</th><th>얼마나 자주</th><th>했어요 ✔</th></tr>${e.rows.map(r=>`<tr><td><b>${esc(r.name)}</b></td><td>${esc(r.method).replace(/\n/g,'<br>')}</td><td>${esc(r.reps)}</td><td>${esc(r.freq)}</td><td></td></tr>`).join('')||'<tr><td colspan="5">운동 없음</td></tr>'}</table><h2>생활 속에서</h2><p>${esc(e.daily||'').replace(/\n/g,'<br>')}</p><div class="warn"><b>이럴 땐 운동을 멈추세요</b><br>${esc(e.caution||'').replace(/\n/g,'<br>')}</div><h2>아픈 게 심해지면</h2><p>${esc(e.worse||'').replace(/\n/g,'<br>')}</p>`)}
 
  /* ---------------- 탭⑤ 회기별 중재 시행 기록 ---------------- */
- function newSession(){const S=St();const last=S.ses[S.ses.length-1];S.ses.push({id:uid(),no:S.ses.length+1,date:new Date().toISOString().slice(0,10),team:last?last.team:'',rec:last?last.rec:'',items:[],meas:{},_open:true});S.ses.forEach((s,i)=>{if(i<S.ses.length-1)s._open=false});save();renderT5();ptIxStatus();renderOut()}
- function loadPlan(si){const S=St();const s=S.ses[si];if(!S.cards.length){alert('③에 중재가 없습니다.');return}S.cards.forEach(c=>{if(s.items.some(it=>it.cardId===c.id))return;const d=Object.entries(c.dose||{}).map(([k,o])=>o&&(o.stu||o.lit)?`${((DOSE[c.cls]||[]).find(x=>x[0]===k)||[k,k])[1]} ${o.stu||o.lit}`:'').filter(Boolean).join(', ');s.items.push({cardId:c.id,name:c.name,cls:c.cls,plan:d,done:false,dose:'',assist:'',min:'',dev:''})});save();renderT5()}
+ function newSession(){const S=St();const last=S.ses[S.ses.length-1];S.ses.push({id:uid(),no:S.ses.length+1,date:new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10)/* 2026-11-23: 한국 시간 기준 날짜(오전 9시 전 하루 전 날짜로 들어가던 문제) */,team:last?last.team:'',rec:last?last.rec:'',items:[],meas:{},_open:true});S.ses.forEach((s,i)=>{if(i<S.ses.length-1)s._open=false});save();renderT5();ptIxStatus();renderOut()}
+ function loadPlan(si){const S=St();const s=S.ses[si];if(!S.cards.length){alert('③에 중재가 없습니다.');return}S.cards.forEach(c=>{if(s.items.some(it=>it.cardId===c.id))return;if(/확정 후 중재 선택|중재 미정|평가 지표 확정/.test(c.name||''))return;/* 2026-11-23: 중재 미정 카드는 회기 계획에 넣지 않음 */const d=Object.entries(c.dose||{}).map(([k,o])=>o&&(o.stu||o.lit)?`${((DOSE[c.cls]||[]).find(x=>x[0]===k)||[k,k])[1]} ${o.stu||o.lit}`:'').filter(Boolean).join(', ');s.items.push({cardId:c.id,name:c.name,cls:c.cls,plan:d,done:false,dose:'',assist:'',min:'',dev:''})});save();renderT5()}
+ /* 2026-11-23: ⑤에서 정한 다음 회기 결정을 ⑥ 결정 기록에 한 줄로 넣거나 고침(회기마다 하나, '⑤에서'로 표시) */
+ function ixSyncSesDec(S,s){S.dec=S.dec||[];const ch=String(s.plan||'').trim(),re=String(s.planWhy||'').trim();let d=S.dec.find(x=>x.fromSes===s.id);if(!ch||!re){if(d)S.dec.splice(S.dec.indexOf(d),1);return}
+  if(!d){d={fromSes:s.id};S.dec.push(d)}d.when=new Date().toLocaleString('ko-KR');d.ses=String(s.no);d.choice=ch;d.reason='(⑤에서) '+re}
  function soap(s){const inds=indicators();const done=s.items.filter(it=>it.done);const pain=(s.prePain!==''&&s.prePain!=null)||(s.postPain!==''&&s.postPain!=null)?`통증 NRS 중재 전 ${s.prePain||'-'}/10 → 직후 ${s.postPain||'-'}/10`:'';
   const meas=inds.filter(i=>s.meas&&s.meas[i.key]!==''&&s.meas[i.key]!=null).map(i=>`${i.name} ${s.meas[i.key]}${i.unit}`).join(', ');
   const dec=St().dec.filter(d=>d.ses==s.no).slice(-1)[0];
   return `S: ${[s.preFunc&&'중재 전 기능 상태 — '+s.preFunc,s.next&&'지난 방문 뒤 반응 — '+s.next,s.home&&'가정운동 — '+s.home].filter(Boolean).join(' / ')||'(입력 없음)'}
-O: ${[pain,meas&&'측정값 — '+meas,done.length&&'시행 중재 — '+done.map(it=>`${it.name}${it.dose?' ('+it.dose+')':''}${it.min?' '+it.min+'분':''}`).join(', ')].filter(Boolean).join(' / ')||'(입력 없음)'}
-A: ${[s.immed&&'중재 직후 반응 — '+s.immed,s.adverse?'이상반응 — '+s.adverse+(s.adResp?' (대응: '+s.adResp+')':''):'이상반응 없음 또는 미기록',s.items.filter(it=>!it.done).length?'계획했으나 시행하지 않은 중재 — '+s.items.filter(it=>!it.done).map(it=>it.name).join(', '):'',s.items.filter(it=>it.dev).map(it=>`${it.name}: 계획과 다르게 함 — ${it.dev}`).join(' / ')].filter(Boolean).join(' / ')}
-P: ${dec?`${dec.choice} — ${dec.reason}`:'⑥ 반응 확인에서 다음 계획 결정'}`}
+O: ${[(s.bp||s.hr)&&`활력징후 — ${s.bp?'혈압 '+s.bp:''}${s.bp&&s.hr?', ':''}${s.hr?'맥박 '+s.hr+'회/분':''}`,s.redflag&&'새 위험징후 — '+s.redflag,pain,meas&&'측정값 — '+meas,done.length&&'시행 중재 — '+done.map(it=>`${it.name}${it.dose?' ('+it.dose+')':''}${it.min?' '+it.min+'분':''}`).join(', ')].filter(Boolean).join(' / ')||'(입력 없음)'}
+A: ${[s.assess&&'판단 — '+s.assess,s.immed&&'중재 직후 반응 — '+s.immed,s.adverse?'이상반응 — '+s.adverse+(s.adResp?' (대응: '+s.adResp+')':''):'이상반응 없음 또는 미기록',s.items.filter(it=>!it.done).length?'계획했으나 시행하지 않은 중재 — '+s.items.filter(it=>!it.done).map(it=>it.name).join(', '):'',s.items.filter(it=>it.dev).map(it=>`${it.name}: 계획과 다르게 함 — ${it.dev}`).join(' / ')].filter(Boolean).join(' / ')}
+P: ${s.plan?`${s.plan}${s.planWhy?' — '+s.planWhy:''}`:dec?`${dec.choice} — ${dec.reason}`:'(다음 회기 결정 미입력 — 아래 A·P에서 정하세요)'}`}
  function renderT5(){const S=St();const P=pane(5);const inds=indicators();
   P.innerHTML=`<p class="ix-help">회기마다 실제로 한 내용을 기록합니다. [계획 불러오기]는 ③의 중재를 가져오지만 <b>'시행함'은 자동으로 체크하지 않습니다</b> — 실제로 한 것만 직접 체크하세요. 입력값으로 SOAP가 자동 정리되며, 덧붙일 내용만 따로 적습니다.</p>
   <div class="ix-bar"><button type="button" class="ix-btn" data-a="addSes">+ 새 회기 기록</button></div>`+
   (S.ses.length?S.ses.map((s,si)=>`<details class="ix-card" ${s._open?'open':''} data-si="${si}"><summary><span class="ix-tag">${si+1}회기</span><span class="ix-cname">${esc(s.date||'')}</span>${s.items.some(i=>i.done)?`<span class="ix-tag src">시행 ${s.items.filter(i=>i.done).length}/${s.items.length}</span>`:''}${painUp(s)||s.adverse?'<span class="ix-badge warn">경고 확인</span>':''}</summary><div class="ix-cbody">
-   <div class="ix-grid3"><label class="ix-f">회기 번호${inp(`ses.${si}.no`,'',`number`)}</label><label class="ix-f">날짜${inp(`ses.${si}.date`,'','date')}</label><label class="ix-f">담당 팀${inp(`ses.${si}.team`,'예: 3조')}</label><label class="ix-f">기록자${inp(`ses.${si}.rec`,'이름')}</label><label class="ix-f">중재 전 통증 NRS (0~10)${inp(`ses.${si}.prePain`,'0~10','number')}</label><label class="ix-f">중재 직후 통증 NRS (0~10)${inp(`ses.${si}.postPain`,'0~10','number')}</label></div>
-   <label class="ix-f full" style="margin-top:8px">중재 전 기능 상태${ta(`ses.${si}.preFunc`,'예: 2시간 공부 시 목 통증 4/10, 고개 돌리기 불편')}</label>
-   <div class="ix-sec">시행한 중재</div><div class="ix-bar"><button type="button" class="ix-btn ghost sm" data-a="loadPlan" data-i="${si}">계획 불러오기 (③ 중재)</button><span class="ix-mini">'시행함'은 실제로 했을 때만 직접 체크</span></div>
-   <div class="ix-tw"><table class="ix-tbl"><thead><tr><th>시행함</th><th>중재 (계획 용량)</th><th>실제 용량</th><th>제공한 보조·피드백</th><th>소요시간(분)</th><th>계획과 다르게 한 내용과 이유</th></tr></thead><tbody>${s.items.map((it,ii)=>`<tr><td style="text-align:center"><input type="checkbox" data-b="ses.${si}.items.${ii}.done" ${it.done?'checked':''}></td><td><b>${esc(it.name)}</b><div class="ix-mini">${esc(it.plan||'')}</div></td><td>${inp(`ses.${si}.items.${ii}.dose`,'실제로 한 용량')}</td><td>${inp(`ses.${si}.items.${ii}.assist`,'예: 거울 피드백')}</td><td>${inp(`ses.${si}.items.${ii}.min`,'분','number')}</td><td>${inp(`ses.${si}.items.${ii}.dev`,'없으면 비움')}</td></tr>`).join('')||'<tr><td colspan="6" class="ix-mini">[계획 불러오기]를 누르세요.</td></tr>'}</tbody></table></div>
-   <div class="ix-grid2" style="margin-top:8px"><label class="ix-f">중재 직후 반응${ta(`ses.${si}.immed`,'예: 목 움직임이 편해짐')}</label><label class="ix-f">이상반응${ta(`ses.${si}.adverse`,'없으면 비움')}</label><label class="ix-f">이상반응 대응${ta(`ses.${si}.adResp`,'예: 중단 후 휴식, 보고')}</label><label class="ix-f">가정운동 수행${ta(`ses.${si}.home`,'예: 5일 중 4일 수행')}</label><label class="ix-f full">다음 방문 때 반응 (지난 회기 뒤 변화)${ta(`ses.${si}.next`,'예: 다음날 근육통 경미, 하루 만에 회복')}</label></div>
-   <div class="ix-sec">이번 회기 측정값 <span class="ix-mini">(7 결과 지표 · 측정한 것만)</span></div><div class="ix-grid3">${inds.map(ind=>`<label class="ix-f">${esc(ind.name)} <span class="ix-mini">초기 ${ind.init}${ind.unit}</span>${inp(`ses.${si}.meas.${ind.key}`,'미측정','number')}</label>`).join('')||'<span class="ix-mini">앞 단계 측정값이 없습니다.</span>'}</div>
+   <!-- 2026-11-23: 회기 기록을 실제 치료 순서(S → O → 중재 → 반응 → A·P)로 다시 묶음. 기존 입력값의 이름은 그대로라 저장된 내용 유지 -->
+   <div class="ix-grid3"><label class="ix-f">회기 번호${inp(`ses.${si}.no`,'',`number`)}</label><label class="ix-f">날짜${inp(`ses.${si}.date`,'','date')}</label><label class="ix-f">담당 팀 · 기록자<span style="display:flex;gap:6px">${inp(`ses.${si}.team`,'예: 3조')}${inp(`ses.${si}.rec`,'이름')}</span></label></div>
+   <div class="ix-soapsec"><div class="ix-soaph"><span class="ix-soapL">S</span>주관적 정보 <span class="ix-mini">환자가 왔을 때 먼저 묻기</span></div><div class="ix-soapb">
+    <div class="ix-grid3"><label class="ix-f">지난 회기 뒤 변화${ta(`ses.${si}.next`,'예: 다음날 근육통 경미, 하루 만에 회복',2)}</label><label class="ix-f">가정운동 수행${ta(`ses.${si}.home`,'예: 5일 중 4일 수행',2)}</label><label class="ix-f">중재 전 통증 NRS (0~10)${inp(`ses.${si}.prePain`,'0~10','number')}<span class="ix-mini">7 결과의 '통증 NRS'로도 쓰여요</span></label></div>
+    <label class="ix-f full">중재 전 기능 상태${ta(`ses.${si}.preFunc`,'예: 2시간 공부 시 목 통증 4/10, 고개 돌리기 불편',2)}</label></div></div>
+   <div class="ix-soapsec"><div class="ix-soaph"><span class="ix-soapL">O</span>객관적 정보 <span class="ix-mini">회기 전 안전 확인 · 측정</span></div><div class="ix-soapb">
+    <div class="ix-grid3"><label class="ix-f">혈압 (mmHg)${inp(`ses.${si}.bp`,'예: 118/76')}</label><label class="ix-f">맥박 (회/분)${inp(`ses.${si}.hr`,'예: 72','number')}</label><label class="ix-f">새 위험징후${sel(`ses.${si}.redflag`,['없음','있음 — 중재 보류·의뢰 검토'],'확인 전')}</label></div>
+    <label class="ix-reechk"><input type="checkbox" data-b="ses.${si}.reeval" ${s.reeval?'checked':''}> 재평가 회기 (4주·8주) — 체크하면 결과 지표 측정 칸이 모두 펼쳐져요</label>
+    ${s.reeval?`<div class="ix-grid3">${inds.map(ind=>`<label class="ix-f">${esc(ind.name)} <span class="ix-mini">초기 ${ind.init}${ind.unit}</span>${inp(`ses.${si}.meas.${ind.key}`,'미측정','number')}</label>`).join('')||'<span class="ix-mini">앞 단계 측정값이 없습니다.</span>'}</div>`:`<div class="ix-mini">평소 회기는 S의 통증만 기록해요.${inds.some(i=>s.meas&&s.meas[i.key]!==''&&s.meas[i.key]!=null&&i.key!=='nrs')?' (이 회기에 적어 둔 측정값이 있어요 — 체크하면 보여요)':''}</div>`}</div></div>
+   <div class="ix-soapsec"><div class="ix-soaph"><span class="ix-soapL">I</span>시행한 중재 <span class="ix-mini">'시행함'은 실제로 했을 때만 직접 체크</span><span style="flex:1"></span><button type="button" class="ix-btn ghost sm" data-a="loadPlan" data-i="${si}">계획 불러오기 (③ 중재)</button></div><div class="ix-soapb">
+   <div class="ix-tw"><table class="ix-tbl"><thead><tr><th>시행함</th><th>중재 (계획 용량)</th><th>실제 용량</th><th>제공한 보조·피드백</th><th>소요시간(분)</th><th>계획과 다르게 한 내용과 이유</th></tr></thead><tbody>${s.items.map((it,ii)=>`<tr><td style="text-align:center"><input type="checkbox" data-b="ses.${si}.items.${ii}.done" ${it.done?'checked':''}></td><td><b>${esc(it.name)}</b><div class="ix-mini">${esc(it.plan||'')}</div></td><td>${inp(`ses.${si}.items.${ii}.dose`,'실제로 한 용량')}</td><td>${inp(`ses.${si}.items.${ii}.assist`,'예: 거울 피드백')}</td><td>${inp(`ses.${si}.items.${ii}.min`,'분','number')}</td><td>${inp(`ses.${si}.items.${ii}.dev`,'없으면 비움')}</td></tr>`).join('')||'<tr><td colspan="6" class="ix-mini">[계획 불러오기]를 누르세요.</td></tr>'}</tbody></table></div></div></div>
+   <div class="ix-soapsec"><div class="ix-soaph"><span class="ix-soapL">R</span>반응 <span class="ix-mini">중재 직후</span></div><div class="ix-soapb">
+    <div class="ix-grid3"><label class="ix-f">중재 직후 통증 NRS (0~10)${inp(`ses.${si}.postPain`,'0~10','number')}</label><label class="ix-f">중재 직후 반응${ta(`ses.${si}.immed`,'예: 목 움직임이 편해짐',2)}</label><label class="ix-f">이상반응${ta(`ses.${si}.adverse`,'없으면 비움',2)}</label></div>
+    <label class="ix-f full">이상반응 대응 <span class="ix-mini">(이상반응이 있을 때만)</span>${ta(`ses.${si}.adResp`,'예: 중단 후 휴식, 보고',2)}</label></div></div>
+   <div class="ix-soapsec ap"><div class="ix-soaph"><span class="ix-soapL">A</span><span class="ix-soapL">P</span>판단 · 다음 회기 계획 <span class="ix-mini">근거와 함께 · 여기서 정한 결정은 ⑥ 결정 기록에도 자동으로 들어가요</span></div><div class="ix-soapb">
+    <div class="ix-grid2"><label class="ix-f">오늘 판단 (A)${ta(`ses.${si}.assess`,'예: 통증 3→2, 이상반응 없음, CCFT 8회부터 보상',2)}</label><label class="ix-f">다음 회기 결정 (P)${sel(`ses.${si}.plan`,['유지','진행','감량','변경','중단','의뢰 검토'],'선택')}${ta(`ses.${si}.planWhy`,'예: 8회부터 시작, 보상 없으면 10회로 진행 — ③ 진행 기준',2)}</label></div>
+    ${(()=>{const used=s.items.filter(it=>it.done).map(it=>S.cards.find(c=>c.id===it.cardId)).filter(Boolean);const L=(used.length?used:S.cards.filter(c=>!/확정 후 중재 선택|중재 미정|평가 지표 확정/.test(c.name||''))).slice(0,6);return L.length?`<div class="ix-sesref"><div class="ix-mini" style="margin-bottom:4px"><b>③ 진행·중단 기준과 근거</b> ${used.length?'(이번 회기에 시행한 중재)':'(③의 중재)'}</div>${L.map(c=>{const ci=S.cards.indexOf(c);const P2=cardPapers(S,c);return `<div class="ix-sesrefi"><b>${ci+1}. ${esc(c.name||'')}</b> — ${esc(String(c.prog||'진행 기준 미작성').split('\n')[0].slice(0,110))} <span class="ix-mini">· 근거 ${P2.map(id=>esc(ixEvS(S,id))).join(', ')||'<b style="color:#8a5a00">논문 없음</b>'}</span> <button type="button" class="ix-btn ghost sm" data-a="sesQuote" data-i="${si}" data-c="${ci}">판단에 인용</button></div>`}).join('')}</div>`:''})()}</div></div>
    <div class="ix-sec">SOAP 자동 정리</div><div class="ix-soap" data-soap="${si}">${esc(soap(s))}</div><label class="ix-f full" style="margin-top:8px">덧붙일 내용${ta(`ses.${si}.add`,'자동 정리 외에 덧붙일 내용만',2)}</label>
    <div class="ix-bar" style="margin-top:10px"><span style="flex:1"></span><button type="button" class="ix-btn danger sm" data-a="delSes" data-i="${si}">이 회기 삭제</button></div></div></details>`).join(''):'<div class="ix-empty">아직 회기 기록이 없습니다. [+ 새 회기 기록]을 누르세요.</div>')}
  const painUp=s=>{const a=num(s.prePain),b=num(s.postPain);return a!=null&&b!=null&&b-a>=2};
 
  /* ---------------- 탭⑥ 반응 확인·프로그램 수정 ---------------- */
  const CHOICES=['유지','진행','감량','변경','중단','의뢰 검토'];
- function renderT6(){const S=St();const P=pane(6);const inds=indicators().slice(0,6);const warn=S.ses.filter(s=>painUp(s)||s.adverse);
-  P.innerHTML=`<p class="ix-help">회기별 통증 변화·측정값·이상반응을 비교하고 다음 계획을 정합니다. <b>판단 이유는 꼭 적어야</b> 저장됩니다. '변경'을 저장하면 지금의 ③ 중재 프로그램을 버전으로 보관해 언제든 되돌릴 수 있습니다.</p>
+ /* 2026-11-23: ⑥ 정리 — ① 회기별 반응(통증 그래프 + 측정값이 기록된 열만) ② 결정 기록(⑤ 회기 결정 + ⑥ 프로그램 결정을 한 표로) ③ 프로그램 결정(고른 회기에 시행한 중재의 기준만, 기준 미작성은 표시) ④ 버전.
+    기존 기능(경고·기준 출처·결정 저장·판단 이유 필수·변경 시 버전 보관·되돌리기)은 그대로 둠 */
+ function ixPainChart(S){const ses=S.ses.filter(s=>num(s.prePain)!=null||num(s.postPain)!=null);if(!ses.length)return '<div class="ix-mini" style="margin:4px 0 8px">통증을 기록한 회기가 없어 그래프를 그리지 않았어요 (⑤의 중재 전·직후 통증 NRS).</div>';const W=560,H=140,x0=44,x1=540,yv=v=>110-v*10,n=ses.length,xs=i=>n===1?(x0+x1)/2:x0+20+(x1-x0-40)*i/(n-1);
+  const line=(k,col,dash)=>{const pts=ses.map((s,i)=>num(s[k])!=null?`${xs(i)},${yv(num(s[k]))}`:null).filter(Boolean);return pts.length>1?`<polyline fill="none" stroke="${col}" stroke-width="2"${dash?' stroke-dasharray="5 4"':''} points="${pts.join(' ')}"/>`:''};
+  const dots=(k,col)=>ses.map((s,i)=>{const v=num(s[k]);if(v==null)return '';const bad=k==='postPain'&&painUp(s);return `<circle cx="${xs(i)}" cy="${yv(v)}" r="${bad?6:4}" fill="${bad?'#b91c1c':col}"><title>${s.no}회기 ${k==='prePain'?'중재 전':'중재 직후'} ${v}/10</title></circle>`}).join('');
+  return `<svg class="ix-painchart" viewBox="0 0 ${W} ${H}" width="100%" role="img"><title>회기별 통증 NRS 변화</title><line x1="${x0}" y1="110" x2="${x1}" y2="110" stroke="#cfc9bf"/><line x1="${x0}" y1="10" x2="${x0}" y2="110" stroke="#cfc9bf"/>${[0,5,10].map(v=>`<text x="${x0-8}" y="${yv(v)+4}" font-size="10" text-anchor="end" fill="#5b6b85">${v}</text>`).join('')}${line('prePain','#1d3a6e')}${line('postPain','#1d9e75',1)}${dots('prePain','#1d3a6e')}${dots('postPain','#1d9e75')}${ses.map((s,i)=>`<text x="${xs(i)}" y="128" font-size="11" text-anchor="middle" fill="#5b6b85">${esc(String(s.no))}회기</text>`).join('')}<rect x="${x1-270}" y="8" width="12" height="3" fill="#1d3a6e"/><text x="${x1-254}" y="13" font-size="11" fill="#5b6b85">중재 전</text><rect x="${x1-200}" y="8" width="12" height="3" fill="#1d9e75"/><text x="${x1-184}" y="13" font-size="11" fill="#5b6b85">중재 직후 (빨강 = 2점↑)</text></svg>`}
+ function ixDecRefHtml(S,sesNo){const s=S.ses.find(x=>String(x.no)===String(sesNo));const used=s?s.items.filter(it=>it.done).map(it=>S.cards.find(c=>c.id===it.cardId)).filter(Boolean):[];const rest=S.cards.filter(c=>!used.includes(c));
+  const row=c=>{const ci=S.cards.indexOf(c);const P=cardPapers(S,c);const none=!String(c.prog||'').trim()&&!String(c.stop||'').trim();return `<div class="ix-decc"><div><b>${ci+1}. ${esc(c.name||'(중재명 미입력)')}</b> <span class="ix-mini">근거: ${P.map(id=>esc(ixEvS(S,id))).join(' · ')||'<b style="color:#8a5a00">⚠ 연결된 논문 없음</b>'}</span></div>${none?'<div class="ix-decneed">⚠ 진행·감량·중단 기준 미작성 — ③ 카드의 ⑤ 진행·감량 및 중단·재의뢰 기준에서 작성하세요</div>':`<div class="ix-mini">진행·감량 기준: ${esc(c.prog||'미작성')}</div><div class="ix-mini">중단·재의뢰 기준: ${esc(c.stop||'미작성')}</div><button type="button" class="ix-btn ghost sm" data-decq="${ci}">판단 이유에 이 기준·근거 넣기</button>`}</div>`};
+  if(!S.cards.length)return '<div class="ix-mini">③에 중재가 없습니다.</div>';
+  return (used.length?`<div class="ix-mini" style="margin:2px 0 4px"><b>${esc(String(sesNo))}회기에 시행한 중재의 기준과 근거</b></div>${used.map(row).join('')}`:`<div class="ix-mini" style="margin:2px 0 4px">${s?esc(String(sesNo))+'회기에 \'시행함\'으로 체크한 중재가 없어요 — ③의 모든 중재를 보여 줘요':'③의 모든 중재'}</div>`)+(used.length?(rest.length?`<details class="ix-decmore"><summary>▸ 다른 중재 ${rest.length}개의 기준 보기</summary>${rest.map(row).join('')}</details>`:''):rest.map(row).join(''))}
+ function renderT6(){const S=St();const P=pane(6);const indsAll=indicators();const inds=indsAll.filter(i=>S.ses.some(s=>s.meas&&s.meas[i.key]!==''&&s.meas[i.key]!=null));const warn=S.ses.filter(s=>painUp(s)||s.adverse);const lastNo=S.ses.length?S.ses[S.ses.length-1].no:'';
+  P.innerHTML=`<p class="ix-help">회기별 통증 변화·측정값·이상반응을 비교하고 다음 계획을 정합니다. <b>판단 이유는 꼭 적어야</b> 저장됩니다. '변경'을 저장하면 지금의 ③ 중재 프로그램을 버전으로 보관해 언제든 되돌릴 수 있습니다. 매 회기의 다음 결정은 ⑤ 회기 기록의 A·P에서 하고, 여기서는 여러 회기를 보고 프로그램 자체를 바꿀 때(변경·중단·의뢰) 결정합니다.</p>
   ${warn.length?`<div class="ix-warn">⚠ 재검진 또는 의학적 평가 필요성 검토 — ${warn.map(s=>`${s.no}회기${painUp(s)?` 통증 ${s.prePain}→${s.postPain} (2점 이상 증가)`:''}${s.adverse?' 이상반응: '+esc(s.adverse):''}`).join(' / ')}<div class="ix-mini" style="color:#9b1c1c;margin-top:4px">진단이 아니라, 진행 전에 재검진이나 의뢰가 필요한지 확인하라는 알림입니다.</div></div>`:''}
-  <div class="ix-tw"><table class="ix-tbl"><thead><tr><th>회기</th><th>날짜</th><th>통증 전 → 후</th><th>변화</th>${inds.map(i=>`<th>${esc(i.name)}<div class="ix-mini">초기 ${i.init}${i.unit}</div></th>`).join('')}<th>이상반응</th><th>시행</th></tr></thead><tbody>${S.ses.map(s=>{const a=num(s.prePain),b=num(s.postPain);const d=a!=null&&b!=null?b-a:null;return `<tr><td>${s.no}</td><td>${esc(s.date||'')}</td><td>${a??'-'} → ${b??'-'}</td><td style="${d!=null&&d>=2?'color:#b91c1c;font-weight:800':''}">${d==null?'-':(d>0?'+':'')+d}</td>${inds.map(i=>`<td>${s.meas&&s.meas[i.key]!==''&&s.meas[i.key]!=null?esc(s.meas[i.key]):'<span class="ix-mini">미측정</span>'}</td>`).join('')}<td>${s.adverse?`<b style="color:#b91c1c">${esc(s.adverse)}</b>`:'없음'}</td><td>${s.items.filter(x=>x.done).length}/${s.items.length}</td></tr>`}).join('')||`<tr><td colspan="${6+inds.length}" class="ix-mini">회기 기록이 없습니다 (⑤에서 작성).</td></tr>`}</tbody></table></div>
-  <div class="ix-sec">프로그램 결정</div><div class="ix-grid2"><label class="ix-f">결정할 회기${`<select id="ixDecSes">${S.ses.map(s=>`<option value="${s.no}">${s.no}회기 (${esc(s.date||'')})</option>`).join('')||'<option value="">회기 없음</option>'}</select>`}</label><label class="ix-f">선택<select id="ixDecChoice"><option value="">선택</option>${CHOICES.map(c=>`<option>${c}</option>`).join('')}</select></label><label class="ix-f full">판단 이유 (필수)<textarea id="ixDecReason" rows="2" placeholder="예: 3회기 연속 통증 감소, CCFT 8→10회로 단기목표 근접 → 저항 단계 진행"></textarea></label></div>
-  <div class="ix-bar" style="margin-top:8px"><button type="button" class="ix-btn" data-a="saveDec">결정 저장</button><span class="ix-mini" id="ixDecMsg"></span></div>
-  <div class="ix-tw"><table class="ix-tbl"><thead><tr><th>저장 시각</th><th>회기</th><th>선택</th><th>판단 이유</th></tr></thead><tbody>${S.dec.slice().reverse().map(d=>`<tr><td>${esc(d.when)}</td><td>${esc(d.ses||'')}</td><td><b>${esc(d.choice)}</b></td><td>${esc(d.reason)}</td></tr>`).join('')||'<tr><td colspan="4" class="ix-mini">아직 결정 기록이 없습니다.</td></tr>'}</tbody></table></div>
-  <div class="ix-sec">중재 프로그램 버전</div><div class="ix-tw"><table class="ix-tbl"><thead><tr><th>보관 시각</th><th>이유</th><th>중재</th><th></th></tr></thead><tbody>${S.vers.slice().reverse().map((x,ri)=>{const i=S.vers.length-1-ri;return `<tr><td>${esc(x.when)}</td><td>${esc(x.reason)}</td><td>${x.cards.map(c=>esc(c.name)).join(', ')}</td><td><button type="button" class="ix-btn ghost sm" data-a="restoreVer" data-i="${i}">이 버전으로 되돌리기</button></td></tr>`}).join('')||'<tr><td colspan="4" class="ix-mini">보관된 버전이 없습니다. \'변경\'을 저장하면 그 전 프로그램이 여기에 보관됩니다.</td></tr>'}</tbody></table></div>`}
+  <div class="ix-t4card"><div class="ix-t4h"><h3>① 회기별 반응</h3></div><div class="ix-t4b">
+  <div class="ix-mini" style="margin:0 0 6px">'변화' 칸이 빨간색이면 통증 NRS가 <b>2점 이상 증가</b>한 회기입니다. 기준 출처: 통증 NRS 약 2점(30%) 변화가 임상적으로 의미 있는 변화(Farrar 2001, Pain · <a href="https://pubmed.ncbi.nlm.nih.gov/11690728/" target="_blank" rel="noopener">PMID 11690728</a>)${/뇌졸중|stroke|편마비|척수|SCI|AIS/i.test(v('ref_medical_dx')||'')?'':' · 기계적 목 통증 NPRS MCID 1.5점·MDC 2.6점(Young 2019 · <a href="https://pubmed.ncbi.nlm.nih.gov/29856244/" target="_blank" rel="noopener">PMID 29856244</a>)'}</div>
+  ${ixPainChart(S)}
+  <div class="ix-tw"><table class="ix-tbl"><thead><tr><th>회기</th><th>날짜</th><th>통증 전 → 후</th><th>변화</th>${inds.map(i=>`<th>${esc(i.name)}<div class="ix-mini">초기 ${i.init}${i.unit}</div></th>`).join('')}<th>이상반응</th><th>시행</th></tr></thead><tbody>${S.ses.map(s=>{const a=num(s.prePain),b=num(s.postPain);const d=a!=null&&b!=null?b-a:null;return `<tr><td>${s.no}${s.reeval?' <span class="ix-tag">재평가</span>':''}</td><td>${esc(s.date||'')}</td><td>${a??'-'} → ${b??'-'}</td><td style="${d!=null&&d>=2?'color:#b91c1c;font-weight:800':d!=null&&d<0?'color:#22663a;font-weight:700':''}">${d==null?'-':(d>0?'+':'')+d}</td>${inds.map(i=>`<td>${s.meas&&s.meas[i.key]!==''&&s.meas[i.key]!=null?esc(s.meas[i.key]):'<span class="ix-mini">—</span>'}</td>`).join('')}<td>${s.adverse?`<b style="color:#b91c1c">${esc(s.adverse)}</b>`:'없음'}</td><td>${s.items.filter(x=>x.done).length}/${s.items.length}</td></tr>`}).join('')||`<tr><td colspan="${6+inds.length}" class="ix-mini">회기 기록이 없습니다 (⑤에서 작성).</td></tr>`}</tbody></table></div>
+  <div class="ix-mini" style="margin-top:6px">${indsAll.length?`측정값이 기록된 열만 보여요${inds.length?' (' +inds.map(i=>esc(i.name)).join(' · ')+')':''} · 아직 미측정 ${indsAll.length-inds.length}개 지표 (⑤에서 \'재평가 회기\'를 체크하고 측정값을 적으면 열이 생겨요)`:''}</div></div></div>
+  <div class="ix-t4card"><div class="ix-t4h"><h3>② 결정 기록</h3></div><div class="ix-t4b"><div class="ix-tw"><table class="ix-tbl"><thead><tr><th>저장 시각</th><th>회기</th><th>선택</th><th>판단 이유</th><th style="width:120px">어디서</th></tr></thead><tbody>${S.dec.slice().reverse().map(d=>`<tr><td>${esc(d.when)}</td><td>${esc(d.ses||'')}</td><td><b>${esc(d.choice)}</b></td><td>${esc(String(d.reason||'').replace(/^\(⑤에서\)\s*/,''))}</td><td>${d.fromSes?'<span class="ix-wtag" style="background:#e6eefb;color:#1d3a6e">⑤ 회기 기록</span>':'<span class="ix-wtag" style="background:#eef0f3;color:#4b5563">⑥ 프로그램 결정</span>'}</td></tr>`).join('')||'<tr><td colspan="5" class="ix-mini">아직 결정 기록이 없습니다.</td></tr>'}</tbody></table></div></div></div>
+  <div class="ix-t4card"><div class="ix-t4h"><h3>③ 프로그램 결정</h3><span class="ix-mini" style="margin-left:8px">여러 회기를 보고 프로그램 자체를 바꿀 때 (변경 · 중단 · 의뢰) — 매 회기 결정은 ⑤에서</span></div><div class="ix-t4b">
+  <div class="ix-grid2"><label class="ix-f">결정할 회기${`<select id="ixDecSes">${S.ses.map(s=>`<option value="${s.no}" ${s.no===lastNo?'selected':''}>${s.no}회기 (${esc(s.date||'')})</option>`).join('')||'<option value="">회기 없음</option>'}</select>`}</label><label class="ix-f">선택<select id="ixDecChoice"><option value="">선택</option>${CHOICES.map(c=>`<option>${c}</option>`).join('')}</select></label><label class="ix-f full">판단 이유 (필수)<textarea id="ixDecReason" rows="2" placeholder="예: 3회기 연속 통증 감소, CCFT 8→10회로 단기목표 근접 → 저항 단계 진행"></textarea></label></div>
+  <div class="ix-decref" id="ixDecRef">${ixDecRefHtml(S,lastNo)}</div>
+  <div class="ix-bar" style="margin-top:8px"><button type="button" class="ix-btn" data-a="saveDec">결정 저장</button><span class="ix-mini" id="ixDecMsg"></span></div></div></div>
+  <div class="ix-t4card"><div class="ix-t4h"><h3>④ 중재 프로그램 버전</h3></div><div class="ix-t4b"><div class="ix-tw"><table class="ix-tbl"><thead><tr><th>보관 시각</th><th>이유</th><th>중재</th><th></th></tr></thead><tbody>${S.vers.slice().reverse().map((x,ri)=>{const i=S.vers.length-1-ri;return `<tr><td>${esc(x.when)}</td><td>${esc(x.reason)}</td><td>${x.cards.map(c=>esc(c.name)).join(', ')}</td><td><button type="button" class="ix-btn ghost sm" data-a="restoreVer" data-i="${i}">이 버전으로 되돌리기</button></td></tr>`}).join('')||'<tr><td colspan="4" class="ix-mini">보관된 버전이 없습니다. \'변경\'을 저장하면 그 전 프로그램이 여기에 보관됩니다.</td></tr>'}</tbody></table></div></div></div>`}
+ document.addEventListener('change',e=>{if(e.target&&e.target.id==='ixDecSes'){const box=document.getElementById('ixDecRef');if(box)box.innerHTML=ixDecRefHtml(St(),e.target.value)}});
 
+ /* 2026-11-23: ⑥ 판단 이유에 ③ 카드의 기준과 근거 논문을 넣음 */
+ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-decq]');if(!b)return;e.preventDefault();const S=St(),c=S.cards[+b.dataset.decq],ta=document.getElementById('ixDecReason');if(!c||!ta)return;const P=cardPapers(S,c);
+  const add=`[${(+b.dataset.decq)+1}. ${c.name||'중재'}] 기준: ${(c.prog||c.stop||'미작성').replace(/\s+/g,' ').slice(0,120)} / 근거: ${P.map(id=>ixEvS(S,id)).join(', ')||'연결된 논문 없음'}`;
+  ta.value=(ta.value.trim()?ta.value.trim()+'\n':'')+add;ta.focus()});
+ /* 2026-11-23: 7 결과 — 지표별 의미 있는 변화(MCID·MDC)와 출처. 확인된 값이 없으면 '출처 확인 필요' */
+ function mcidNote(key){const neuro=/뇌졸중|stroke|편마비|척수|SCI|AIS/i.test(v('ref_medical_dx')||'');const L=(t,id)=>`${t} · <a href="https://pubmed.ncbi.nlm.nih.gov/${id}/" target="_blank" rel="noopener">PMID ${id}</a>`;
+  if(key==='nrs'||key==='nrsmax')return (neuro?'':L('MCID 1.5 · MDC 2.6점(기계적 목 통증, Young 2019)','29856244')+'<br>')+L('약 2점(30%) 변화가 임상적으로 의미 있음(Farrar 2001)','11690728');
+  if(key==='ndi')return L('MCID 5.5 · MDC 6.9점/50(기계적 목 통증, Young 2019)','29856244');
+  if(/^psfs_/.test(key))return L('MCID 2.0–3.0점(Horn 2012)','22031594')+'<br>단일 활동 MDC 약 3점(Stratford 1995, Physiotherapy Canada)';
+  if(key==='speed')return L('작은 의미 변화 0.05 · 큰 변화 0.1 m/s(노인, Perera 2006)','16696738');
+  if(key==='mwt6')return L('작은 의미 변화 약 20 m · 큰 변화 약 50 m(노인, Perera 2006)','16696738');
+  return '<span style="color:#8a5a00">⚠ MCID·MDC 출처 확인 필요</span>'}
  /* ---------------- 7. 결과 ---------------- */
  function rate(init,cur,tgt){if(cur==null||tgt==null||init==null)return null;if(tgt===init)return null;return Math.round((cur-init)/(tgt-init)*1000)/10}
+ /* 2026-11-24: 7 결과 개편 — 9열 표 대신 지표별 카드(초기→4주→8주·목표), 변화량을 MCID·MDC와 자동 비교(출처 링크), 해석 초안, 목표 달성 자동 판정 초안(측정값 연결), 종합 해석 3칸(변화의 의미·5 예후 비교·⑥과 연결된 다음 계획). 기존 입력값(out.*)은 그대로 씀 */
+ if(!document.getElementById('ox2-css')){const cs=document.createElement('style');cs.id='ox2-css';cs.textContent=`
+#ptOx .ox-ind{border:1px solid #b9c3d3;border-radius:10px;padding:12px 14px;margin:0 0 12px;background:#fff}
+#ptOx .ox-ih{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:8px}
+#ptOx .ox-ih b{font-size:16px;color:#12274a}
+#ptOx .ox-grid{display:grid;grid-template-columns:minmax(0,.8fr) 20px minmax(0,1fr) 20px minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:start}
+#ptOx .ox-grid input{width:100%;box-sizing:border-box}
+#ptOx .ox-ar{align-self:center;text-align:center;color:#5b6b85;font-size:18px;padding-top:14px}
+#ptOx .ox-tg{border-left:1px dashed #b9c3d3;padding-left:10px}
+#ptOx .ox-k{display:block;font-size:12px;font-weight:700;color:#5b6b85;margin-bottom:3px}
+#ptOx .ox-v{font-size:18px;font-weight:800;color:#12274a;padding:4px 0}
+#ptOx .ox-res{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:10px;padding-top:8px;border-top:1px solid #e2ddd4;font-size:13.5px}
+#ptOx .ox-res .ox-k{display:inline;margin:0}
+#ptOx .ox-res b{color:#12274a}
+#ptOx .ox-tag{display:inline-block;font-size:12px;font-weight:700;padding:1px 9px;border-radius:99px;margin:1px 4px 1px 0}
+#ptOx .ox-tag.ok{background:#e3f4e6!important;color:#1f6b33!important;-webkit-text-fill-color:#1f6b33}
+#ptOx .ox-tag.warn{background:#fdf1d8!important;color:#8a5a00!important;-webkit-text-fill-color:#8a5a00}
+#ptOx .ox-tag.bad{background:#fde3e1!important;color:#9b2c24!important;-webkit-text-fill-color:#9b2c24}
+#ptOx .ox-bar{display:inline-block;width:80px;height:7px;border-radius:4px;background:#e7ebf1;vertical-align:middle;overflow:hidden;margin-right:4px}
+#ptOx .ox-bar i{display:block;height:100%;background:#2f8f4e}
+#ptOx .ox-mcsrc{font-size:12px;color:#45423e;margin-top:6px;line-height:1.6}
+#ptOx .ox-interp{margin-top:8px}
+#ptOx .ox-interp input{width:100%;box-sizing:border-box}
+#ptOx .ox-draft{padding:7px 10px;border:1px dashed #b9c3d3;border-radius:6px;background:#f7f9fc;font-size:13px;line-height:1.6;margin-bottom:6px}
+#ptOx .ox-draft .ox-k{display:inline;margin-right:6px}
+#ptOx .ox-gwhy{font-size:12.5px;line-height:1.55;color:#1f2937;background:#f7f9fc;border-radius:6px;padding:5px 8px;margin-bottom:5px}
+#ptOx .ox-sum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#ptOx .ox-sb{border:1px solid #b9c3d3;border-radius:10px;padding:10px 12px;background:#fff}
+#ptOx .ox-sb textarea{width:100%;box-sizing:border-box}
+#ptOx .ox-sbt{font-weight:800;color:#12274a;margin-bottom:6px}
+#ptOx .ox-auto{font-size:12.5px;line-height:1.6;background:#f7f9fc;border-radius:6px;padding:6px 9px;margin-bottom:6px;color:#1f2937}
+#ptOx .ox-nwarn{color:#b91c1c;font-size:12px;font-weight:700}
+@media(max-width:860px){#ptOx .ox-grid{grid-template-columns:1fr 1fr}#ptOx .ox-ar{display:none}#ptOx .ox-tg{border-left:0;padding-left:0}#ptOx .ox-sum{grid-template-columns:1fr}}`;document.head.appendChild(cs)}
+ const oxNeuro=()=>/뇌졸중|stroke|편마비|척수|SCI|AIS/i.test(v('ref_medical_dx')||'');
+ /* MCID·MDC 수치 — mcidNote()에 적힌 출처와 같은 값만 씀(출처 없는 지표는 판정하지 않음) */
+ function oxMc(key){if(key==='nrs'||key==='nrsmax')return oxNeuro()?{m:2,ml:'MCID',ref:'Farrar 2001'}:{m:1.5,d:2.6,ml:'MCID',ref:'Young 2019'};
+  if(key==='ndi')return {m:5.5,d:6.9,ml:'MCID',ref:'Young 2019'};
+  if(/^psfs_/.test(key))return {m:2,d:3,ml:'MCID',ref:'Horn 2012 · Stratford 1995'};
+  if(key==='speed')return {m:0.05,b:0.1,ml:'작은 의미 변화',ref:'Perera 2006'};
+  if(key==='mwt6')return {m:20,b:50,ml:'작은 의미 변화',ref:'Perera 2006'};
+  return null}
+ const oxR=x=>Math.round(x*100)/100;
+ const oxU=ind=>String(ind.unit).startsWith('/')?'점':ind.unit;
+ function oxVals(ind){const o=St().out;const g=k=>{const x=o[k]&&o[k][ind.key];return x===''||x==null||isNaN(+x)?null:+x};const mid=g('mid'),end=g('end');const last=end!=null?end:mid;return {mid,end,last,lastLab:end!=null?'8주':mid!=null?'4주':''}}
+ function oxImp(ind,cur){return oxR(ind.dir==='down'?ind.init-cur:cur-ind.init)}
+ function oxJudge(ind){const {last,lastLab}=oxVals(ind);if(last==null)return {state:'none',tags:[]};const diff=oxR(last-ind.init),imp=oxImp(ind,last),mc=oxMc(ind.key),tags=[];
+  if(mc){if(imp<=0)tags.push(['bad',imp<0?'악화':'변화 없음']);else{tags.push([imp>=mc.m?'ok':'warn',`${mc.ml} ${mc.m} ${imp>=mc.m?'넘음':'못 넘음'}`]);if(mc.d!=null)tags.push([imp>=mc.d?'ok':'warn',`MDC ${mc.d} ${imp>=mc.d?'넘음':'못 넘음'}`]);if(mc.b!=null)tags.push([imp>=mc.b?'ok':'warn',`큰 변화 ${mc.b} ${imp>=mc.b?'넘음':'못 넘음'}`])}}
+  else tags.push(['bad','MCID 출처 없음']);
+  const sg=(diff>0?'+':'')+diff;
+  let dr=`${ind.name} ${ind.init}→${last}${ind.unit} (${lastLab}, ${sg}${oxU(ind)}) — ${imp>0?'개선':imp<0?'악화':'변화 없음'}.`;
+  if(mc){if(imp>0){const okM=imp>=mc.m,okD=mc.d==null||imp>=mc.d;dr+=okM&&okD?` ${mc.ml}(${mc.m})${mc.d!=null?'와 MDC('+mc.d+')를 모두':'를'} 넘어 임상적으로 의미 있는 변화(${mc.ref}).`:okM?` ${mc.ml}(${mc.m})는 넘었으나 MDC(${mc.d}) 미만이라 측정오차일 가능성을 배제하기 어려움(${mc.ref}).`:` ${mc.ml}(${mc.m}) 미만으로 임상적으로 의미 있는 개선이라 말하기 어려움(${mc.ref}).`}else dr+=' 임상적으로 의미 있는 개선 없음 — 원인과 프로그램 조정을 검토하세요.'}
+  else dr+=' MCID가 확인된 문헌이 없어 임상적 의미는 판정하지 않음 — 관찰된 변화로만 기술하거나 측정 신뢰도(MDC) 문헌을 찾아 근거로 붙이세요.';
+  return {state:imp>0?'imp':imp<0?'worse':'same',diff:sg,imp,tags,draft:dr,pass:mc&&imp>0?imp>=mc.m:mc?false:null,mc,lastLab}}
+ const oxRateHtml=(cur,r)=>cur==null?'<span class="ix-miss">미측정</span>':r==null?'<span class="ix-miss">목표 없음</span>':`<span class="ox-bar"><i style="width:${Math.max(0,Math.min(100,r))}%"></i></span>${r}%`;
+ const oxGk=g=>g.label.replace(/[^\w가-힣]/g,'_');
+ /* 목표 문장에서 'A에서 B' 형태의 지표·목표값을 찾아 측정값과 연결 → 판정 초안 */
+ function oxGoalAuto(g){const kind=/^STG/.test(g.label)?'stg':'ltg',lab=kind==='stg'?'4주':'8주';const L=[];
+  indicators().forEach(ind=>{for(const kw of ind.kws){const re=kw instanceof RegExp?kw:new RegExp(reEsc(kw));const i=g.text.search(re);if(i<0)continue;const m=g.text.slice(i,i+140).match(/(-?\d+(?:\.\d+)?)\s*(?:\/\s*\d+)?\s*(?:점|°|초|회|kgf|m\/s|m|cm)?\s*에서\s*(-?\d+(?:\.\d+)?)/);if(m&&Math.abs(+m[1]-ind.init)<0.051){L.push({ind,tgt:+m[2]});break}}});
+  if(!L.length)return {st:'',why:'목표 문장에서 측정 지표(“○에서 ○”)를 찾지 못함 — 직접 판정하세요.'};
+  const parts=[],rs=[];L.forEach(({ind,tgt})=>{const vv=oxVals(ind),cur=kind==='stg'?vv.mid:vv.end;if(cur==null){parts.push(`${ind.name}: ${lab} 미측정`);return}const r=rate(ind.init,cur,tgt);rs.push(r);const mc=oxMc(ind.key),imp=oxImp(ind,cur);parts.push(`${ind.name} ${ind.init}→${cur} (${lab}), 목표 ${tgt} · 달성률 ${r==null?'-':r+'%'}${mc&&imp>0?` · ${mc.ml} ${mc.m} ${imp>=mc.m?'넘음':'미만'} (${mc.ref})`:''}`)});
+  if(!rs.length)return {st:'',why:parts.join(' / ')+' — 측정 후 판정'};
+  const st=rs.every(r=>r!=null&&r>=100)?'달성':rs.every(r=>r==null||r<=0)?'미달성':'부분 달성';return {st,why:parts.join(' / ')}}
+ function oxProg(){const b=document.getElementById('ptPrognosisView');if(!b||!b.textContent.trim())return null;const pot=b.querySelector('select[data-plan-edit="rehab-potential"]');const peak=b.querySelector('.pt-pg-peak-grid .pt-pg-box.lt [contenteditable]');const dur=b.querySelector('[aria-label="예상 최고 기능 수준 도달 기간"]');
+  return {pot:pot?(pot.value==='auto'?(pot.dataset.autoValue||''):pot.value):'',peak:peak?peak.textContent.replace(/\s+/g,' ').trim():'',dur:dur?dur.textContent.replace(/\s+/g,' ').trim().split(/\(|근거:/)[0].trim():''}}
+ function oxIndCard(ind){const o=St().out;const st=findTarget(ind,'stg'),lt=findTarget(ind,'ltg');const tg=o.tgt&&o.tgt[ind.key]||{};const S4=tg.s!=null&&tg.s!==''?+tg.s:st,L8=tg.l!=null&&tg.l!==''?+tg.l:lt;
+  const src=(m)=>`<div class="ix-src2 ${o[m]&&o[m][ind.key]?'ok':''}">${o[m]&&o[m][ind.key]?esc(o[m][ind.key]):'직접 입력'}</div>`;
+  return `<div class="ox-ind" data-k="${ind.key}"><div class="ox-ih"><b>${esc(ind.name)}</b><span class="ix-mini">${ind.dir==='down'?'낮을수록 좋음':'높을수록 좋음'} · ${esc(ind.unit)}</span></div>
+  <div class="ox-grid"><div><span class="ox-k">초기</span><div class="ox-v">${ind.init}</div><div class="ix-src2">앞 단계에서 가져옴</div></div><div class="ox-ar">→</div>
+  <div><span class="ox-k">중간 (4주)</span>${inp(`out.mid.${ind.key}`,'미측정','number')}${src('midSrc')}</div><div class="ox-ar">→</div>
+  <div><span class="ox-k">종료 (8주)</span>${inp(`out.end.${ind.key}`,'미측정','number')}${src('endSrc')}</div>
+  <div class="ox-tg"><span class="ox-k">단기목표 (4주)</span><input type="number" data-b="out.tgt.${ind.key}.s" value="${S4!=null?S4:''}" placeholder="목표 미설정"><div class="ix-src2 ${st!=null?'ok':''}">${st!=null?'④에서 추출·확인':'④에서 못 찾음 — 직접 입력'}</div></div>
+  <div class="ox-tg"><span class="ox-k">장기목표 (8주)</span><input type="number" data-b="out.tgt.${ind.key}.l" value="${L8!=null?L8:''}" placeholder="목표 미설정"><div class="ix-src2 ${lt!=null?'ok':''}">${lt!=null?'④에서 추출·확인':'④에서 못 찾음 — 직접 입력'}</div></div></div>
+  <div class="ox-res"><span class="ox-k">변화</span><b data-chg>미측정</b><span data-tags></span><span class="ox-k">4주 달성률</span><span data-r4></span><span class="ox-k">8주 달성률</span><span data-r8></span></div>
+  <div class="ox-mcsrc"><b>판정 기준:</b> ${mcidNote(ind.key)}</div>
+  <div class="ox-interp"><span class="ox-k">임상적 해석</span><div class="ox-draft" data-draft></div>${inp(`out.interp.${ind.key}`,'초안을 넣거나 직접 적으세요 (예: MCID 넘음, 임상적으로 의미 있음)')}</div></div>`}
  function renderOut(){const S=St();const o=S.out;const inds=indicators();const sesOpt=S.ses.map(s=>`<option value="${s.no}">${s.no}회기 (${esc(s.date||'')})</option>`).join('');
   const goals=[...goalTexts('stg'),...goalTexts('ltg')];
-  const acts=[...[['psfs_study','2시간 공부'],['psfs_phone','스마트폰 30분'],['psfs_turn','우측 후방 확인']].filter(([k])=>v(k)!=='').map(([k,n])=>({key:k,name:`PSFS — ${n}`,init:`${v(k)}/10`})),...(()=>{try{return qAllChecked('function').map(f=>({key:'f_'+f,name:`일상활동 — ${f}`,init:'제한 있음'}))}catch(e){return []}})(),{key:'want',name:'환자가 중요하게 여기는 활동 (A-12)',init:(v('goal_detail')||'').slice(0,60)}];
-  ox.innerHTML=`<p class="ix-help">초기값은 앞 단계(검사 및 측정)에서 가져옵니다. 중간(4주)·종료(8주) 값은 <b>직접 입력</b>하거나 <b>⑥ 중재의 회기 기록에서 가져옵니다</b>. 기록하지 않은 값은 비워 두며, 좋아진 값을 자동으로 만들지 않습니다.<br>달성률 = (현재값 − 초기값) ÷ (목표값 − 초기값) × 100 · 통증·기능장애 점수처럼 <b>낮을수록 좋은 지표</b>도 같은 식으로 맞게 계산됩니다.</p>
+  const acts0=[...[['psfs_study','2시간 공부'],['psfs_phone','스마트폰 30분'],['psfs_turn','우측 후방 확인']].filter(([k])=>v(k)!=='').map(([k,n])=>({key:k,name:`PSFS — ${n}`,init:`${v(k)}/10`})),...(()=>{try{return qAllChecked('function').map(f=>({key:'f_'+f,name:`일상활동 — ${f}`,init:'제한 있음'}))}catch(e){return []}})(),{key:'want',name:'환자가 중요하게 여기는 활동 (A-12)',init:(v('goal_detail')||'').slice(0,60)}];
+  const hasAct=k=>{const a=(o.act||{})[k];return a&&(String(a.m||'').trim()||String(a.e||'').trim())};
+  const psfsInd=inds.some(i=>/^psfs_/.test(i.key));
+  const acts=acts0.filter(a=>!/^psfs_/.test(a.key)||!psfsInd||hasAct(a.key));
+  const ld=S.dec&&S.dec.length?S.dec[S.dec.length-1]:null;
+  const ldTxt=ld?`⑥ 마지막 결정: <b>${esc(ld.ses)}회기 '${esc(ld.choice)}'</b> <span class="ix-mini">(${ld.fromSes?'⑤ 회기 기록':'⑥ 프로그램 결정'})</span>${ld.reason?'<br>이유: '+esc(String(ld.reason).replace(/\s+/g,' ').slice(0,90)):''}`:'⑥ 결정 기록이 아직 없습니다.';
+  ox.innerHTML=`<p class="ix-help">초기값은 앞 단계(검사 및 측정)에서 가져옵니다. 중간(4주)·종료(8주) 값은 <b>직접 입력</b>하거나 <b>⑥ 중재의 회기 기록에서 가져옵니다</b>. 기록하지 않은 값은 비워 두며, 좋아진 값을 자동으로 만들지 않습니다.<br>달성률 = (현재값 − 초기값) ÷ (목표값 − 초기값) × 100 · 통증·기능장애 점수처럼 <b>낮을수록 좋은 지표</b>도 같은 식으로 맞게 계산됩니다.<br>변화량은 <b>MCID</b>(최소 임상 중요 변화)·<b>MDC</b>(최소 감지 변화)와 자동 비교하고 기준 출처를 함께 보여 줍니다. 출처가 확인되지 않은 지표는 판정하지 않습니다. 해석·판정 초안은 모두 고칠 수 있습니다.</p>
   <div class="ix-bar"><span class="ix-mini">회기 기록에서 가져오기:</span> 중간값 <select id="oxMidSes"><option value="">회기 선택</option>${sesOpt}</select><button type="button" class="ix-btn ghost sm" data-a="pullMid">가져오기</button> 종료값 <select id="oxEndSes"><option value="">회기 선택</option>${sesOpt}</select><button type="button" class="ix-btn ghost sm" data-a="pullEnd">가져오기</button><span style="flex:1"></span><button type="button" class="ix-btn ghost" data-a="printOut">결과 표 인쇄</button></div>
-  <div class="ix-tw"><table class="ix-tbl" id="oxTbl"><thead><tr><th>지표</th><th>초기</th><th>중간(4주)</th><th>종료(8주)</th><th>단기목표(4주)</th><th>장기목표(8주)</th><th>4주 달성률</th><th>8주 달성률</th><th>임상적 해석</th></tr></thead><tbody>${inds.map(ind=>{const st=findTarget(ind,'stg'),lt=findTarget(ind,'ltg');const tg=o.tgt&&o.tgt[ind.key]||{};const S4=tg.s!=null&&tg.s!==''?+tg.s:st,L8=tg.l!=null&&tg.l!==''?+tg.l:lt;
-    return `<tr data-k="${ind.key}"><th>${esc(ind.name)}<div class="ix-mini">${ind.dir==='down'?'낮을수록 좋음':'높을수록 좋음'} · ${esc(ind.unit)}</div></th><td>${ind.init}<div class="ix-src2">앞 단계에서 가져옴</div></td>
-    <td>${inp(`out.mid.${ind.key}`,'미측정','number')}<div class="ix-src2 ${o.midSrc&&o.midSrc[ind.key]?'ok':''}">${o.midSrc&&o.midSrc[ind.key]?esc(o.midSrc[ind.key]):'직접 입력'}</div></td>
-    <td>${inp(`out.end.${ind.key}`,'미측정','number')}<div class="ix-src2 ${o.endSrc&&o.endSrc[ind.key]?'ok':''}">${o.endSrc&&o.endSrc[ind.key]?esc(o.endSrc[ind.key]):'직접 입력'}</div></td>
-    <td><input type="number" data-b="out.tgt.${ind.key}.s" value="${S4!=null?S4:''}" placeholder="목표 미설정"><div class="ix-src2 ${st!=null?'ok':''}">${st!=null?'④에서 추출·확인':'④에서 못 찾음 — 직접 입력'}</div></td>
-    <td><input type="number" data-b="out.tgt.${ind.key}.l" value="${L8!=null?L8:''}" placeholder="목표 미설정"><div class="ix-src2 ${lt!=null?'ok':''}">${lt!=null?'④에서 추출·확인':'④에서 못 찾음 — 직접 입력'}</div></td>
-    <td class="ix-rate" data-r4></td><td class="ix-rate" data-r8></td><td>${inp(`out.interp.${ind.key}`,'예: MCID 넘음, 임상적으로 의미 있음')}</td></tr>`}).join('')||'<tr><td colspan="9" class="ix-mini">앞 단계 측정값이 없습니다.</td></tr>'}</tbody></table></div>
-  <div class="ix-k2">활동 상태</div><div class="ix-tw"><table class="ix-tbl"><thead><tr><th>활동</th><th>초기</th><th>중간(4주)</th><th>종료(8주)</th></tr></thead><tbody>${acts.map(a=>`<tr><th>${esc(a.name)}</th><td>${esc(a.init)}</td><td>${inp(`out.act.${a.key}.m`,'기록')}</td><td>${inp(`out.act.${a.key}.e`,'기록')}</td></tr>`).join('')}</tbody></table></div>
-  <div class="ix-k2">단기·장기 목표 달성 여부</div><div class="ix-tw"><table class="ix-tbl"><thead><tr><th>목표 (4-2)</th><th style="width:130px">달성 여부</th><th style="width:28%">판단 근거 (측정값과 연결)</th></tr></thead><tbody>${goals.map(g=>{const k=g.label.replace(/[^\w가-힣]/g,'_');return `<tr><td><b>${esc(g.label)}</b><div class="ix-mini">${esc(g.text)}</div></td><td>${sel(`out.goal.${k}.st`,['달성','부분 달성','미달성'],'미평가')}</td><td>${inp(`out.goal.${k}.why`,'예: NRS 3→1, 목표 도달')}</td></tr>`}).join('')||'<tr><td colspan="3" class="ix-mini">4-2 목표가 없습니다.</td></tr>'}</tbody></table></div>
-  <div class="ix-k2">종합 해석</div><label class="ix-f full">${ta('out.summary','측정값의 변화가 임상적으로 의미 있는지, 목표 달성에 영향을 준 요인, 다음 계획(종결·지속·의뢰)을 적으세요.',4)}</label>`;
+  <div class="ix-k2">① 결과 지표 — 변화량과 MCID 비교</div><div id="oxTbl">${inds.map(oxIndCard).join('')||'<div class="ix-mini">앞 단계 측정값이 없습니다.</div>'}</div>
+  <div class="ix-k2">② 단기·장기 목표 달성 여부</div><div class="ix-tw"><table class="ix-tbl"><thead><tr><th>목표 (4-2)</th><th style="width:150px">달성 여부</th><th style="width:40%">판단 근거 (측정값과 자동 연결)</th></tr></thead><tbody>${goals.map(g=>{const k=oxGk(g);return `<tr data-gk="${k}"><td><b>${esc(g.label)}</b><div class="ix-mini">${esc(g.text)}</div></td><td>${sel(`out.goal.${k}.st`,['달성','부분 달성','미달성'],'자동 판정 따름')}<div data-gst style="margin-top:4px"></div></td><td><div class="ox-gwhy" data-gwhy></div>${inp(`out.goal.${k}.why`,'추가 판단 근거·메모 (선택)')}</td></tr>`}).join('')||'<tr><td colspan="3" class="ix-mini">4-2 목표가 없습니다.</td></tr>'}</tbody></table></div>
+  <div class="ix-mini" style="margin:4px 0 0">자동 판정 규칙: 달성률 100% 이상 = 달성 · 0% 초과~100% 미만 = 부분 달성 · 0% 이하 = 미달성. 직접 고르면 '직접 판정'으로 표시됩니다.</div>
+  <div class="ix-k2">③ 활동 상태</div>${psfsInd?'<div class="ix-mini" style="margin-bottom:4px">PSFS 활동은 위 ① 결과 지표에서 숫자로 비교합니다 (MCID 2점, Horn 2012).</div>':''}<div class="ix-tw"><table class="ix-tbl"><thead><tr><th>활동</th><th>초기</th><th>중간(4주)</th><th>종료(8주)</th></tr></thead><tbody>${acts.map(a=>`<tr><th>${esc(a.name)}</th><td>${esc(a.init)}</td><td>${inp(`out.act.${a.key}.m`,'기록')}</td><td>${inp(`out.act.${a.key}.e`,'기록')}</td></tr>`).join('')}</tbody></table></div>
+  <div class="ix-k2">④ 종합 해석</div><div class="ox-sum">
+   <div class="ox-sb"><div class="ox-sbt">변화의 의미</div><div class="ox-auto" data-sumauto></div>${ta('out.summary','자동 요약을 바탕으로 변화가 임상적으로 의미 있는지, 목표 달성에 영향을 준 요인을 적으세요.',4)}</div>
+   <div class="ox-sb"><div class="ox-sbt">예후 예측과 비교 <span class="ix-mini">5 예후</span></div><div class="ox-auto" data-sumprog></div>${ta('out.sumProg','예측과 실제가 같았는지, 다르다면 이유(이행도·동반 요인·중재 용량 등)를 적으세요.',4)}</div>
+   <div class="ox-sb"><div class="ox-sbt">다음 계획 <span class="ix-mini">⑥ 결정과 연결</span></div><div class="ox-auto">${ldTxt}</div>${sel('out.next',['종결','지속','의뢰'],'종결·지속·의뢰 선택')}<div data-nwarn class="ox-nwarn"></div>${ta('out.nextWhy','판단 이유 (필수) — ① 결과 지표·② 목표 달성 결과를 인용하세요.',3)}</div></div>`;
   calcRates()}
- function calcRates(){const S=St();const o=S.out;indicators().forEach(ind=>{const tr=ox.querySelector(`tr[data-k="${ind.key}"]`);if(!tr)return;const g=k=>{const x=o[k]&&o[k][ind.key];return x===''||x==null?null:+x};const tg=(o.tgt||{})[ind.key]||{};
-   const ts=tr.querySelector(`[data-b="out.tgt.${ind.key}.s"]`).value,tl=tr.querySelector(`[data-b="out.tgt.${ind.key}.l"]`).value;
-   const r4=rate(ind.init,g('mid'),ts===''?null:+ts),r8=rate(ind.init,g('end'),tl===''?null:+tl);
-   tr.querySelector('[data-r4]').innerHTML=g('mid')==null?'<span class="ix-miss">미측정</span>':r4==null?'<span class="ix-miss">목표 없음</span>':r4+'%';
-   tr.querySelector('[data-r8]').innerHTML=g('end')==null?'<span class="ix-miss">미측정</span>':r8==null?'<span class="ix-miss">목표 없음</span>':r8+'%'})}
+ function calcRates(){const S=St();const o=S.out;const inds=indicators();const J=[];
+  inds.forEach(ind=>{const j=oxJudge(ind);J.push({ind,j});const el=ox.querySelector(`.ox-ind[data-k="${ind.key}"]`);if(!el)return;const vv=oxVals(ind);
+   const ts=el.querySelector(`[data-b="out.tgt.${ind.key}.s"]`).value,tl=el.querySelector(`[data-b="out.tgt.${ind.key}.l"]`).value;
+   el.querySelector('[data-r4]').innerHTML=oxRateHtml(vv.mid,rate(ind.init,vv.mid,ts===''?null:+ts));el.querySelector('[data-r8]').innerHTML=oxRateHtml(vv.end,rate(ind.init,vv.end,tl===''?null:+tl));
+   el.querySelector('[data-chg]').textContent=j.state==='none'?'미측정':`${j.diff}${oxU(ind)} (초기→${j.lastLab})`;
+   el.querySelector('[data-tags]').innerHTML=j.tags.map(([c,t])=>`<span class="ox-tag ${c}">${esc(t)}</span>`).join('');
+   el.querySelector('[data-draft]').innerHTML=j.state==='none'?'<span class="ix-mini">중간·종료값을 넣으면 해석 초안이 만들어집니다.</span>':`<span class="ox-k">해석 초안</span>${esc(j.draft)} <button type="button" class="ix-btn ghost sm" data-a="oxDraft" data-k="${ind.key}">해석 칸에 넣기</button>`});
+  const GS={달성:0,'부분 달성':0,미달성:0,미판정:0},LT={n:0,ok:0};
+  [...goalTexts('stg'),...goalTexts('ltg')].forEach(g=>{const k=oxGk(g),au=oxGoalAuto(g),us=((o.goal||{})[k]||{}).st||'';const fin=us||au.st;GS[fin||'미판정']++;if(/^LTG/.test(g.label)){LT.n++;if(fin==='달성')LT.ok++}
+   const tr=ox.querySelector(`tr[data-gk="${k}"]`);if(!tr)return;const cl=s=>s==='달성'?'ok':s==='미달성'?'bad':'warn';
+   tr.querySelector('[data-gst]').innerHTML=us?(au.st&&us!==au.st?`<span class="ox-tag warn">직접 판정</span><span class="ix-mini">자동: ${esc(au.st)}</span>`:`<span class="ox-tag ${cl(us)}">직접 확인</span>`):au.st?`<span class="ox-tag ${cl(au.st)}">자동: ${esc(au.st)}</span>`:'<span class="ix-mini">자동 판정 불가</span>';
+   tr.querySelector('[data-gwhy]').innerHTML='<b>자동 연결:</b> '+esc(au.why)});
+  const meas=J.filter(x=>x.j.state!=='none'),pass=meas.filter(x=>x.j.pass===true),fail=meas.filter(x=>x.j.mc&&x.j.pass!==true),nomc=meas.filter(x=>!x.j.mc);const nm=a=>a.length?' ('+a.map(x=>esc(x.ind.name.replace(/\s*\(.*$/,''))).join(', ')+')':'';
+  const sa=ox.querySelector('[data-sumauto]');if(sa)sa.innerHTML=meas.length?`측정한 지표 ${meas.length}/${inds.length}개<br>· MCID 넘음 ${pass.length}개${nm(pass)}<br>· 못 넘음·악화 ${fail.length}개${nm(fail)}<br>· 판정 불가(출처 없음) ${nomc.length}개${nm(nomc)}<br>· 목표: 달성 ${GS['달성']} · 부분 ${GS['부분 달성']} · 미달성 ${GS['미달성']} · 미판정 ${GS['미판정']}`:'중간·종료값을 넣으면 자동 요약이 나옵니다.';
+  const sp=ox.querySelector('[data-sumprog]');if(sp){const P=oxProg();sp.innerHTML=(P?`<b>예측</b> 재활잠재력 ${esc(P.pot||'미선택')}${P.dur?' · 기간 '+esc(P.dur.slice(0,60)):''}${P.peak?'<br>최고 기능 수준: '+esc(P.peak.slice(0,80))+(P.peak.length>80?'…':''):''}`:'5 예후가 아직 만들어지지 않았습니다.')+`<br><b>실제</b> MCID 넘은 지표 ${pass.length}/${meas.length}개 · 장기목표 달성 ${LT.ok}/${LT.n}개`}
+  const nw=ox.querySelector('[data-nwarn]');if(nw)nw.textContent=o.next&&!String(o.nextWhy||'').trim()?'판단 이유를 적어 주세요 (필수).':''}
  function pull(which,no){const S=St();const s=S.ses.find(x=>String(x.no)===String(no));if(!s){alert('회기를 고르세요.');return}const k=which==='mid'?'midSrc':'endSrc';S.out[k]=S.out[k]||{};let n=0;
   indicators().forEach(ind=>{const x=s.meas&&s.meas[ind.key];if(x!==''&&x!=null){S.out[which][ind.key]=x;S.out[k][ind.key]=`${s.no}회기 기록에서 가져옴`;n++}});save();renderOut();alert(n?`${s.no}회기에서 측정값 ${n}개를 가져왔습니다. 기록이 없는 지표는 '미측정'으로 둡니다.`:`${s.no}회기에 기록된 측정값이 없습니다.`)}
- function printOut(){const S=St();const o=S.out;const rows=[...ox.querySelectorAll('#oxTbl tbody tr[data-k]')].map(tr=>{const c=[...tr.children].map(td=>{const i=td.querySelector('input,select');return i?(i.value||(i.placeholder||'')):td.innerText.split('\n')[0]});return `<tr>${c.map((x,j)=>j===0?`<th>${esc(x)}</th>`:`<td>${esc(x)}</td>`).join('')}</tr>`}).join('');
-  const goals=[...goalTexts('stg'),...goalTexts('ltg')].map(g=>{const k=g.label.replace(/[^\w가-힣]/g,'_');const x=(o.goal||{})[k]||{};return `<tr><td><b>${esc(g.label)}</b><div class="sub">${esc(g.text)}</div></td><td>${esc(x.st||'미평가')}</td><td>${esc(x.why||'')}</td></tr>`}).join('');
-  printDoc('결과 표',`<h1>결과 (Outcome)</h1><div class="sub">${esc(v('ref_medical_dx'))} · ${new Date().toLocaleDateString('ko-KR')} · 달성률 = (현재−초기)÷(목표−초기)×100</div><h2>결과 지표</h2><table><tr><th>지표</th><th>초기</th><th>중간(4주)</th><th>종료(8주)</th><th>단기목표</th><th>장기목표</th><th>4주 달성률</th><th>8주 달성률</th><th>임상적 해석</th></tr>${rows}</table><h2>목표 달성 여부</h2><table><tr><th>목표</th><th>달성 여부</th><th>판단 근거</th></tr>${goals}</table><h2>종합 해석</h2><p>${esc(o.summary||'').replace(/\n/g,'<br>')}</p>`)}
+ function printOut(){const S=St();const o=S.out;const strip=h=>String(h).replace(/<br>/g,' / ').replace(/<[^>]+>/g,'');
+  /* 2026-11-24: 인쇄본에도 변화량·MCID 판정·판정 기준 출처·해석(자동 초안이면 표시)·활동 상태·종합 해석 3칸을 넣음 */
+  const rows=indicators().map(ind=>{const vv=oxVals(ind),j=oxJudge(ind);const tg=(o.tgt||{})[ind.key]||{};const ts=tg.s!=null&&tg.s!==''?+tg.s:findTarget(ind,'stg'),tl=tg.l!=null&&tg.l!==''?+tg.l:findTarget(ind,'ltg');const r4=rate(ind.init,vv.mid,ts),r8=rate(ind.init,vv.end,tl);const rt=(c,r)=>c==null?'미측정':r==null?'목표 없음':r+'%';const it=String((o.interp||{})[ind.key]||'').trim();
+   return `<tr><th>${esc(ind.name)}<div class="sub">${ind.dir==='down'?'낮을수록 좋음':'높을수록 좋음'} · ${esc(ind.unit)}</div></th><td>${ind.init}</td><td>${vv.mid==null?'미측정':vv.mid}</td><td>${vv.end==null?'미측정':vv.end}</td><td>${ts==null?'-':ts} / ${tl==null?'-':tl}</td><td>${rt(vv.mid,r4)}</td><td>${rt(vv.end,r8)}</td><td>${j.state==='none'?'미측정':esc(j.diff)+'<div class="sub">'+esc(j.tags.map(t=>t[1]).join(', '))+'</div>'}</td><td>${it?esc(it):j.draft?esc(j.draft)+' <span class="sub">(자동 초안)</span>':''}<div class="sub">기준: ${esc(strip(mcidNote(ind.key)))}</div></td></tr>`}).join('');
+  const goals=[...goalTexts('stg'),...goalTexts('ltg')].map(g=>{const k=oxGk(g);const x=(o.goal||{})[k]||{};const au=oxGoalAuto(g);const st=x.st?x.st+(au.st&&au.st!==x.st?' (직접 판정 · 자동: '+au.st+')':''):au.st?au.st+' (자동)':'미평가';return `<tr><td><b>${esc(g.label)}</b><div class="sub">${esc(g.text)}</div></td><td>${esc(st)}</td><td>${esc(au.why)}${x.why?'<div>'+esc(x.why)+'</div>':''}</td></tr>`}).join('');
+  const acts=Object.entries(o.act||{}).filter(([k,a])=>a&&(String(a.m||'').trim()||String(a.e||'').trim())).map(([k,a])=>`<tr><th>${esc(k.replace(/^f_/,'일상활동 — ').replace(/^want$/,'환자가 중요하게 여기는 활동'))}</th><td>${esc(a.m||'')}</td><td>${esc(a.e||'')}</td></tr>`).join('');
+  const sa=ox.querySelector('[data-sumauto]'),sp=ox.querySelector('[data-sumprog]');const br=t=>esc(t||'').replace(/\n/g,'<br>');
+  const ld=S.dec&&S.dec.length?S.dec[S.dec.length-1]:null;
+  printDoc('결과 표',`<h1>결과 (Outcome)</h1><div class="sub">${esc(v('ref_medical_dx'))} · ${new Date().toLocaleDateString('ko-KR')} · 달성률 = (현재−초기)÷(목표−초기)×100 · 변화량은 MCID·MDC와 비교(출처가 없는 지표는 판정하지 않음)</div>
+  <h2>결과 지표</h2><table><tr><th>지표</th><th>초기</th><th>중간(4주)</th><th>종료(8주)</th><th>목표(4주/8주)</th><th>4주 달성률</th><th>8주 달성률</th><th>변화·MCID 판정</th><th>임상적 해석 · 판정 기준</th></tr>${rows}</table>
+  <h2>목표 달성 여부</h2><table><tr><th>목표</th><th>달성 여부</th><th>판단 근거</th></tr>${goals}</table>
+  ${acts?`<h2>활동 상태</h2><table><tr><th>활동</th><th>중간(4주)</th><th>종료(8주)</th></tr>${acts}</table>`:''}
+  <h2>종합 해석</h2><table><tr><th style="width:18%">변화의 의미</th><td>${sa?'<div class="sub">'+strip(sa.innerHTML)+'</div>':''}${br(o.summary)}</td></tr><tr><th>예후 예측과 비교</th><td>${sp?'<div class="sub">'+strip(sp.innerHTML)+'</div>':''}${br(o.sumProg)}</td></tr><tr><th>다음 계획</th><td>${ld?`<div class="sub">⑥ 마지막 결정: ${esc(ld.ses)}회기 '${esc(ld.choice)}'</div>`:''}<b>${esc(o.next||'미선택')}</b><div>${br(o.nextWhy)}</div></td></tr></table>`)}
 
  /* ---------------- 입력·버튼 공통 처리 ---------------- */
  let outT;
@@ -6461,6 +6825,13 @@ P: ${dec?`${dec.choice} — ${dec.reason}`:'⑥ 반응 확인에서 다음 계�
   if(t.dataset.arr){const a=getPath(S,t.dataset.arr)||[];const i=a.indexOf(t.value);if(t.checked&&i<0)a.push(t.value);if(!t.checked&&i>=0)a.splice(i,1);setPath(S,t.dataset.arr,a)}
   else if(t.dataset.b){setPath(S,t.dataset.b,t.type==='checkbox'?t.checked:t.value)}else return;
   const p=t.dataset.b||t.dataset.arr;
+  /* 2026-11-23: ⑤ 회기 — 중재 전 통증은 7 결과의 '통증 NRS'로도 씀 · 재평가 회기 체크 시 다시 그림 · A·P 결정은 ⑥ 결정 기록에 반영 */
+  {const m=/^ses\.(\d+)\.(prePain|reeval|plan|planWhy)$/.exec(p||'');if(m){const s=S.ses[+m[1]];if(s){
+   if(m[2]==='prePain'){s.meas=s.meas||{};if(s.meas.nrs==null||s.meas.nrs===''||s.meas.nrs===s._prevPre)s.meas.nrs=s.prePain;s._prevPre=s.prePain}
+   if(m[2]==='plan'||m[2]==='planWhy')ixSyncSesDec(S,s);
+   if(m[2]==='reeval'){save();renderT5();return}}}}
+  /* 2026-11-23: 논문 용량을 복사한 '학생 제안 용량' 초안을 고치면 '초안 · 조정 필요' 표시를 없앰 */
+  {const m=/^cards\.(\d+)\.dose\.(\w+)\.stu$/.exec(p||'');if(m){const d=((S.cards[+m[1]]||{}).dose||{})[m[2]];if(d&&d.stuDraft){if(String(d.stu||'').trim()!==String(d.stuDraftVal||'').trim()){d.stuDraft=false;const tg=t.parentElement&&t.parentElement.querySelector('.ix-stud');if(tg)tg.remove()}}}}
   if(/^cards\.\d+/.test(p)){const c=S.cards[+p.split('.')[1]];c.updated=new Date().toLocaleString('ko-KR');const brief=ix.querySelector('[data-card-summary="'+p.split('.')[1]+'"]');if(brief)brief.textContent=cardBrief(c);refreshCardSectionProgress(+p.split('.')[1],c);if(t.dataset.re){c._open=true;save();renderT3();return}}
   if(/^ses\.(\d+)/.test(p)){const si=+p.split('.')[1];const box=ix.querySelector(`[data-soap="${si}"]`);if(box)box.textContent=soap(S.ses[si]);clearTimeout(outT);outT=setTimeout(renderOut,600)}
   save();if(/^out\./.test(p))calcRates()}
@@ -6469,6 +6840,18 @@ P: ${dec?`${dec.choice} — ${dec.reason}`:'⑥ 반응 확인에서 다음 계�
  function onClick(e){const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,i=+b.dataset.i,S=St();
   if(a==='addCard'){S.cards.forEach(c=>c._open=false);S.cards.push(newCard({_open:true}));save();renderT3();ptIxStatus()}
   else if(a==='importPlan')importPlan();
+  else if(a==='autoDesign')ixAutoDesign();
+  else if(a==='eduAuto')ixEduAutoDesign();
+  else if(a==='mergeCard'){/* 2026-11-23: 중복 카드 합치기 — 이 카드(i)의 내용을 고른 카드로 옮기고 이 카드는 지움. 빈칸만 채우고, 둘 다 쓴 글은 이어 붙여서 아무것도 잃지 않음. 근거·연결 이유·문제·목표는 합침. ④ 가정운동·⑤ 회기 기록이 가리키던 카드도 바꿈 */
+   const sel=ix.querySelector(`[data-mergesel="${i}"]`);const j=sel?+sel.value:NaN;if(!sel||sel.value===''||isNaN(j)||!S.cards[j]||j===i){alert('합칠 카드를 먼저 고르세요.');return}
+   const src=S.cards[i],dst=S.cards[j];if(!confirm(`'${src.name||'(중재명 미입력)'}' 카드를 '${dst.name||'(중재명 미입력)'}' 카드에 합칠까요?\n· 빈칸은 채우고, 둘 다 적힌 칸은 이어 붙여요(내용이 지워지지 않음)\n· 근거 논문·문제·목표는 합쳐요\n· 합친 뒤 '${src.name||''}' 카드는 목록에서 빠져요`))return;
+   const txt=['purpose','why','diff','pos','method','assist','equip','contra','prog','stop','reeval'];txt.forEach(k=>{const a1=String(dst[k]||'').trim(),b1=String(src[k]||'').trim();if(!b1||a1.includes(b1))return;dst[k]=a1?a1+'\n— (합친 카드: '+(src.name||'')+') —\n'+b1:b1});
+   ['probs','goals','evid'].forEach(k=>{dst[k]=[...new Set([...(dst[k]||[]),...(src[k]||[])])]});['evwhy','evauto'].forEach(k=>{dst[k]=Object.assign({},src[k]||{},dst[k]||{})});
+   dst.dose=dst.dose||{};Object.entries(src.dose||{}).forEach(([k,o])=>{const d=dst.dose[k]||{};const n=Object.assign({},d);['lit','stu','src'].forEach(f=>{if(!String(n[f]||'').trim()&&String((o||{})[f]||'').trim())n[f]=o[f]});if(!String(d.stu||'').trim()&&o&&o.stuDraft){n.stuDraft=true;n.stuDraftVal=o.stuDraftVal}dst.dose[k]=n});
+   if(src.autoKey&&!dst.autoKey){dst.autoKey=src.autoKey;dst.autoAt=src.autoAt;dst.autoOk=src.autoOk}
+   (S.edu&&S.edu.rows||[]).forEach(r=>{if(r.from===src.id)r.from=dst.id});(S.ses||[]).forEach(s=>(s.items||[]).forEach(it=>{if(it.cardId===src.id)it.cardId=dst.id}));
+   dst.updated=new Date().toLocaleString('ko-KR');S.cards.splice(i,1);save();renderT3();ptIxStatus()}
+  else if(a==='autoOk'){const c=S.cards[i];if(c){c.autoOk=true;c.updated=new Date().toLocaleString('ko-KR');save();renderT3()}}
   else if(a==='printPlan')printPlan();
   else if(a==='delCard'){if(confirm('이 중재 카드를 삭제할까요?')){S.cards.splice(i,1);save();renderT3();ptIxStatus()}}
   else if(a==='reviewed'){S.cards[i].hash=ptIxSourceHash();S.cards[i].updated=new Date().toLocaleString('ko-KR');save();renderT3()}
@@ -6478,6 +6861,7 @@ P: ${dec?`${dec.choice} — ${dec.reason}`:'⑥ 반응 확인에서 다음 계�
   else if(a==='printHand')printHand();
   else if(a==='addSes')newSession();
   else if(a==='loadPlan')loadPlan(i);
+  else if(a==='sesQuote'){/* 2026-11-23: ⑤ A·P — ③ 카드의 진행 기준과 근거 논문을 '다음 회기 결정' 이유에 넣음 */const s=S.ses[i],c=S.cards[+b.dataset.c];if(!s||!c)return;const P2=cardPapers(S,c);const add=`[${(+b.dataset.c)+1}. ${c.name||'중재'}] 기준: ${String(c.prog||c.stop||'미작성').replace(/\s+/g,' ').slice(0,120)} / 근거: ${P2.map(id=>ixEvS(S,id)).join(', ')||'연결된 논문 없음'}`;s.planWhy=(String(s.planWhy||'').trim()?String(s.planWhy).trim()+'\n':'')+add;ixSyncSesDec(S,s);save();renderT5()}
   else if(a==='delSes'){if(confirm('이 회기 기록을 삭제할까요?')){S.ses.splice(i,1);save();renderT5();ptIxStatus();renderOut()}}
   else if(a==='saveDec'){const ses=ix.querySelector('#ixDecSes').value,ch=ix.querySelector('#ixDecChoice').value,re=ix.querySelector('#ixDecReason').value.trim();const msg=ix.querySelector('#ixDecMsg');
    if(!ch){msg.textContent='선택을 고르세요.';return}if(!re){msg.textContent='판단 이유를 적어야 저장됩니다(필수).';msg.style.color='#b91c1c';return}
@@ -6486,7 +6870,8 @@ P: ${dec?`${dec.choice} — ${dec.reason}`:'⑥ 반응 확인에서 다음 계�
   else if(a==='restoreVer'){if(!confirm('이 버전으로 되돌릴까요? 지금 프로그램도 버전으로 보관됩니다.'))return;S.vers.push({when:new Date().toLocaleString('ko-KR'),reason:'되돌리기 직전 프로그램 (자동 보관)',cards:JSON.parse(JSON.stringify(S.cards))});S.cards=JSON.parse(JSON.stringify(S.vers[i].cards));save();renderT6();ptIxStatus();alert('되돌렸습니다. ③에서 확인하세요.')}
   else if(a==='pullMid')pull('mid',ox.querySelector('#oxMidSes').value);
   else if(a==='pullEnd')pull('end',ox.querySelector('#oxEndSes').value);
-  else if(a==='printOut')printOut()}
+  else if(a==='printOut')printOut()
+  else if(a==='oxDraft'){/* 2026-11-24: 7 결과 해석 초안을 해석 칸에 넣음 */const ind=indicators().find(x=>x.key===b.dataset.k);if(!ind)return;const j=oxJudge(ind);if(j.state==='none')return;const cur=String((S.out.interp||{})[ind.key]||'').trim();if(cur&&!confirm('해석 칸에 이미 적은 내용이 있어요. 초안으로 바꿀까요?'))return;S.out.interp=S.out.interp||{};S.out.interp[ind.key]=j.draft;save();renderOut()}}
  ix.addEventListener('click',onClick);ox.addEventListener('click',onClick);
  /* 2026-11-17: 카드 제목 줄 안 근거 논문 칩·버튼 — 누를 때 카드가 접혔다 펴지지 않게 막고 처리 */
  ix.addEventListener('click',e=>{const t=e.target.closest('[data-cev],[data-cev-go],[data-cev-url],[data-cev-un]');if(!t||!t.closest('summary'))return;e.preventDefault();e.stopPropagation();const S=St();
@@ -7702,5 +8087,207 @@ document.addEventListener('click',function(e){var card=e.target.closest&&e.targe
  document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('button');if(b&&/clearForm/.test(b.getAttribute('onclick')||''))setTimeout(()=>{if(notYet())run()},800)},true);
 })();
 </script>
-</body>
+<style id="pt-src-css">
+#ptPrognosisView .pt-pg-src{margin-top:10px;padding-top:8px;border-top:1px dashed #e2ddd4;font-size:13px;color:#5b6b85}
+#ptPrognosisView .pt-pg-src .pt-src-chs::before{content:'이 판단의 근거';margin-right:2px;font-weight:700}
+#ptPrognosisView>.pt-src-bar{margin:0 0 12px}
+/* 2026-11-23: 2-3 문장별 근거 표시 — 평소엔 작은 표시, 누르면 펼침 */
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:12px 0 0;font-size:13.5px;color:#45423e}
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-all{font:inherit;font-size:13px;font-weight:700;padding:5px 14px;border-radius:99px;border:1px solid #1d3a6e;background:#fff;color:#1d3a6e;cursor:pointer}
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-all:hover{background:#eef2f8!important}
+html body :is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) button.pt-src-all,html body:not(#d1):not(#d2):not(#d3):not(#d4):not(#d5) main :is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) button.pt-src-all{background:#fff!important;color:#1d3a6e!important;-webkit-text-fill-color:#1d3a6e!important;box-shadow:none!important}
+html body :is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) button.pt-src-ch.pt,html body:not(#d1):not(#d2):not(#d3):not(#d4):not(#d5) main :is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) button.pt-src-ch.pt{-webkit-text-fill-color:#1d3a6e!important;background:#e6eefb!important;box-shadow:none!important}
+html body :is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) button.pt-src-ch.lt,html body:not(#d1):not(#d2):not(#d3):not(#d4):not(#d5) main :is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) button.pt-src-ch.lt{-webkit-text-fill-color:#22663a!important;background:#e3f3e6!important;box-shadow:none!important}
+html body :is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) button.pt-src-ch.un,html body:not(#d1):not(#d2):not(#d3):not(#d4):not(#d5) main :is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) button.pt-src-ch.un{-webkit-text-fill-color:#8a5a00!important;background:#fdf0d2!important;box-shadow:none!important}
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-k{display:inline-block;font-size:11.5px;font-weight:700;padding:0 7px;border-radius:99px}
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-chs{white-space:nowrap}
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-ch{font:inherit;font-size:11.5px!important;font-weight:700;line-height:1.5;padding:0 8px;margin-left:4px;border-radius:99px;border:1px solid transparent;cursor:pointer;vertical-align:1px}
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-k.pt,:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-ch.pt{background:#e6eefb;color:#1d3a6e!important}
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-k.lt,:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-ch.lt{background:#e3f3e6;color:#22663a!important}
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-ch.un{background:#fdf0d2;color:#8a5a00!important;border-color:#efc77c}
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-ch.on{border-color:currentColor}
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-d{display:none;margin:8px 0 2px;padding:8px 10px;border-radius:8px;background:#f7f6f2;border:1px solid #e6e2da;font-size:12.5px;line-height:1.6;color:#2f2d2a;word-break:keep-all}
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-d.show{display:block}
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-d b{color:#12274a}
+:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-d a{color:#1d3a6e;text-decoration:underline}
+@media print{:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-bar{display:none}:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-ch{border:0;padding:0 4px}:is(#analysisResult,#ptPlanProblems,#ptPrognosisView,#treatmentPlanSection) .pt-src-d{display:block!important;background:none;border:0;border-top:1px dashed #bbb;border-radius:0;padding:4px 0 0;font-size:10.5px}}
+</style>
+<script id="pt-src-js">
+/* 2026-11-23: 근거 표시 펼치기 · 모두 펼치기 (2-3·2-4 분석 결과, 4-1 치료목록. 다시 그려도 동작하도록 문서에 위임) */
+document.addEventListener('click',function(e){
+ if(!e.target.closest)return;const ch=e.target.closest('.pt-src-ch');
+ if(ch){const root=ch.closest('#analysisResult,#ptPlanProblems,#ptPrognosisView,.pt-plan-src');if(!root)return;e.preventDefault();const box=root.querySelector('[data-srcd="'+ch.dataset.src+'"]');if(!box)return;const on=!ch.classList.contains('on');ch.classList.toggle('on',on);box.classList.toggle('show',on);return}
+ const all=e.target.closest('.pt-src-all');
+ if(all){const root=all.closest('#analysisResult,#ptPlanProblems,#ptPrognosisView,.pt-plan-src');if(!root)return;e.preventDefault();const open=!/접기/.test(all.textContent);root.querySelectorAll('.pt-src-ch').forEach(c=>{c.classList.toggle('on',open);const b=root.querySelector('[data-srcd="'+c.dataset.src+'"]');if(b)b.classList.toggle('show',open)});all.textContent=open?'근거 모두 접기':'근거 모두 펼치기'}
+});
+</script>
+<style id="pt-plan-src-css">
+/* 2026-11-23: 4-2~4-6 근거 표시 줄 */
+#treatmentPlanSection .pt-plan-src{margin:10px 0 0;padding-top:8px;border-top:1px dashed #e2ddd4;font-size:13px;color:#5b6b85}
+#treatmentPlanSection .pt-plan-src:empty{display:none}
+/* 2026-11-23: 4-5 아래 6-④ 가정운동·교육 근거 요약 */
+#treatmentPlanSection .pt-edu4{margin:12px 0 0;padding:10px 12px;border:1px solid #e2ddd4;border-radius:10px;background:#fbf9f5;font-size:13px}
+#treatmentPlanSection .pt-edu4:empty{display:none}
+#treatmentPlanSection .pt-e4h{font-weight:800;color:#12274a;font-size:14px;margin-bottom:6px}
+#treatmentPlanSection .pt-e4h span{font-weight:400;color:#5b6b85;font-size:12.5px}
+#treatmentPlanSection .pt-e4tbl{width:100%;border-collapse:collapse;background:#fff}
+#treatmentPlanSection .pt-e4tbl th,#treatmentPlanSection .pt-e4tbl td{border:1px solid #e2ddd4;padding:6px 8px;text-align:left;vertical-align:top;line-height:1.5}
+#treatmentPlanSection .pt-e4tbl th{background:#f3f1ec;font-weight:700}
+#treatmentPlanSection .pt-e4m{color:#5b6b85;font-size:12px}
+#treatmentPlanSection .pt-e4w{color:#8a5a00;font-weight:700}
+#treatmentPlanSection .pt-e4empty{color:#5b6b85}
+#treatmentPlanSection .pt-e4tops{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+#treatmentPlanSection .pt-e4t{font-size:12px;padding:1px 9px;border-radius:99px;background:#fdf0d2;color:#8a5a00}
+#treatmentPlanSection .pt-e4t.ok{background:#e3f3e6;color:#22663a}
+/* 2026-11-23: 6 중재 — 선정 이유 출처 상태 · 용량 출처 · ⑥ 기준 인용 · 결과 MCID */
+#ptIx .ix-whysrc{margin:8px 0 0;padding:7px 10px;border-radius:8px;font-size:13px;line-height:1.55}
+#ptIx .ix-whysrc.ok{background:#e3f3e6;color:#22663a}
+#ptIx .ix-whysrc.need{background:#fdf0d2;color:#8a5a00;border:1px solid #efc77c}
+#ptIx select.ix-dsrc{width:100%;font-size:12.5px}
+#ptIx select.ix-need{border-color:#e0a63a!important;background:#fff8e6!important}
+/* 2026-11-23: ① 환자·목표 확인 표 — 줄 사이 구분선을 진하게 (2-2 문제목록 표와 같은 선 색) */
+html body #ptIx #ixT1{border:1px solid #cfc9bf!important}
+html body #ptIx #ixT1>.ix-row{border-top:1px solid #cfc9bf!important}
+html body #ptIx #ixT1>.ix-row:first-child{border-top:0!important}
+html body #ptIx #ixT1>.ix-row>.ix-k{border-right:1px solid #cfc9bf!important}
+/* 2026-11-23: ② 연결 패널 — 밑줄 없앰 · 중재 미정 칩 · 지침 권장 표시 */
+#ptIx .ix-link,#ptIx .ix-link *{text-decoration:none!important}
+/* 2026-11-23: ⑥ 반응 확인 — 통증 그래프 · 기준 미작성 표시 · 다른 중재 접기 */
+#ptIx .ix-painchart{display:block;max-width:640px;margin:6px 0 10px}
+#ptIx .ix-decneed{margin:4px 0 2px;padding:5px 9px;border-radius:6px;background:#fdf0d2;color:#8a5a00;font-size:12.5px;font-weight:700}
+#ptIx .ix-decmore{margin-top:6px}
+#ptIx .ix-decmore>summary{cursor:pointer;font-size:13px;font-weight:700;color:#1d3a6e}
+#ptIx #ixDecRef{margin:10px 0 4px;border:1px solid #e2ddd4;border-radius:10px;padding:8px 12px;background:#fbf9f5}
+/* 2026-11-23: ⑤ 회기 기록 — S·O·I·R·A/P 구역 */
+#ptIx .ix-soapsec{margin:10px 0 0;border:1px solid #e2ddd4;border-radius:10px;overflow:hidden;background:#fff}
+#ptIx .ix-soapsec.ap{border-color:#c9d3e3}
+#ptIx .ix-soaph{display:flex;align-items:center;gap:8px;padding:7px 12px;background:#f3f1ec;border-bottom:1px solid #e2ddd4;font-size:14.5px;font-weight:800;color:#12274a}
+#ptIx .ix-soapsec.ap .ix-soaph{background:#eef2f8}
+#ptIx .ix-soapL{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;background:#1d3a6e;color:#fff!important;-webkit-text-fill-color:#fff;font-size:13px;font-weight:800}
+#ptIx .ix-soapb{padding:10px 12px}
+#ptIx .ix-soapb>.ix-f.full{margin-top:8px}
+#ptIx .ix-reechk{display:flex;align-items:center;gap:8px;margin:10px 0 8px;padding:7px 10px;border:1px dashed #c9c2b6;border-radius:8px;font-size:13.5px;font-weight:700;color:#12274a;cursor:pointer}
+#ptIx .ix-sesref{margin-top:10px;padding:8px 10px;border:1px solid #c9d3e3;border-radius:8px;background:#f4f6fa}
+#ptIx .ix-sesrefi{padding:5px 0;border-top:1px dashed #d3dbe8;font-size:13px;line-height:1.6}
+#ptIx .ix-sesrefi:first-of-type{border-top:0}
+/* 2026-11-23: ④ 환자 교육·가정운동 — ① 교육 내용 · ② 가정운동 · ③ 교육 확인을 떨어진 카드로, 주제 제목 줄 색으로 근거 상태 */
+#ptIx .ix-t4card{margin:14px 0 0;border:1px solid #cfc9bf;border-radius:12px;background:#fff;overflow:hidden}
+#ptIx .ix-t4h{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f3f1ec;border-bottom:1px solid #e2ddd4}
+#ptIx .ix-t4h h3{margin:0;font-family:'Noto Serif KR',serif;font-size:18px;font-weight:700;color:#141414}
+html body:not(#t1):not(#t2):not(#t3):not(#t4):not(#t5):not(#t6):not(#t7) main #ptIx .ix-t4h h3{font-family:'Noto Serif KR',serif!important;font-size:18px!important;font-weight:700!important;color:#141414!important;-webkit-text-fill-color:#141414!important;margin:0!important;padding:0!important;border:0!important}
+#ptIx .ix-t4b{padding:12px 14px}
+#ptIx .ix-t4cnt{font-size:12.5px;font-weight:700;padding:2px 10px;border-radius:99px;background:#e3f3e6;color:#22663a}
+#ptIx .ix-t4cnt.warn{background:#fdf0d2;color:#8a5a00}
+#ptIx .ix-t4foot{display:flex;justify-content:flex-end;margin:12px 0 0}
+#ptIx .ix-edtopic{border:1px solid #e2ddd4;border-radius:10px;overflow:hidden;background:#fff}
+#ptIx .ix-edtopic textarea{border:0!important;border-top:1px solid #e2ddd4!important;border-radius:0!important;margin:0!important;width:100%;box-sizing:border-box}
+#ptIx .ix-edhead{border-radius:0!important}
+#ptIx .ix-edhead.ok{background:#e3f3e6!important}
+#ptIx .ix-edhead.no{background:#fdf0d2!important}
+#ptIx .ix-edno{font-size:11.5px;font-weight:700;padding:1px 9px;border-radius:99px;background:#fff;color:#8a5a00;border:1px solid #efc77c}
+#ptIx .ix-edtopic .ix-edpaper{margin:6px 10px}
+#ptIx .ix-autobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 10px;padding:10px 12px;border:1px solid #c9d3e3;border-radius:10px;background:#f4f6fa}
+#ptIx .ix-autobar .ix-mini{flex:1;min-width:240px}
+#ptIx .ix-gapbox{margin:0 0 10px;padding:8px 12px;border:1px solid #efc77c;border-radius:10px;background:#fff8e6;color:#6b4a00;font-size:13px;line-height:1.6}
+#ptIx .ix-autonote{margin:0 0 10px;padding:8px 12px;border-radius:8px;background:#fdf0d2;color:#6b4a00;font-size:13px;line-height:1.6}
+#ptIx .ix-steps{font-size:13px;color:#45423e;margin:0 0 8px}
+#ptIx .ix-wtag{display:inline-block;font-size:11px;font-weight:700;padding:0 7px;border-radius:99px;vertical-align:1px;white-space:nowrap}
+#ptIx .ix-wtag.auto{background:#fdf0d2;color:#8a5a00!important;-webkit-text-fill-color:#8a5a00!important}
+#ptIx .ix-wtag.ok{background:#e3f3e6;color:#22663a!important;-webkit-text-fill-color:#22663a!important}
+#ptIx .ix-whybox{display:block!important;margin-top:10px}
+#ptIx .ix-whybox .ix-whyhd{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:13.5px}
+#ptIx .ix-whybox textarea{width:100%;box-sizing:border-box;min-height:58px;font-size:13px;line-height:1.55;padding:8px 10px}
+#ptIx .ix-whybox .ix-mis{font-size:12.5px;color:#8a5a00;margin-top:6px;font-weight:700}
+#ptIx .ix-whybox .ix-whyft{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px}
+#ptIx .ix-lhelp{margin-top:10px;font-size:12.5px;color:#5b6b85}
+#ptIx .ix-lhelp>summary{cursor:pointer;font-weight:700;color:#1d3a6e}
+#ptIx .ix-lhelp>div{margin-top:6px;line-height:1.6}
+#ptIx .ix-lchip.ix-lchip-off{opacity:.55;cursor:not-allowed;border-style:dashed!important}
+#ptIx .ix-edgl{display:inline-block;margin-left:4px;font-size:11px;font-weight:700;padding:0 6px;border-radius:99px;background:#fdf0d2;color:#8a5a00!important;-webkit-text-fill-color:#8a5a00!important}
+#ptIx .ix-decref{margin:10px 0 4px;border:1px solid #e2ddd4;border-radius:10px;padding:8px 12px;background:#fbf9f5}
+#ptIx .ix-decref>summary{cursor:pointer;font-weight:700;color:#1d3a6e;font-size:13.5px}
+#ptIx .ix-decc{padding:8px 0;border-top:1px dashed #e2ddd4;line-height:1.6}
+#ptIx .ix-decc:first-of-type{border-top:0}
+.ix-mcid{line-height:1.5;margin-top:3px}
+.ix-mcid a{color:#1d3a6e;text-decoration:underline}
+#treatmentPlanSection .pt-plan-src .pt-src-chs::before{content:'이 부분의 근거';margin-right:2px;font-weight:700}
+</style>
+<script id="pt-plan-src-js">
+/* 2026-11-23: 4-2 목표 · 4-3 중재·재평가 · 4-4 협력 · 4-5 교육 · 4-6 퇴원 — 부분마다 근거(자료·문헌) 표시.
+   치료계획을 다시 만들 때마다 새 환자 자료와 진단으로 다시 채움 */
+(function(){
+ const fl=cats=>{const F=(typeof ptLastFindings!=='undefined'&&ptLastFindings||[]).filter(f=>!cats||cats.includes(f.cat));return F.slice(0,6).map(f=>'· '+(f.source?'['+escU(f.source)+'] ':'')+escU(String(f.label).replace(/\s+/g,' '))+': '+escU(String(f.detail).replace(/\s+/g,' '))).join('<br>')+(F.length>6?`<br>· 외 ${F.length-6}건 (2-1 이상소견 목록에 모두 있음)`:'')};
+ const probs=()=>{const P=(typeof ptLastProblems!=='undefined'&&ptLastProblems||[]);return P.length?'· 2-2 문제목록: '+P.map((p,i)=>(i+1)+'. '+escU(p.title)).join(', '):''};
+ window.ptPlanSrcFill=function(){
+  const set=(id,k,dat,extra)=>{const el=document.getElementById(id);if(el)el.innerHTML=ptSrcHtml({cat:k,dat:dat||'· 자동 추출된 관련 자료 없음',extra},'','lit4x',k,[])};
+  /* 2026-11-23: 4-5 아래에 6-④ 가정운동·교육 근거 요약 (4-5 칸은 그대로 두고 요약만 따로) */
+  const S=(typeof ptIxState==='function'&&ptIxState())||{};const EV=S.ev||[],ED=S.edu||{},CARDS=S.cards||[];
+  const pShort=id=>{const e=EV.find(x=>x.id===id);if(!e)return null;const au=String(e.authors||'').trim(),a=au.split(/[,;]/)[0].trim();return [(a?a+(/[,;]/.test(au)?' 외':''):'')+(e.year?' ('+e.year+')':''),String(e.titleKo||e.title||'').slice(0,90),e.journal||'',e.pmid||'','']};
+  const TOP={explain:'질환·회복 과정 설명',daily:'일상·업무 조절',caution:'주의사항·중단 기준',worse:'증상 악화 시 대처'};
+  const edEx=[],seen=new Set();Object.entries(ED.evlinks||{}).forEach(([k,arr])=>(arr||[]).forEach(z=>{const r=pShort(z.id);if(!r)return;const key=z.id+k;if(seen.has(key))return;seen.add(key);r[1]=`[④ ${TOP[k]||k}] `+r[1]+(z.why?' — 연결 이유: '+z.why:'');edEx.push(r)}));
+  const e4=document.getElementById('ptEduFrom4');if(e4){const rows=ED.rows||[];
+   const tr=rows.map(r=>{const c=CARDS.find(x=>x.id===r.from);const n=c?(c.evid||[]).filter(id=>EV.some(e=>e.id===id)):[];const ci=c?CARDS.indexOf(c)+1:0;
+    const src=c&&c.dose?(Object.values(c.dose).some(x=>String((x||{}).stu||'').trim()&&!(x||{}).stuDraft)?'학생 제안':Object.values(c.dose).some(x=>String((x||{}).lit||'').trim())?'논문':'—'):'—';
+    return `<tr><td><b>${escU(r.name||'')}</b>${r.method?`<div class="pt-e4m">${escU(String(r.method).slice(0,120))}</div>`:''}</td><td>${escU(([r.reps,r.freq].filter(Boolean).join(' · ')||'—').replace(/회회/g,'회').replace(/세트세트/g,'세트'))}</td><td>${c?`③ ${ci}번 카드 · ${n.length?n.map(id=>escU((pShort(id)||[''])[0])).join(', '):'<span class="pt-e4w">논문 없음</span>'}`:'<span class="pt-e4w">직접 추가 · 근거 없음</span>'}</td><td>${src}</td></tr>`}).join('');
+   const topics=Object.keys(TOP).map(k=>{const n=((ED.evlinks||{})[k]||[]).filter(z=>EV.some(e=>e.id===z.id)).length;return `<span class="pt-e4t${n?' ok':''}">${TOP[k]} · ${n?'근거 '+n+'편':'근거 없음'}</span>`}).join('');
+   e4.innerHTML=`<div class="pt-e4h">가정운동·교육 근거 <span>(6 중재 ④에서 작성 · 자동 반영)</span></div>`+(rows.length?`<table class="pt-e4tbl"><thead><tr><th>가정운동</th><th style="width:18%">반복·빈도</th><th style="width:30%">근거</th><th style="width:11%">용량 출처</th></tr></thead><tbody>${tr}</tbody></table>`:`<div class="pt-e4empty">아직 가정운동이 없습니다. 6 중재 ④ 환자 교육·가정운동에서 [③ 운동 가져오기]로 만들면 여기에 표시됩니다.</div>`)+`<div class="pt-e4tops">교육 내용 근거: ${topics}</div>`}
+  set('ptSrcG42','g42',['· 4-1 치료목록의 문제와 우선순위',fl(['pain','mobility','strength','motorcontrol','activity','participation','gait','balance'])].filter(Boolean).join('<br>'));
+  set('ptSrcI43','i43',[probs(),'· 4-2 목표의 재평가 지표·시점',fl(null)].filter(Boolean).join('<br>'));
+  set('ptSrcC44','c44',['· 사전 의무기록(진단명·담당 의사·의뢰 정보)','· 안전성 소견과 의뢰 필요 여부(2-2)',fl(['safety'])].filter(Boolean).join('<br>'));
+  set('ptSrcE45','e45',['· 4-3 중재 내용(가정운동 빈도·용량)','· 문진의 악화·완화 요인과 생활·직업 정보(A 단계)',fl(['pain','activity'])].filter(Boolean).join('<br>'),edEx);
+  set('ptSrcD46','d46',['· 4-2 장기목표와 5 예후(최고 기능 수준·도달 기간)',fl(['activity','participation'])].filter(Boolean).join('<br>'));
+ };
+ if(typeof renderTreatmentPlan==='function'){const _o=renderTreatmentPlan;renderTreatmentPlan=function(){const r=_o.apply(this,arguments);try{ptPlanSrcFill()}catch(e){}return r}}
+ setTimeout(()=>{try{if(typeof ptLastProblems!=='undefined'&&ptLastProblems.length)ptPlanSrcFill()}catch(e){}},2000);
+ /* 2026-11-23: 6 중재 ④·③·② 내용이 바뀌면 4-5 요약을 다시 채움 (2.5초마다 바뀌었는지만 확인) */
+ let _h='';setInterval(()=>{try{if(typeof ptIxState!=='function')return;const S=ptIxState()||{};const h=JSON.stringify([S.edu&&S.edu.rows,S.edu&&S.edu.evlinks,(S.cards||[]).map(c=>[c.id,c.evid,c.dose]),(S.ev||[]).map(e=>e.id)]);if(h!==_h){_h=h;ptPlanSrcFill()}}catch(e){}},2500);
+})();
+</script><style id="pt-prio-color-css">
+/* 2026-11-23: 4-1 우선순위 3단계 색 — 1–2위 높음(분홍) · 3–5위 중간(노랑) · 6위 이하 낮음(회색), 숫자 아래 글자로도 표시 */
+html body:not(#d1):not(#d2):not(#d3):not(#d4):not(#d5):not(#d6) main #ptPlanProblems select.pt-priority-select[data-lv]{font-weight:800!important;border-width:1px!important;box-shadow:none!important}
+html body:not(#d1):not(#d2):not(#d3):not(#d4):not(#d5):not(#d6) main #ptPlanProblems select.pt-priority-select[data-lv="hi"]{background-color:#fde3e1!important;color:#9b2c24!important;-webkit-text-fill-color:#9b2c24!important;border-color:#f1b4b4!important}
+html body:not(#d1):not(#d2):not(#d3):not(#d4):not(#d5):not(#d6) main #ptPlanProblems select.pt-priority-select[data-lv="mid"]{background-color:#fdf0d2!important;color:#8a5a00!important;-webkit-text-fill-color:#8a5a00!important;border-color:#efc77c!important}
+html body:not(#d1):not(#d2):not(#d3):not(#d4):not(#d5):not(#d6) main #ptPlanProblems select.pt-priority-select[data-lv="lo"]{background-color:#eef0f3!important;color:#4b5563!important;-webkit-text-fill-color:#4b5563!important;border-color:#d5d9df!important}
+#ptPlanProblems .pt-prio-lv{display:block;margin-top:3px;font-size:11.5px;font-weight:700;text-align:center}
+#ptPlanProblems .pt-prio-lv.hi{color:#9b2c24}#ptPlanProblems .pt-prio-lv.mid{color:#8a5a00}#ptPlanProblems .pt-prio-lv.lo{color:#4b5563}
+@media print{#ptPlanProblems .pt-prio-lv{color:#000!important}}
+</style>
+<script id="pt-prio-color-js">
+/* 2026-11-23: 순위 값에 따라 색·글자(높음/중간/낮음)를 붙임. 순위를 바꾸거나 표를 다시 그려도 따라감 */
+(function(){
+ const LV=r=>r<=2?['hi','높음']:r<=5?['mid','중간']:['lo','낮음'];
+ function paint(){const box=document.getElementById('ptPlanProblems');if(!box)return;box.querySelectorAll('select.pt-priority-select').forEach(sel=>{const [c,t]=LV(+sel.value||99);if(sel.dataset.lv!==c)sel.dataset.lv=c;let sp=sel.parentElement.querySelector('.pt-prio-lv');if(!sp){sp=document.createElement('span');sel.after(sp)}if(sp.className!=='pt-prio-lv '+c)sp.className='pt-prio-lv '+c;if(sp.textContent!==t)sp.textContent=t})}
+ document.addEventListener('change',e=>{if(e.target.matches&&e.target.matches('#ptPlanProblems .pt-priority-select'))setTimeout(paint,0)});
+ function start(){const box=document.getElementById('ptPlanProblems');if(!box)return;paint();new MutationObserver(()=>paint()).observe(box,{childList:true,subtree:true})}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();
+</script><style id="pt-pgflow-css">
+/* 2026-11-23: 5 예후 — '예후 판단' 제목 상자(제목·안내 한 줄뿐)를 숨기고, 4단계 순서 안내 줄로 대신함 */
+#interventionSection.pt-split>.pt-subcard:first-child{display:none!important}
+#ptPrognosisView .pt-pgflow{margin:0 0 14px}
+#ptPrognosisView .pt-pgf-row{display:flex;align-items:stretch;gap:6px;flex-wrap:wrap}
+html body:not(#d1):not(#d2):not(#d3):not(#d4):not(#d5):not(#d6) main #ptPrognosisView button.pt-pgf-st{flex:1;min-width:140px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:9px 12px!important;border:1px solid #d9d3c8!important;border-radius:10px!important;background:#fff!important;color:#1f2937!important;-webkit-text-fill-color:#1f2937!important;box-shadow:none!important;cursor:pointer;font:inherit}
+html body:not(#d1):not(#d2):not(#d3):not(#d4):not(#d5):not(#d6) main #ptPrognosisView button.pt-pgf-st:hover{border-color:#1d3a6e!important;background:#f4f6fa!important}
+#ptPrognosisView .pt-pgf-n{font-size:12px;color:#5b6b85!important;-webkit-text-fill-color:#5b6b85!important}
+#ptPrognosisView .pt-pgf-t{font-size:15px;font-weight:800;color:#12274a!important;-webkit-text-fill-color:#12274a!important;margin-bottom:4px}
+#ptPrognosisView .pt-pgf-tg{font-size:11.5px;font-weight:700;padding:1px 9px;border-radius:99px}
+#ptPrognosisView .pt-pgf-tg.ok{background:#e3f3e6;color:#22663a!important;-webkit-text-fill-color:#22663a!important}
+#ptPrognosisView .pt-pgf-tg.need{background:#fdf0d2;color:#8a5a00!important;-webkit-text-fill-color:#8a5a00!important}
+#ptPrognosisView .pt-pgf-ar{display:flex;align-items:center;font-size:18px;color:#8a94a6}
+#ptPrognosisView .pt-pgf-desc{margin:8px 0 0;font-size:13px;color:#5b6b85}
+@media(max-width:760px){#ptPrognosisView .pt-pgf-ar{display:none}}
+</style>
+<script id="pt-pgflow-js">
+/* 2026-11-23: 예후 4단계 안내 — 누르면 해당 카드를 펼치고 화면 맨 위로 */
+document.addEventListener('click',function(e){const b=e.target.closest&&e.target.closest('#ptPrognosisView [data-pgjump]');if(!b)return;e.preventDefault();const cards=[...document.querySelectorAll('#ptPrognosisView .pt-pg-card')];const c=cards[+b.dataset.pgjump];if(!c)return;c.classList.remove('ix-ev-flash');void c.offsetWidth;c.classList.add('ix-ev-flash');if(window.ptScrollTop)ptScrollTop(c);else c.scrollIntoView({behavior:'smooth',block:'start'})});
+</script><script id="pt-cfold-collapsed-fix-js">
+/* 2026-11-23: 버그 수정 — 'C-1 자세 평가' 등 접기 카드(pt-cfold)의 제목을 누르면 예전 접기 기능('collapsed')이 같이 켜져,
+   카드는 펼쳐진 상태인데 내용이 숨는 문제. 접기 카드는 '눌러서 펼치기/접기'(pt-cshut) 하나로만 접고 펼치도록 'collapsed'를 늘 지움 */
+(function(){
+ function clean(sec){if(sec.classList.contains('pt-cfold')&&sec.classList.contains('collapsed'))sec.classList.remove('collapsed')}
+ function start(){document.querySelectorAll('.pt-cfold.collapsed').forEach(clean);
+  new MutationObserver(ms=>ms.forEach(m=>{if(m.type==='attributes'&&m.target.classList)clean(m.target)})).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class']})}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(start,500));else setTimeout(start,500);
+})();
+</script></body>
 </html>
