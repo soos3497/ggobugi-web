@@ -148,6 +148,125 @@
     var st = nload(), k = el.getAttribute('data-nk'); st[k] = st[k] || {}; st[k].memo = el.value; nsave(st);
   });
 
+  /* ================= 3) 연구 방법 정리: 연구대상 · 연구기간 · 실험·중재·연구 방법 · 통계 방법 =================
+     AI 를 쓰지 않고 초록의 구분 제목과 문장 단서어로 나눔(자동 분류 — 정확하지 않을 수 있음). 없으면 '보고되지 않음/원문 확인 필요' */
+  var RX = {
+    pop: /\b(participants?|patients?|subjects?|volunteers?|adults?|individuals?|women|men|males?|females?|students?|athletes?|workers?|aged|years? old|mean age|age[ds]?\b|recruited|enrolled|eligible|inclusion|exclusion|n\s*=\s*\d+)|\d+\s+(patients|participants|subjects|individuals|adults|women|men|people|volunteers|students)|대상자?|참여자|참가자|환자|피험자|\d+\s*명|모집|선정 기준|포함 기준|제외 기준|연령|\d+\s*세/i,
+    per: /\b(\d+[\s-]*(weeks?|months?|days?|years?|sessions?|visits?)|follow-?up|weekly|per week|times a week|twice|three times|period|duration|(from|between)\s+[A-Z]?[a-z]*\.?\s*\d{0,2},?\s*(19|20)\d\d|(19|20)\d\d\s*(to|and|–|-)\s*(19|20)\d\d|baseline and)|\d+\s*(주|개월|일|회기|년)|주\s*\d+\s*회|추적|기간|중재 전후|사전[·-]?사후/i,
+    int: /\b(randomi[sz]ed|randomly|allocated|assigned|groups?|intervention|control|placebo|sham|received|underwent|exercise|training|therapy|treatment|programs?|programmes?|protocol|manual|mobili[sz]ation|education|design|trial|cohort|cross-sectional|case series|systematic review|meta-analysis|searched|databases?|measured|assessed|outcomes?|evaluated|instruments?|questionnaires?|scale)\b|무작위|배정|실험군|대조군|중재|운동|프로그램|치료|교육|설계|측정|평가|검색|데이터베이스|도구|설문/i,
+    stat: /\b(statistic|statistical|analy[sz](is|ed|es)|anova|ancova|t-?tests?|regression|chi-?square|mann-?whitney|wilcoxon|kruskal|friedman|mixed[- ]?(effects?\s*)?models?|linear (mixed )?models?|generali[sz]ed estimating|spss|stata|sas\b|intention-to-treat|per-protocol|effect sizes?|cohen'?s d|standardi[sz]ed mean difference|smd|heterogeneity|i2|i²|random-effects?|fixed-effects?|pooled|correlation|pearson|spearman|icc|bonferroni|significance (level|was set))\b|통계|분석|검정|유의수준|회귀|분산분석|효과 크기|상관/i
+  };
+  var STAT_P = /\bp\s*[<≤=]\s*0?\.\d+/i;
+  function splitS(t) { return String(t || '').replace(/\s+/g, ' ').trim().split(/(?<=[.!?])\s+(?=[A-Z가-힣(\d])/).map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 3; }); }
+  function chipsOf(k, sents) {
+    var re = k === 'pop' ? /(n\s*=\s*\d+|\d+\s+(patients|participants|subjects|individuals|adults|women|men|people|volunteers|students)|mean (\[SD\] )?age[^,;)]*\d+(\.\d+)?|\d+\s*명|\d+\s*세)/gi
+      : k === 'per' ? /(\d+[\s-]*(weeks?|months?|days?|years?|sessions?)|follow-?up at [^.;]+?(months|weeks)|(from|between)\s+[A-Z][a-z]+\.?\s*\d{0,2},?\s*(19|20)\d\d,?\s*(to|and)\s*[A-Z][a-z]+\.?\s*\d{0,2},?\s*(19|20)\d\d|\d+\s*(주|개월|회기)|주\s*\d+\s*회)/gi : null;
+    if (!re) return [];
+    var out = []; sents.forEach(function (s) { (s.match(re) || []).forEach(function (m) {
+      m = m.trim();
+      /* 기간 칩에서 나이(예: aged 18 to 65 years)는 뺌 */
+      if (k === 'per' && /^\d+\s*-?\s*years?$/i.test(m) && (parseInt(m, 10) >= 10 || new RegExp('aged[^.]{0,20}' + parseInt(m, 10) + '\\s*years?', 'i').test(s))) return;
+      if (out.indexOf(m) < 0 && out.length < 6) out.push(m);
+    }); });
+    return out;
+  }
+  /* sections: [{label, sents:[...] , kind:'method'|'result'|'other'}] */
+  function classify(sections) {
+    var res = { pop: [], per: [], int: [], stat: [] };
+    var add = function (k, s) { if (res[k].indexOf(s) < 0) res[k].push(s); };
+    sections.forEach(function (sec) {
+      var L = String(sec.label || '').toUpperCase(), lk = sec.label || '';
+      var isMethod = sec.kind === 'method' || /METHOD|DESIGN|SETTING|PARTICIPANT|SUBJECT|PATIENT|INTERVENTION|MEASURE|OUTCOME|PROCEDURE|STATISTIC|ANALYSIS|DATA SOURCE|STUDY SELECTION|ELIGIB|방법|대상|중재|설계|측정|분석/.test(L + lk);
+      var isResult = sec.kind === 'result' || /RESULT|FINDING|결과/.test(L + lk);
+      sec.sents.forEach(function (s) {
+        if (isMethod) {
+          if (/PARTICIPANT|SUBJECT|PATIENT|ELIGIB|대상/.test(L + lk) || RX.pop.test(s)) add('pop', s);
+          if (RX.per.test(s)) add('per', s);
+          if (/STATISTIC|ANALYSIS|분석/.test(L + lk) || RX.stat.test(s)) add('stat', s);
+          if (/INTERVENTION|DESIGN|MEASURE|OUTCOME|PROCEDURE|SETTING|DATA SOURCE|STUDY SELECTION|중재|설계|측정/.test(L + lk) || RX.int.test(s)) { if (!(/STATISTIC/.test(L)) ) add('int', s); }
+        } else if (isResult) {
+          /* 결과 문장 중 인원·성별·나이(연구대상 정보)와 통계 검정 이름만 */
+          if (/\b(men|women|males?|females?|mean (\[SD\] )?age|aged|n\s*=\s*\d+)\b|\d+\s+(patients|participants|subjects)\s+(were|completed|enrolled|randomi)|\d+\s*명|남성|여성/i.test(s)) add('pop', s);
+          if (/\b(anova|ancova|t-?test|regression|chi-?square|mann-?whitney|wilcoxon|mixed model|intention-to-treat)\b/i.test(s)) add('stat', s);
+        }
+      });
+    });
+    return res;
+  }
+  var MLAB = [['pop', '① 연구대상'], ['per', '② 연구기간'], ['int', '③ 실험·중재·연구 방법'], ['stat', '④ 통계 방법']];
+  function methHtml(res, evIdx) {
+    var empty = MLAB.every(function (m) { return !res[m[0]].length; });
+    return '<div class="wa-meth" data-ix-own><div class="wa-meth-h"><b>연구 방법 정리</b> <span class="ix-tag">문장 단서어로 자동 분류 · 정확하지 않을 수 있음</span>' + (evIdx != null ? '<button type="button" class="ix-btn ghost sm wa-mfill" data-mfill="' + evIdx + '">근거 칸에 채우기(빈 칸만)</button>' : '') + '</div>' +
+      (empty ? '<p class="wa-muted">초록에서 연구 방법 문장을 찾지 못했습니다 — 보고되지 않음/원문 확인 필요</p>' : '') +
+      MLAB.map(function (m) {
+        var list = res[m[0]], chips = chipsOf(m[0], list);
+        return '<div class="wa-mrow"><div class="wa-mk">' + m[1] + '</div><div class="wa-mv">' + (chips.length ? '<div class="wa-chips">' + chips.map(function (c) { return '<span>' + esc(c) + '</span>'; }).join('') + '</div>' : '') +
+          (list.length ? list.slice(0, 4).map(function (s) { return /[가-힣]/.test(s) ? '<div class="ix-sent"><div class="en">' + esc(s) + '</div></div>' : '<div class="ix-sent"><div class="en">' + esc(s) + '</div><div class="ko wait hold" data-tr="' + esc(s) + '"></div></div>'; }).join('') + (list.length > 4 ? '<small class="wa-muted">외 ' + (list.length - 4) + '문장</small>' : '') : '<span class="wa-muted">초록에 보고되지 않음 · 원문 확인 필요</span>') + '</div></div>';
+      }).join('') + '</div>';
+  }
+  /* 검색 결과·KCI 미리보기의 초록 표(.ix-abs) */
+  function procAbs(abs) {
+    if (abs.getAttribute('data-wa-meth')) return;
+    var rows = [].slice.call(abs.querySelectorAll('.ix-abs-row'));
+    if (!rows.length) return;
+    var secs = rows.map(function (r) {
+      var k = ((r.querySelector('.ix-abs-k') || {}).textContent || '').trim();
+      var sents = [].slice.call(r.querySelectorAll('.ix-sent .en')).map(function (e) { return e.textContent.trim(); });
+      if (!sents.length) sents = splitS(((r.querySelector('.ix-abs-v') || {}).textContent || ''));
+      return { label: k, sents: [].concat.apply([], sents.map(splitS)), kind: /방법/.test(k) ? 'method' : /결과/.test(k) ? 'result' : 'other' };
+    });
+    var hasM = secs.some(function (s) { return s.kind === 'method'; });
+    if (!hasM) secs.forEach(function (s) { if (s.kind === 'other') s.kind = 'method'; });
+    var res = classify(secs);
+    var after = rows.filter(function (r) { return /방법/.test(((r.querySelector('.ix-abs-k') || {}).textContent || '')); }).pop() || rows[rows.length - 1];
+    var w = document.createElement('div'); w.innerHTML = methHtml(res, null);
+    after.parentNode.insertBefore(w.firstChild, after.nextSibling);
+    abs.setAttribute('data-wa-meth', '1');
+  }
+  /* 근거 목록 카드: 저장된 초록(구분 제목 포함)으로 정리 + 근거 칸 채우기 */
+  function evSections(x) {
+    var a = x.abs;
+    if (Array.isArray(a)) return a.map(function (p) { return { label: p.label || '', sents: splitS(p.text), kind: /RESULT|FINDING/i.test(p.label || '') ? 'result' : /BACKGROUND|IMPORTANCE|INTRODUCTION|OBJECTIVE|PURPOSE|AIM|CONCLUSION|REGISTRATION|CONTEXT/i.test(p.label || '') ? 'other' : 'method' }; });
+    var t = String(a || ''); if (!t.trim()) return [];
+    /* 문자열 초록: 'METHODS:' 같은 제목으로 나눔, 없으면 전체를 방법 후보로 */
+    var parts = t.split(/\b(BACKGROUND|OBJECTIVES?|PURPOSE|METHODS?|DESIGN|PARTICIPANTS|INTERVENTIONS?|RESULTS?|CONCLUSIONS?|연구 ?배경|목적|연구 ?방법|방법|결과|결론)\s*[:：]/i);
+    if (parts.length < 3) return [{ label: '', sents: splitS(t), kind: 'method' }];
+    var out = []; for (var i = 1; i < parts.length; i += 2) out.push({ label: parts[i], sents: splitS(parts[i + 1]), kind: /RESULT|결과/i.test(parts[i]) ? 'result' : /BACKGROUND|OBJECTIVE|PURPOSE|CONCLUSION|배경|목적|결론/i.test(parts[i]) ? 'other' : 'method' });
+    return out;
+  }
+  function procEvidence() {
+    if (typeof window.ptIxState !== 'function') return;
+    var S = window.ptIxState(), cards = [].slice.call(document.querySelectorAll('#ixEvidence .ix-ev'));
+    cards.forEach(function (card, i) {
+      var x = (S.ev || [])[i]; if (!x) return;
+      var key = (x.id || i) + '';
+      var old = card.querySelector(':scope > .wa-meth');
+      if (old && old.getAttribute('data-k') === key) return;
+      if (old) old.remove();
+      var secs = evSections(x); if (!secs.length) return;
+      var w = document.createElement('div'); w.innerHTML = methHtml(classify(secs), i); var el = w.firstChild; el.setAttribute('data-k', key);
+      var grid = card.querySelector('.ix-ev-grid'); card.insertBefore(el, grid || null);
+    });
+  }
+  function fillEvidence(i) {
+    var S = window.ptIxState(), x = S.ev[i]; if (!x) return;
+    var res = classify(evSections(x)), card = document.querySelectorAll('#ixEvidence .ix-ev')[i]; if (!card) return;
+    /* 연구대상: 대상 단서어가 가장 많은 문장(예: 'aged 18 to 65', 'patients with …', 'inclusion') 을 고름 */
+    var popScore = function (s) { return (s.match(/aged|age\b|years|men|women|participants? (included|were)|patients with|inclusion|exclusion|eligible|n\s*=|대상|명|세/gi) || []).length - (/trial|design|conducted|organi[sz]ed|hospital/i.test(s) ? 1 : 0); };
+    var bestPop = res.pop.slice().sort(function (a, b) { return popScore(b) - popScore(a); })[0] || '';
+    var map = { pop: (chipsOf('pop', res.pop).join(', ') ? chipsOf('pop', res.pop).join(', ') + ' — ' : '') + bestPop, fu: chipsOf('per', res.per).join(', ') || res.per[0] || '', ig: res.int.filter(function (s) { return /group|intervention|received|randomi|실험군|중재/i.test(s); }).slice(0, 2).join(' ') || res.int[0] || '' };
+    var n = 0;
+    Object.keys(map).forEach(function (f) {
+      var ta = card.querySelector('[data-f="' + f + '"]'); if (!ta || !map[f] || String(ta.value || '').trim()) return;
+      ta.value = '[초록에서 자동 정리 · 원문 확인 필요] ' + map[f]; ta.dispatchEvent(new Event('input', { bubbles: true })); n++;
+    });
+    toast(n ? n + '칸을 채웠습니다(빈 칸만). 원문과 맞는지 꼭 확인하세요.' : '채울 빈 칸이 없거나 초록에서 찾지 못했습니다.');
+  }
+  document.addEventListener('click', function (e) { var b = e.target.closest && e.target.closest('[data-mfill]'); if (b) fillEvidence(+b.getAttribute('data-mfill')); });
+  var methT = null;
+  function methSoon() { clearTimeout(methT); methT = setTimeout(function () { try { [].forEach.call(document.querySelectorAll('#ptIx .ix-abs'), procAbs); procEvidence(); } catch (e) { console.warn('[addons] meth', e); } }, 250); }
+  (function watch() { var ix = document.getElementById('ptIx'); if (!ix) { setTimeout(watch, 800); return; } new MutationObserver(function (ms) { if (ms.some(function (m) { return !(m.target.closest && m.target.closest('.wa-meth')); })) methSoon(); }).observe(ix, { childList: true, subtree: true }); methSoon(); })();
+
   /* 환자가 바뀌거나 화면이 다시 그려져도 계속 붙어 있게 */
   var lastCur = null, lastSig = '';
   setInterval(function () {

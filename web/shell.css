@@ -297,3 +297,15 @@ html body main:not(#wa1):not(#wa2):not(#wa3):not(#wa4) .wa-tabs button.on{backgr
 .wa-warn{margin-top:5px;font-size:12px;font-weight:700;color:#9a3a12}
 @media (max-width:760px){.wa-grid{grid-template-columns:1fr}}
 @media print{.wa-evadd{display:none!important}}
+/* 연구 방법 정리 (web/addons.js) */
+.wa-meth{margin:8px 0 10px;border:1px solid #d6deee;border-left:4px solid #1d3a6e;border-radius:10px;background:#f7f9ff;padding:8px 10px;font-family:"Noto Sans KR","Malgun Gothic",sans-serif}
+.wa-meth-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-bottom:6px}
+.wa-meth-h b{font-size:14px;color:#1d3a6e}
+.wa-meth-h .wa-mfill{margin-left:auto}
+.wa-mrow{display:grid;grid-template-columns:150px 1fr;gap:8px;padding:6px 0;border-top:1px dashed #d6deee}
+.wa-mk{font-size:13px;font-weight:800;color:#1f2937}
+.wa-mv{font-size:13px;line-height:1.55;color:#374151}
+.wa-mv .ix-sent{margin-bottom:4px}
+.wa-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px}
+.wa-chips span{font-size:12px;font-weight:700;color:#1d3a6e;background:#e6edfb;border-radius:999px;padding:2px 8px}
+@media (max-width:760px){.wa-mrow{grid-template-columns:1fr}}
