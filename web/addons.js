@@ -267,10 +267,139 @@
   function methSoon() { clearTimeout(methT); methT = setTimeout(function () { try { [].forEach.call(document.querySelectorAll('#ptIx .ix-abs'), procAbs); procEvidence(); } catch (e) { console.warn('[addons] meth', e); } }, 250); }
   (function watch() { var ix = document.getElementById('ptIx'); if (!ix) { setTimeout(watch, 800); return; } new MutationObserver(function (ms) { if (ms.some(function (m) { return !(m.target.closest && m.target.closest('.wa-meth')); })) methSoon(); }).observe(ix, { childList: true, subtree: true }); methSoon(); })();
 
+  /* ================= 4) 가상 경과 시나리오 (연습용) =================
+     ⑤ 회기 기록 8회(4·8회기 재평가) + ④ 교육 확인 + ⑥ 결정 + 7 결과 중간·종료값을 '그럴듯하게' 채움.
+     모든 값에 '가상 경과(연습용) — 실제 측정값 아님' 표시. 직접 기록한 회기가 있으면 만들지 않음(덮어쓰지 않음). [가상 경과 지우기]로 원래대로. */
+  var SIMTYPES = [['good', '순조로운 호전'], ['slow', '느린 호전(정체)'], ['flare', '중간에 악화 후 회복']];
+  var SIM_NOTE = '⚠ 가상 경과(연습용) — 실제 측정값이 아닙니다';
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  function readIndicators() {
+    return $$('#ptOx [data-b^="out.mid."]').map(function (inp) {
+      var key = inp.getAttribute('data-b').slice(8), grid = inp.closest('.ox-grid'), box = grid ? grid.parentElement : null, txt = box ? box.innerText : '';
+      var v = function (sel) { var e = grid && grid.querySelector(sel); var n = e ? parseFloat(e.value != null ? e.value : e.textContent) : NaN; return isNaN(n) ? null : n; };
+      return { key: key, name: (txt.split('\n')[0] || key).trim(), low: /낮을수록/.test(txt), init: v('.ox-v'), stg: v('[data-b="out.tgt.' + key + '.s"]'), ltg: v('[data-b="out.tgt.' + key + '.l"]'), unit: (txt.match(/좋음\s*·\s*([^\n]+)/) || [0, ''])[1] };
+    }).filter(function (x) { return x.init !== null; });
+  }
+  function bounds(ind) {
+    var k = ind.key, u = ind.unit || '';
+    if (/^nrs/.test(k) || /\/10/.test(u)) return [0, 10, 0];
+    if (k === 'ndi' || /\/50/.test(u)) return [0, 50, 0];
+    if (/^psfs/.test(k)) return [0, 10, 0];
+    if (/^mmt/.test(k)) return [0, 5, 0];
+    if (/^rom/.test(k) || /°/.test(u)) return [0, 180, 0];
+    if (k === 'speed') return [0.2, 1.8, 2];
+    if (k === 'cva' || k === 'dnf' || k === 'tug') return [0, 200, 1];
+    return [0, 1000, 0];
+  }
+  function stepVal(ind, frac) {
+    var b = bounds(ind), init = ind.init;
+    /* 목표가 없으면 작게(15%)만 변하게 — 이미 정상인 값(TUG·보행속도 등)이 비현실적으로 좋아지지 않도록 */
+    var ltg = ind.ltg !== null ? ind.ltg : ind.stg !== null ? (ind.low ? Math.min(ind.stg, init - (init - ind.stg) * 1.3) : Math.max(ind.stg, init + (ind.stg - init) * 1.3)) : (ind.low ? init * 0.85 : init * 1.15);
+    if (ind.low && ind.ltg === null && ind.stg !== null) ltg = Math.max(ltg, ind.stg * 0.5);
+    var v = init + (ltg - init) * frac;
+    v = Math.max(b[0], Math.min(b[1], v));
+    var p = Math.pow(10, b[2]); return Math.round(v * p) / p;
+  }
+  function setSel(sel, txt) { var s = typeof sel === 'string' ? $(sel) : sel; if (!s) return; s.value = txt; s.dispatchEvent(new Event('change', { bubbles: true })); }
+  async function makeSim(type) {
+    if (typeof window.ptIxState !== 'function') { toast('중재 화면이 아직 준비되지 않았습니다.'); return; }
+    var S = window.ptIxState(); S.ses = S.ses || [];
+    if (S.ses.some(function (s) { return !s.sim; })) { alert('직접 기록한 회기가 있어서 가상 경과를 만들지 않았습니다(덮어쓰지 않음).\n연습하려면 새 가상 환자를 만들어서 해 보세요.'); return; }
+    if (S.sim && S.sim.on && !confirm('이미 만든 가상 경과를 지우고 새로 만들까요?')) return;
+    if (S.sim && S.sim.on) removeSim(true);
+    /* ③ 중재 카드가 없으면 4-3 계획에서 불러옴 */
+    if (!(S.cards || []).length) { try { window.ptIxShowTab(3); await wait(300); var ib = $('#ptIx [data-a="importPlan"]'); if (ib) { var c0 = window.confirm; window.confirm = function () { return true; }; ib.click(); window.confirm = c0; } await wait(500); } catch (e) { } S = window.ptIxState(); }
+    var inds = readIndicators();
+    var backup = JSON.parse(JSON.stringify({ out: S.out || {}, edu: S.edu || {}, dec: S.dec || [] }));
+    var start = new Date((fv('date') || new Date().toISOString().slice(0, 10)) + 'T09:00:00');
+    var nrsInd = inds.filter(function (i) { return i.key === 'nrs'; })[0] || { key: 'nrs', init: 5, stg: null, ltg: null, low: true, unit: '/10' };
+    var curve = { good: [0.15, 0.3, 0.45, 0.62, 0.72, 0.82, 0.9, 1.0], slow: [0.05, 0.12, 0.18, 0.3, 0.36, 0.42, 0.5, 0.62], flare: [0.15, 0.3, 0.05, 0.4, 0.55, 0.7, 0.82, 0.92] }[type];
+    var cards = (S.cards || []).filter(function (c) { return !/확정 후 중재 선택|중재 미정|평가 지표 확정/.test(c.name || ''); });
+    var bp = fv('bp') || '120/78', hr = parseInt(fv('hr'), 10) || 72;
+    S.ses = [];
+    for (var i = 0; i < 8; i++) {
+      var d = new Date(start.getTime() + (i * 7 + 2) * 864e5), f = curve[i], fPrev = i ? curve[i - 1] : 0;
+      var pre = stepVal(nrsInd, fPrev), post = Math.max(0, pre - (type === 'slow' ? 0 : 1));
+      var flare = type === 'flare' && i === 2;
+      if (flare) { pre = stepVal(nrsInd, 0.2); post = Math.min(10, pre + 2); }
+      var reeval = i === 3 || i === 7, meas = {};
+      if (reeval) inds.forEach(function (ind) { meas[ind.key] = String(stepVal(ind, curve[i] * rnd(0.95, 1.03))); });
+      meas.nrs = String(pre);
+      S.ses.push({
+        id: 'sim' + i + Date.now().toString(36), sim: true, no: i + 1, date: d.toISOString().slice(0, 10), team: '가상 경과(연습용)', rec: '가상', _open: i === 7,
+        home: type === 'good' ? '주 5일 중 ' + (i < 2 ? 3 : 5) + '일 수행' : type === 'slow' ? '주 5일 중 2~3일 수행(시간 부족)' : (i === 2 ? '통증 걱정으로 2일만 수행' : '주 5일 중 4일 수행'),
+        prePain: String(pre), postPain: String(post), preFunc: i === 0 ? '초기 평가와 비슷' : (f > fPrev ? '지난 회기보다 일상 동작이 조금 편해짐' : '지난 회기와 비슷'),
+        bp: bp, hr: String(hr + Math.round(rnd(-4, 4))), redflag: '없음', reeval: reeval,
+        items: cards.map(function (c) { var dose = Object.keys(c.dose || {}).map(function (k) { var o = c.dose[k]; return o && (o.stu || o.lit) ? (o.stu || o.lit) : ''; }).filter(Boolean).join(', '); return { cardId: c.id, name: c.name, cls: c.cls, plan: dose, done: !(flare && /운동/.test(c.cls || '')), dose: flare && /운동/.test(c.cls || '') ? '' : (dose || '계획대로'), assist: i < 3 ? '구두·촉각 피드백' : '구두 피드백', min: String(Math.round(rnd(8, 15))), dev: flare && /운동/.test(c.cls || '') ? '통증 증가로 이번 회기는 운동 강도를 낮춤' : '' }; }),
+        immed: flare ? '운동 중 통증 증가, 휴식 후 일부 감소' : '중재 직후 통증 감소, 움직임이 편해짐',
+        adverse: flare ? '운동 뒤 통증 NRS 2점 증가(다음날까지 지속)' : '', adResp: flare ? '운동 강도·반복 감량, 냉찜질, 다음 회기 재확인' : '',
+        next: flare ? '다음날까지 통증 지속, 이틀 뒤 원래대로' : (type === 'slow' ? '큰 변화 없음' : '다음날 근육통 경미, 하루 만에 회복'),
+        assess: reeval ? (i === 3 ? '4주 재평가 — ' : '8주 재평가 — ') + inds.slice(0, 4).map(function (ind) { return ind.name.split(' (')[0] + ' ' + ind.init + '→' + meas[ind.key]; }).join(', ') : (flare ? '운동 후 통증 증가 — 감량 필요' : '통증 ' + pre + '→' + post + ', 이상반응 없음'),
+        plan: flare ? '감량' : reeval && i === 3 ? (type === 'slow' ? '변경' : '진행') : reeval ? '유지' : '유지',
+        planWhy: flare ? '통증 2점 증가 — ③ 감량 기준 적용' : reeval && i === 3 ? (type === 'slow' ? '4주 변화가 작아 중재 방법·용량 조정' : '목표에 가까워져 강도를 한 단계 올림') : '현재 용량 유지',
+        add: SIM_NOTE, meas: meas
+      });
+    }
+    S.edu = S.edu || {};
+    S.edu.understand = type === 'slow' ? '부분적으로 이해함' : '이해함';
+    S.edu.redemo = type === 'good' ? '정확하게 수행' : '부분적으로 수행';
+    S.edu.adherence = type === 'good' ? '계획대로 수행(80% 이상)' : '일부 수행(50~80%)';
+    S.edu.barriers = (type === 'slow' ? '시간 부족, 방법을 자주 잊음' : type === 'flare' ? '통증이 심해질까 걱정' : '특별한 어려움 없음') + ' [가상 경과(연습용)]';
+    S.dec = (S.dec || []).filter(function (x) { return !x.sim; });
+    var now = new Date().toLocaleString('ko-KR');
+    if (type === 'flare') S.dec.push({ sim: true, when: now, ses: '3회기', choice: '감량', reason: '[가상 경과] 운동 후 통증 2점 증가 — 재검진 필요성 확인, 위험신호 없음, 강도 감량' });
+    S.dec.push({ sim: true, when: now, ses: '4회기', choice: type === 'slow' ? '변경' : '진행', reason: type === 'slow' ? '[가상 경과] 4주 변화가 MCID 에 못 미쳐 중재 방법·용량 변경' : '[가상 경과] 4주 단기목표에 가까워 강도 한 단계 진행' });
+    S.dec.push({ sim: true, when: now, ses: '8회기', choice: type === 'slow' ? '의뢰 검토' : '유지', reason: type === 'slow' ? '[가상 경과] 8주에도 호전이 작아 재평가·의뢰 검토' : '[가상 경과] 장기목표에 근접 — 가정운동 중심으로 유지' });
+    S.sim = { on: true, type: type, when: now, backup: backup };
+    try { window.ptIxSave(); window.ptIxReload(); } catch (e) { console.warn(e); }
+    await wait(600);
+    /* 7 결과: 기록지의 '회기 기록에서 가져오기'로 중간=4회기, 종료=8회기 */
+    try {
+      var c1 = window.alert; window.alert = function () { };
+      setSel('#oxMidSes', '4'); var pm = $('#ptOx [data-a="pullMid"]'); if (pm) pm.click(); await wait(300);
+      setSel('#oxEndSes', '8'); var pe = $('#ptOx [data-a="pullEnd"]'); if (pe) pe.click(); await wait(300);
+      window.alert = c1;
+      var S2 = window.ptIxState(); S2.out = S2.out || {}; S2.out.summary = '[가상 경과(연습용) — 실제 측정값 아님] ' + String(S2.out.summary || '').replace(/^\[가상 경과[^\]]*\]\s*/, ''); window.ptIxSave(); window.ptIxReload();
+    } catch (e) { console.warn('[addons] pull', e); }
+    toast('가상 경과(' + (SIMTYPES.filter(function (x) { return x[0] === type; })[0] || [0, ''])[1] + ')를 만들었습니다 — 연습용, 실제 측정값 아님');
+  }
+  function removeSim(silent) {
+    var S = window.ptIxState(); if (!S.sim || !S.sim.on) { if (!silent) toast('지울 가상 경과가 없습니다.'); return; }
+    if (!silent && !confirm('가상 경과(회기 기록·교육 확인·결정·결과 중간/종료값)를 지우고 만들기 전으로 되돌릴까요?')) return;
+    var b = S.sim.backup || {};
+    S.ses = (S.ses || []).filter(function (s) { return !s.sim; });
+    S.out = b.out || {}; S.edu = b.edu || {}; S.dec = (b.dec || []).filter(function (x) { return !x.sim; });
+    delete S.sim;
+    try { window.ptIxSave(); window.ptIxReload(); } catch (e) { }
+    if (!silent) toast('가상 경과를 지웠습니다.');
+  }
+  function simBar() {
+    var S = typeof window.ptIxState === 'function' ? window.ptIxState() : null, on = S && S.sim && S.sim.on;
+    var t = on ? (SIMTYPES.filter(function (x) { return x[0] === S.sim.type; })[0] || [0, ''])[1] : '';
+    return '<div class="wa-sim' + (on ? ' on' : '') + '" data-ix-own>' + (on ? '<b>' + SIM_NOTE + '</b><span>경과 유형: ' + esc(t) + ' · 만든 때 ' + esc(S.sim.when) + '</span><button type="button" class="ix-btn ghost sm" data-simdel>가상 경과 지우기</button>'
+      : '<b>🧪 가상 경과 시나리오 만들기</b><span>연습용: ⑤ 회기 기록 8회(4·8회기 재평가) · 교육 확인 · ⑥ 결정 · 7 결과 중간/종료값을 그럴듯하게 채웁니다(실제 측정값 아님 표시).</span><select data-simtype>' + SIMTYPES.map(function (x) { return '<option value="' + x[0] + '">' + x[1] + '</option>'; }).join('') + '</select><button type="button" class="ix-btn sm" data-simmake>만들기</button>') + '</div>';
+  }
+  function ensureSimBars() {
+    var targets = [$('#ptIx .ix-pane[data-pane="5"]'), $('#ptIx .ix-pane[data-pane="6"]'), $('#ptOx')];
+    var S = typeof window.ptIxState === 'function' ? window.ptIxState() : null, sig = S && S.sim && S.sim.on ? 'on' + S.sim.when : 'off';
+    targets.forEach(function (t) {
+      if (!t) return; var bar = t.querySelector(':scope > .wa-sim');
+      if (bar && bar.getAttribute('data-sig') === sig) return;
+      if (bar) bar.remove();
+      var w = document.createElement('div'); w.innerHTML = simBar(); var el = w.firstChild; el.setAttribute('data-sig', sig); t.insertBefore(el, t.firstChild);
+    });
+  }
+  document.addEventListener('click', function (e) {
+    var mk = e.target.closest && e.target.closest('[data-simmake]');
+    if (mk) { var sel = mk.parentElement.querySelector('[data-simtype]'); makeSim(sel ? sel.value : 'good'); return; }
+    if (e.target.closest && e.target.closest('[data-simdel]')) removeSim(false);
+  });
+
   /* 환자가 바뀌거나 화면이 다시 그려져도 계속 붙어 있게 */
   var lastCur = null, lastSig = '';
   setInterval(function () {
-    ensurePanel(); ensureNeuro();
+    ensurePanel(); ensureNeuro(); try { ensureSimBars(); } catch (e) { }
     var c = null; try { c = sessionStorage.getItem('ggobugi_web_cur'); } catch (e) { }
     /* 환자가 바뀌었거나 기록지 값(감각·반사·근력)이 늦게 채워지면 표를 다시 그림 — 입력 중일 때는 건드리지 않음 */
     var sig = ''; try { sig = JSON.stringify(initNeuro().map(function (r) { return r.init + '|' + r.note; })); } catch (e) { }
