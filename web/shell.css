@@ -339,3 +339,13 @@ html body:not(#z1):not(#z2):not(#z3):not(#z4):not(#z5):not(#z6):not(#z7):not(#z8
 /* ④ 환자 교육·가정운동: '②·③으로 교육·가정운동 자동 설계' 버튼 숨김 (사용자 요청 2026-11-24, 기록지 파일은 그대로) */
 #ptIx .ix-pane[data-pane="4"] .ix-autobar:has(>[data-a="eduAuto"]){display:none!important}
 #ptIx [data-a="eduAuto"]{display:none!important}
+/* FITT-VP 용량 입력 (원래 용량 표는 숨김) */
+#ptIx .wa-dose-hide{display:none!important}
+.wa-ff{display:block;margin:0 0 6px}
+.wa-ff em{display:block;font-style:normal;font-size:12px;color:#5b6b85;margin-bottom:2px}
+html body:not(#z1):not(#z2):not(#z3):not(#z4):not(#z5):not(#z6):not(#z7):not(#z8):not(#z9) main #ptIx .wa-ff input{width:100%;box-sizing:border-box;border:1px solid #c9d2e3!important;border-radius:6px!important;padding:6px 8px!important;font-size:13.5px!important;background:#fff!important;color:#141414!important;-webkit-text-fill-color:#141414!important}
+html body:not(#z1):not(#z2):not(#z3):not(#z4):not(#z5):not(#z6):not(#z7):not(#z8):not(#z9) main #ptIx .wa-ff input::placeholder{color:#7b8496!important;-webkit-text-fill-color:#7b8496!important}
+.wa-flit{display:block;font-size:11.5px;color:#22663a;margin-top:2px}
+.wa-fcalc{font-size:12.5px;font-weight:700;color:#1d3a6e}
+.wa-fcalc:empty{display:none}
+.wa-fprog{font-size:13.5px;line-height:1.55;white-space:pre-line;margin-bottom:4px}

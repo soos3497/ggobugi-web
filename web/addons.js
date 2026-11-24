@@ -292,60 +292,92 @@
     try { window.ptIxSave(); window.ptIxReload(); } catch (e) { }
   }
 
-  /* ================= 5) ③ 중재 카드: FITT-VP 한눈에 보기 =================
-     카드의 '용량' 표(학생 제안 → 없으면 논문 용량)와 '진행·감량 기준'을 FITT-VP 6칸으로 다시 보여 줌.
-     새 입력칸은 만들지 않음(읽기 전용) — 고칠 때는 위 용량 표에서 고침. */
+  /* ================= 5) ③ 중재 카드: FITT-VP 용량 =================
+     (2026-11-24 사용자 요청) 원래 '용량' 표(논문 용량·출처·학생 제안)는 숨기고, 이 FITT-VP 상자에서 바로 적음.
+     입력칸은 기록지와 같은 data-b="cards.N.dose.KEY.stu" 를 써서 기록지의 저장 방식 그대로 저장됨(새 저장 방식 없음).
+     원래 표의 칸(분류별 DOSE 항목)은 빠짐없이 6칸 중 하나에 배치. 논문 용량이 적혀 있으면 칸 아래에 작게 보여 줌.
+     P(진행)는 ⑤ 진행·감량 기준 칸을 그대로 보여 줌(두 곳에서 고치면 엉킬 수 있어 읽기 전용). */
   var FITT_MAP = {
-    '운동치료': { F: ['freq'], I: ['inten'], T: ['time', 'hold', 'rest'], Ty: ['type'] },
-    '기능·과제 훈련': { F: ['freq'], I: ['level', 'assist'], T: ['time'], Ty: ['task'] },
-    '수기치료': { F: ['freq'], I: ['grade'], T: ['dose'], Ty: ['tech', 'site'] },
-    '신경가동술': { F: ['freq'], I: [], T: [], Ty: ['tech', 'pos'] },
-    '물리적 인자': { F: ['freq'], I: ['param'], T: ['time'], Ty: ['kind', 'site'] },
-    '환자 교육': { F: ['count'], I: [], T: ['time'], Ty: ['topic', 'how'] },
-    '환경·인체공학적 조정': { F: [], I: [], T: [], Ty: ['what', 'env'] }
+    '운동치료': { F: ['freq'], I: ['inten'], T: ['time', 'hold', 'rest'], Ty: ['type'], V: ['reps', 'sets', 'period'] },
+    '기능·과제 훈련': { F: ['freq'], I: ['level', 'assist'], T: ['time'], Ty: ['task'], V: ['trials', 'period'] },
+    '수기치료': { F: ['freq'], I: ['grade'], T: ['dose'], Ty: ['tech', 'site'], V: ['period'] },
+    '신경가동술': { F: ['freq'], I: [], T: [], Ty: ['tech', 'pos'], V: ['reps', 'sets', 'period'] },
+    '물리적 인자': { F: ['freq'], I: ['param'], T: ['time'], Ty: ['kind', 'site'], V: ['period'] },
+    '환자 교육': { F: ['count'], I: [], T: ['time'], Ty: ['topic', 'how', 'mat'], V: [] },
+    '환경·인체공학적 조정': { F: [], I: [], T: ['check'], Ty: ['what', 'env'], V: ['period'] }
   };
-  var FLAB = { freq: '빈도', inten: '강도', time: '시간', hold: '유지', rest: '휴식', type: '유형', level: '난이도', assist: '보조', grade: '등급', dose: '횟수·시간', tech: '기법', site: '부위', pos: '자세', param: '매개변수', kind: '종류', count: '횟수', topic: '주제', how: '방법', what: '내용', env: '환경', task: '과제' };
-  function dv(c, k) { var d = (c.dose || {})[k] || {}; var s = String(d.stu || '').trim(), l = String(d.lit || '').trim(); return s ? { v: s, src: '' } : l ? { v: l, src: '논문' } : null; }
+  var FLAB = { freq: '빈도', inten: '강도', time: '시간', hold: '유지', rest: '휴식', type: '유형', reps: '반복', sets: '세트', period: '기간', level: '난이도·환경', assist: '보조 수준', trials: '반복·시도 횟수', grade: '등급', dose: '진동 횟수·시간·세트', tech: '기법', site: '부위', pos: '자세', param: '강도·매개변수', kind: '종류', count: '횟수', topic: '주제', how: '방법', mat: '자료', what: '조정 내용', env: '대상 환경', check: '확인 시점', task: '과제' };
+  var FPH = { freq: '예: 주 3회', inten: '예: RPE 5–6, 통증 NRS 3 이하', time: '예: 15분', hold: '예: 10초', rest: '예: 세트 간 60초', type: '예: 머리목굽힘 운동', reps: '예: 10회', sets: '예: 3세트', period: '예: 8주', trials: '예: 5회', count: '예: 주 1회', grade: '예: Maitland III', dose: '예: 30초 × 3세트' };
+  function dget(c, k) { return ((c.dose || {})[k] || {}); }
   function numOf(t) { var m = String(t || '').replace(/,/g, '').match(/(\d+(?:\.\d+)?)(?:\s*[~–-]\s*(\d+(?:\.\d+)?))?/); if (!m) return null; return m[2] ? (parseFloat(m[1]) + parseFloat(m[2])) / 2 : parseFloat(m[1]); }
   function perWeek(t) { t = String(t || ''); if (/매일|daily|every ?day/i.test(t)) return 7; var m = t.match(/주\s*(\d+(?:\s*[~–-]\s*\d+)?)\s*(회|번|일)/) || t.match(/(\d+(?:\s*[~–-]\s*\d+)?)\s*(times|x|회)\s*(\/|per|a)\s*week/i); if (m) return numOf(m[1]); var d = t.match(/하루\s*(\d+)\s*(회|번)/); if (d) return 7 * numOf(d[1]); return null; }
   function minutesOf(t) { t = String(t || ''); var n = numOf(t); if (n == null) return null; if (/시간|hour|hr/i.test(t) && !/분|min/i.test(t)) return n * 60; if (/분|min/i.test(t)) return n; return null; }
-  function fittRows(c) {
-    var m = FITT_MAP[c.cls] || FITT_MAP['운동치료'];
-    var pick = function (keys) { return keys.map(function (k) { var x = dv(c, k); return x ? { k: k, v: x.v, src: x.src } : null; }).filter(Boolean); };
-    var F = pick(m.F), I = pick(m.I), T = pick(m.T), Ty = pick(m.Ty);
-    if (!Ty.length && c.name) Ty = [{ k: '', v: c.name, src: '카드 이름' }];
-    /* V(총량): 반복×세트, 회당 시간×빈도로 주당 양을 계산(숫자를 읽을 수 있을 때만) */
-    var V = [], reps = dv(c, 'reps') || dv(c, 'trials'), sets = dv(c, 'sets'), fq = dv(c, 'freq') || dv(c, 'count'), tm = dv(c, 'time'), per = dv(c, 'period');
-    var pw = fq ? perWeek(fq.v) : null, rn = reps ? numOf(reps.v) : null, sn = sets ? numOf(sets.v) : null, mn = tm ? minutesOf(tm.v) : null;
-    if (reps) V.push({ k: '', v: reps.v + (sets ? ' × ' + sets.v : ''), src: reps.src || (sets && sets.src) || '' });
-    if (rn != null && pw != null) V.push({ k: '', v: '주당 약 ' + Math.round(rn * (sn || 1) * pw) + '회 반복', src: '자동 계산' });
-    if (mn != null && pw != null) V.push({ k: '', v: '주당 약 ' + Math.round(mn * pw) + '분', src: '자동 계산' });
-    if (per) V.push({ k: 'period', v: '기간 ' + per.v, src: per.src });
-    var P = String(c.prog || '').trim() ? [{ k: '', v: String(c.prog).trim(), src: '⑤ 진행·감량 기준' }] : [];
-    return [['F', 'Frequency', '빈도 · 얼마나 자주', F], ['I', 'Intensity', '강도 · 얼마나 세게', I], ['T', 'Time', '시간 · 한 번에 얼마나 오래', T], ['T', 'Type', '종류 · 어떤 운동·기법', Ty], ['V', 'Volume', '총량 · 위를 곱한 전체 양', V], ['P', 'Progression', '진행 · 언제·어떻게 늘리고 줄이나', P]];
+  function sv(c, k) { var d = dget(c, k); return String(d.stu || '').trim() || String(d.lit || '').trim(); }
+  function calcText(c) {
+    var fq = sv(c, 'freq') || sv(c, 'count'), pw = perWeek(fq), rn = numOf(sv(c, 'reps') || sv(c, 'trials')), sn = numOf(sv(c, 'sets')), mn = minutesOf(sv(c, 'time')), out = [];
+    if (rn != null && pw != null) out.push('주당 약 ' + Math.round(rn * (sn || 1) * pw) + '회 반복');
+    if (mn != null && pw != null) out.push('주당 약 ' + Math.round(mn * pw) + '분');
+    return out.join(' · ');
   }
-  function fittHtml(c) {
-    var rows = fittRows(c), filled = rows.filter(function (r) { return r[3].length; }).length;
-    return '<div class="wa-fitt" data-ix-own><div class="wa-fitt-h"><b>FITT-VP 한눈에 보기</b><span class="ix-tag">' + filled + '/6 채움</span><span class="wa-muted">위 용량 표·⑤ 진행 기준에서 자동으로 모음 · 고칠 때는 위 표에서</span></div>' +
-      '<div class="wa-fitt-g">' + rows.map(function (r) {
-        return '<div class="wa-fc' + (r[3].length ? '' : ' empty') + '"><div class="wa-fl"><i>' + r[0] + '</i><span><b>' + r[1] + '</b><small>' + r[2] + '</small></span></div><div class="wa-fvals">' +
-          (r[3].length ? r[3].map(function (x) { return '<div>' + (x.k && FLAB[x.k] && r[3].length > 1 ? '<em>' + FLAB[x.k] + '</em> ' : '') + esc(x.v) + (x.src ? ' <small class="wa-fsrc">' + esc(x.src) + '</small>' : '') + '</div>'; }).join('') : '<span class="wa-muted">미입력</span>') + '</div></div>';
-      }).join('') + '</div></div>';
+  function filledCount(c) {
+    var m = FITT_MAP[c.cls] || FITT_MAP['운동치료'], n = 0;
+    ['F', 'I', 'T', 'Ty', 'V'].forEach(function (g) { if (m[g].some(function (k) { return sv(c, k); })) n++; });
+    if (String(c.prog || '').trim()) n++;
+    return n;
+  }
+  function fittHtml(c, i) {
+    var m = FITT_MAP[c.cls] || FITT_MAP['운동치료'];
+    var field = function (k, many) {
+      var d = dget(c, k), lit = String(d.lit || '').trim();
+      return '<label class="wa-ff">' + (many ? '<em>' + esc(FLAB[k] || k) + '</em>' : '') +
+        '<input type="text" data-b="cards.' + i + '.dose.' + k + '.stu" value="' + esc(d.stu || '') + '" placeholder="' + esc(FPH[k] || '보고되지 않음/확인 필요') + '">' +
+        (d.stuDraft ? '<small class="wa-fsrc">논문 용량 복사 초안 · 조정 필요</small>' : '') +
+        (lit ? '<small class="wa-flit">논문: ' + esc(lit) + '</small>' : '') + '</label>';
+    };
+    var cell = function (letter, en, ko, keys, extra) {
+      return '<div class="wa-fc"><div class="wa-fl"><i>' + letter + '</i><span><b>' + en + '</b><small>' + ko + '</small></span></div><div class="wa-fvals">' +
+        (keys.length ? keys.map(function (k) { return field(k, keys.length > 1); }).join('') : '<span class="wa-muted">이 분류는 해당 없음</span>') + (extra || '') + '</div></div>';
+    };
+    var prog = String(c.prog || '').trim();
+    return '<div class="wa-fitt" data-ix-own data-fi="' + i + '"><div class="wa-fitt-h"><b>용량 — FITT-VP</b><span class="ix-tag" data-fcount>' + filledCount(c) + '/6 채움</span><span class="wa-muted">' + esc(c.cls || '') + ' · 학생이 제안한 용량을 여기에 바로 적어요</span></div>' +
+      '<div class="wa-fitt-g">' +
+      cell('F', 'Frequency', '빈도 · 얼마나 자주', m.F) +
+      cell('I', 'Intensity', '강도 · 얼마나 세게', m.I) +
+      cell('T', 'Time', '시간 · 한 번에 얼마나 오래', m.T) +
+      cell('T', 'Type', '종류 · 어떤 운동·기법', m.Ty) +
+      cell('V', 'Volume', '총량 · 위를 곱한 전체 양', m.V, '<div class="wa-fcalc" data-fcalc>' + esc(calcText(c)) + '</div>') +
+      '<div class="wa-fc"><div class="wa-fl"><i>P</i><span><b>Progression</b><small>진행 · 언제·어떻게 늘리고 줄이나</small></span></div><div class="wa-fvals">' +
+      (prog ? '<div class="wa-fprog">' + esc(prog) + '</div>' : '<span class="wa-muted">미입력</span>') + '<small class="wa-fsrc">아래 ⑤ 진행·감량 기준에서 고쳐요</small></div></div>' +
+      '</div></div>';
   }
   function ensureFitt() {
     if (typeof window.ptIxState !== 'function') return;
     var S = window.ptIxState(); if (!S || !S.cards) return;
     $$('#ptIx .ix-pane[data-pane="3"] details.ix-card[data-ci]').forEach(function (card) {
-      var c = S.cards[+card.getAttribute('data-ci')]; if (!c) return;
+      var i = +card.getAttribute('data-ci'), c = S.cards[i]; if (!c) return;
       var tw = card.querySelector('.ix-dose2'); tw = tw && tw.closest('.ix-tw'); if (!tw) return;
-      var html = fittHtml(c), old = card.querySelector('.wa-fitt');
-      if (old && old.getAttribute('data-h') === html.length + ':' + html.slice(-300)) return;
-      var w = document.createElement('div'); w.innerHTML = html; var el = w.firstChild; el.setAttribute('data-h', html.length + ':' + html.slice(-300));
-      if (old) old.replaceWith(el); else { var note = tw.nextElementSibling; (note && note.classList.contains('ix-mini') ? note : tw).insertAdjacentElement('afterend', el); }
+      /* 원래 용량 표(제목·표·아래 안내)는 숨김 — 지우지 않음 */
+      var head = tw.previousElementSibling, note = tw.nextElementSibling;
+      [tw, head && head.classList.contains('ix-sec') ? head : null, note && note.classList.contains('ix-mini') ? note : null].forEach(function (e) { if (e) e.classList.add('wa-dose-hide'); });
+      var old = card.querySelector('.wa-fitt');
+      if (old && old.contains(document.activeElement)) return; /* 적는 중에는 다시 그리지 않음 */
+      var html = fittHtml(c, i), sig = html.length + ':' + html.slice(-400) + html.slice(0, 400);
+      if (old && old.getAttribute('data-h') === sig) return;
+      var w = document.createElement('div'); w.innerHTML = html; var el = w.firstChild; el.setAttribute('data-h', sig);
+      if (old) old.replaceWith(el); else (note && note.classList.contains('ix-mini') ? note : tw).insertAdjacentElement('afterend', el);
     });
   }
-  var fittT = null;
-  document.addEventListener('input', function (e) { if (e.target.closest && e.target.closest('#ptIx details.ix-card')) { clearTimeout(fittT); fittT = setTimeout(function () { try { ensureFitt(); } catch (x) { } }, 400); } });
+  /* 적는 동안: 칸은 그대로 두고 '채움 수'와 '주당 양'만 바로 바꿈 */
+  document.addEventListener('input', function (e) {
+    var box = e.target.closest && e.target.closest('.wa-fitt'); if (!box) return;
+    setTimeout(function () {
+      try {
+        var c = window.ptIxState().cards[+box.getAttribute('data-fi')]; if (!c) return;
+        var t = box.querySelector('[data-fcount]'); if (t) t.textContent = filledCount(c) + '/6 채움';
+        var v = box.querySelector('[data-fcalc]'); if (v) v.textContent = calcText(c);
+      } catch (x) { }
+    }, 0);
+  });
 
   /* 환자가 바뀌거나 화면이 다시 그려져도 계속 붙어 있게 */
   var lastCur = null, lastSig = '';
