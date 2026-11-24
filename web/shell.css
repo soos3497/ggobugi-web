@@ -336,3 +336,6 @@ html body:not(#z1):not(#z2):not(#z3):not(#z4):not(#z5):not(#z6):not(#z7):not(#z8
 html body:not(#z1):not(#z2):not(#z3) #wsShell .uk-foot small{color:#c9d4e6!important;-webkit-text-fill-color:#c9d4e6!important}
 html body:not(#z1):not(#z2):not(#z3):not(#z4):not(#z5):not(#z6):not(#z7):not(#z8):not(#z9) main details.pt-more>summary{-webkit-text-fill-color:#1d3a6e!important}
 html body:not(#z1):not(#z2):not(#z3):not(#z4):not(#z5):not(#z6):not(#z7):not(#z8):not(#z9) main details.pt-more>summary:hover,html body:not(#z1):not(#z2):not(#z3):not(#z4):not(#z5):not(#z6):not(#z7):not(#z8):not(#z9) main details.pt-more[open]>summary{color:#fff!important;-webkit-text-fill-color:#fff!important}
+/* ④ 환자 교육·가정운동: '②·③으로 교육·가정운동 자동 설계' 버튼 숨김 (사용자 요청 2026-11-24, 기록지 파일은 그대로) */
+#ptIx .ix-pane[data-pane="4"] .ix-autobar:has(>[data-a="eduAuto"]){display:none!important}
+#ptIx [data-a="eduAuto"]{display:none!important}
